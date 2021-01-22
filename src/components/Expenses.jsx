@@ -9,7 +9,7 @@ export function Expenses() {
   const getData = async () => {
     try {
       const token = await getAccessTokenSilently();
-      const response = await fetch("http://localhost:3001/expenses", {
+      const response = await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -25,7 +25,7 @@ export function Expenses() {
   const postExpense = async () => {
     try {
       const token = await getAccessTokenSilently();
-      await fetch("http://localhost:3001/expenses", {
+      await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses`, {
         method: "POST",
         mode: "cors",
         headers: {
