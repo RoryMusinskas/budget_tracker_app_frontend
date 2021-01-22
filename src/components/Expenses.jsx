@@ -55,11 +55,10 @@ export function Expenses() {
             expense: {
               description: "Placeholder",
               amount: 100,
-              user_id: 1,
               category_id: 1,
             },
             payload:{
-              email: "user@example.com",
+              email: user.email,
             }
           }),
         });
