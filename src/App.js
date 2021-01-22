@@ -33,6 +33,8 @@ function App() {
           body: JSON.stringify({
               user: {
                 email: user.email,
+                // TODO ------------------------------------------------------------------------
+                // Conditonally update shares preference. THis might no be the right spot for it, but it's being passed ATM for rails backend validation. We could remove that if needed 
                 shares_preferences: ['test', 'test']
               },
               UserAccessToken: UserAccessToken,
