@@ -1,6 +1,6 @@
 import React from "react";
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
+//import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
@@ -63,6 +63,7 @@ export default function LandingPage() {
             <img
               src={require("../../assets/img/cover.jpeg")}
               alt="placeholder-img"
+              className={classes.aboutImage}
             />
           </Grid>
         </Grid>
@@ -73,21 +74,36 @@ export default function LandingPage() {
           <h3>Features</h3>
         </Grid>
         <Grid container className={classes.featuresContainer}>
-          <Grid item xs={12} md={12} lg={4} className={classes.incomeContainer}>
+          <Grid item xs={12} md={12} lg={3} className={classes.incomeContainer}>
             <Card className={classes.incomeCard}>
               <CardHeader>
                 <CardIcon color="primary">
                   <Icon>monetization_on</Icon>
                 </CardIcon>
+                <h6>Income Tracking</h6>
               </CardHeader>
-              <CardBody></CardBody>
+              <CardBody>
+                <Grid item xs={12} md={12} lg={12}>
+                  <img
+                    src={require("../../assets/img/sidebar-1.jpg")}
+                    alt="placeholder-img"
+                    className={classes.featuresIncomeImage}
+                  />
+                </Grid>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
+                  aut molestiae facere fuga mollitia dolores asperiores minus
+                  vero atque blanditiis dolorum nemo pariatur, amet illum sunt
+                  deserunt corporis, ea iste!
+                </p>
+              </CardBody>
             </Card>
           </Grid>
           <Grid
             item
             xs={12}
             md={12}
-            lg={4}
+            lg={3}
             className={classes.expensesContainer}
           >
             <Card className={classes.expensesCard}>
@@ -95,18 +111,48 @@ export default function LandingPage() {
                 <CardIcon color="info">
                   <Icon>credit_card</Icon>
                 </CardIcon>
+                <h6>Expense Tracking</h6>
               </CardHeader>
-              <CardBody></CardBody>
+              <CardBody>
+                <Grid item xs={12} md={12} lg={12}>
+                  <img
+                    src={require("../../assets/img/sidebar-2.jpg")}
+                    alt="placeholder-img"
+                    className={classes.featuresExpenseImage}
+                  />
+                </Grid>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
+                  aut molestiae facere fuga mollitia dolores asperiores minus
+                  vero atque blanditiis dolorum nemo pariatur, amet illum sunt
+                  deserunt corporis, ea iste!
+                </p>
+              </CardBody>
             </Card>
           </Grid>
-          <Grid item xs={12} md={12} lg={4} className={classes.sharesContainer}>
+          <Grid item xs={12} md={12} lg={3} className={classes.sharesContainer}>
             <Card className={classes.sharesCard}>
               <CardHeader>
                 <CardIcon color="success">
                   <Icon>toc</Icon>
                 </CardIcon>
+                <h6>Share Tracking</h6>
               </CardHeader>
-              <CardBody></CardBody>
+              <CardBody>
+                <Grid item xs={12} md={12} lg={12}>
+                  <img
+                    src={require("../../assets/img/sidebar-3.jpg")}
+                    alt="placeholder-img"
+                    className={classes.featuresSharesImage}
+                  />
+                </Grid>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
+                  aut molestiae facere fuga mollitia dolores asperiores minus
+                  vero atque blanditiis dolorum nemo pariatur, amet illum sunt
+                  deserunt corporis, ea iste!
+                </p>
+              </CardBody>
             </Card>
           </Grid>
         </Grid>
