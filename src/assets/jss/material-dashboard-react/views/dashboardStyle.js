@@ -2,16 +2,19 @@ import {
   successColor,
   whiteColor,
   grayColor,
-  hexToRgb
+  hexToRgb,
 } from "assets/jss/material-dashboard-react";
 
 const dashboardStyle = {
   successText: {
-    color: successColor[0]
+    color: successColor[0],
+  },
+  dashboardContainer: {
+    minHeight: "80vh",
   },
   upArrowCardCategory: {
     width: "16px",
-    height: "16px"
+    height: "16px",
   },
   stats: {
     color: grayColor[0],
@@ -24,15 +27,35 @@ const dashboardStyle = {
       height: "16px",
       position: "relative",
       marginRight: "3px",
-      marginLeft: "3px"
+      marginLeft: "3px",
     },
     "& .fab,& .fas,& .far,& .fal,& .material-icons": {
       top: "4px",
       fontSize: "16px",
       position: "relative",
       marginRight: "3px",
-      marginLeft: "3px"
-    }
+      marginLeft: "3px",
+    },
+  },
+  goalsCard: {
+    minHeight: "30vh",
+  },
+  goalsList: {
+    color: grayColor[2],
+    fontWeight: "300",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+  },
+  incomeCard: {
+    minHeight: "30vh",
+  },
+  expensesCard: {
+    height: "50vh",
+  },
+  expensesCardHeader: {
+    height: "90%",
+  },
+  expensesChart: {
+    height: "100%",
   },
   cardCategory: {
     color: grayColor[0],
@@ -40,14 +63,14 @@ const dashboardStyle = {
     fontSize: "14px",
     marginTop: "0",
     paddingTop: "10px",
-    marginBottom: "0"
+    marginBottom: "0",
   },
   cardCategoryWhite: {
     color: "rgba(" + hexToRgb(whiteColor) + ",.62)",
     margin: "0",
     fontSize: "14px",
     marginTop: "0",
-    marginBottom: "0"
+    marginBottom: "0",
   },
   cardTitle: {
     color: grayColor[2],
@@ -60,8 +83,8 @@ const dashboardStyle = {
     "& small": {
       color: grayColor[1],
       fontWeight: "400",
-      lineHeight: "1"
-    }
+      lineHeight: "1",
+    },
   },
   cardTitleWhite: {
     color: whiteColor,
@@ -74,9 +97,9 @@ const dashboardStyle = {
     "& small": {
       color: grayColor[1],
       fontWeight: "400",
-      lineHeight: "1"
-    }
-  }
+      lineHeight: "1",
+    },
+  },
 };
 
 export default dashboardStyle;
