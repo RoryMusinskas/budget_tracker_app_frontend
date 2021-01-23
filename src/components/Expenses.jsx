@@ -18,8 +18,9 @@ export function Expenses() {
           },
         }
       );
-      const responseData = await response();
-      setExpenses(responseData);
+      const responseData = await response.json();
+      console.log(responseData);
+      // setExpenses(responseData);
     } catch (e) {
       console.error("Error: ", e.message);
     }
