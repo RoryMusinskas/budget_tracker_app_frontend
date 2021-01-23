@@ -22,7 +22,6 @@ const landingPageStyle = {
     alignItems: "center",
     justifyContent: "center",
   },
-  button: {},
   successText: {
     color: successColor[0],
   },
@@ -42,14 +41,17 @@ const landingPageStyle = {
     alignItems: "center",
   },
   aboutInfoContainer: {
-    height: "30vh",
+    minHeight: "30vh",
     display: "flex",
     justifyContent: "space-between",
   },
   aboutImageContainer: {
     height: "60vh",
+  },
+  aboutImage: {
+    height: "100%",
     objectFit: "cover",
-    overflow: "hidden",
+    width: "100%",
   },
   featuresPageContainer: {
     minHeight: "100vh",
@@ -61,15 +63,27 @@ const landingPageStyle = {
   featuresContainer: {
     height: "90%",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
   },
-  incomeContainer: {},
-  incomeCard: {},
-  expensesContainer: {},
-  expensesCard: {},
-  sharesContainer: {},
-  sharesCard: {},
+  featuresIncomeImage: {
+    height: "30%",
+    maxHeight: "350px",
+    objectFit: "cover",
+    width: "100%",
+  },
+  featuresExpenseImage: {
+    height: "30%",
+    maxHeight: "350px",
+    objectFit: "cover",
+    width: "100%",
+  },
+  featuresSharesImage: {
+    height: "30%",
+    maxHeight: "350px",
+    objectFit: "cover",
+    width: "100%",
+  },
   upArrowCardCategory: {
     width: "16px",
     height: "16px",
