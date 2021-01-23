@@ -18,7 +18,7 @@ export function Expenses() {
           },
         }
       );
-      const responseData = await response();
+      const responseData = await response.json();
       setExpenses(responseData);
     } catch (e) {
       console.error("Error: ", e.message);
