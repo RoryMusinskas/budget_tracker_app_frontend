@@ -58,12 +58,12 @@ export default function Dashboard() {
               </CardHeader>
               <CardBody>
                 <ul className={classes.goalsList}>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>6</li>
+                  <li>Goal 1</li>
+                  <li>Goal 2</li>
+                  <li>Goal 3</li>
+                  <li>Goal 4</li>
+                  <li>Goal 5</li>
+                  <li>Goal 6</li>
                 </ul>
               </CardBody>
               <CardFooter stats>
@@ -83,6 +83,16 @@ export default function Dashboard() {
                 <p className={classes.cardCategory}>Income</p>
                 <h3 className={classes.cardTitle}>$34,245</h3>
               </CardHeader>
+              <CardBody>
+                <ul className={classes.goalsList}>
+                  <li>Expense 1</li>
+                  <li>Expense 2</li>
+                  <li>Expense 3</li>
+                  <li>Expense 4</li>
+                  <li>Expense 5</li>
+                  <li>Expense 6</li>
+                </ul>
+              </CardBody>
               <CardFooter stats>
                 <div className={classes.stats}>
                   <DateRange />
