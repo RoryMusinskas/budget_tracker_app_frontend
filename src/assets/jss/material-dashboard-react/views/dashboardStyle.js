@@ -12,6 +12,10 @@ const dashboardStyle = {
   dashboardContainer: {
     minHeight: "80vh",
   },
+  goalIncomeContainer: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
   upArrowCardCategory: {
     width: "16px",
     height: "16px",
@@ -47,6 +51,10 @@ const dashboardStyle = {
   },
   incomeCard: {
     minHeight: "30vh",
+  },
+  expensesContainer: {
+    display: "flex",
+    justifyContent: "center",
   },
   expensesCard: {
     height: "50vh",
