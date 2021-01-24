@@ -11,6 +11,8 @@ const dashboardStyle = {
   },
   dashboardContainer: {
     minHeight: "80vh",
+    display: "flex",
+    justifyContent: "center",
   },
   goalIncomeContainer: {
     display: "flex",
@@ -52,10 +54,6 @@ const dashboardStyle = {
   incomeCard: {
     minHeight: "30vh",
   },
-  expensesContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
   expensesCard: {
     height: "50vh",
   },
@@ -63,6 +61,20 @@ const dashboardStyle = {
     height: "90%",
   },
   expensesChart: {
+    height: "100%",
+  },
+  sharesContainer: {
+    minHeight: "100%",
+  },
+  sharesCardHeader: {
+    minHeight: "660px",
+  },
+  widgetContainer: {
+    height: "660px",
+    width: "100%",
+  },
+  widget: {
+    width: "100%",
     height: "100%",
   },
   cardCategory: {
