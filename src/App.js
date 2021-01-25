@@ -33,30 +33,30 @@ export default function App() {
   // Use Auth0 hook to check if user is authenticated
   // If they are, post to the users end point to check
   // and see if the user is already added to the users table
-  if (isAuthenticated === true) {
-    const getUserToken = async () => {
-      try {
-        const token = await getAccessTokenSilently();
-        fetch(`${process.env.REACT_APP_RAILS_API_URL}/users`, {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `bearer ${token}`,
-          },
-          body: JSON.stringify({
-            user: {
-              email: user.email,
-              shares_preferences: ["test", "test"],
-            },
-          }),
-        });
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-    getUserToken();
-  }
+  // if (isAuthenticated === true) {
+  //   const getUserToken = async () => {
+  //     try {
+  //       const token = await getAccessTokenSilently();
+  //       fetch(`${process.env.REACT_APP_RAILS_API_URL}/users`, {
+  //         method: "POST",
+  //         mode: "cors",
+  //         headers: {
+  //           "Content-type": "application/json",
+  //           Authorization: `bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({
+  //           user: {
+  //             email: user.email,
+  //             shares_preferences: ["test", "test"],
+  //           },
+  //         }),
+  //       });
+  //     } catch (e) {
+  //       console.log(e.message);
+  //     }
+  //   };
+  //   getUserToken();
+  // }
   return (
     <>
       <Switch>
