@@ -6,6 +6,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
+  const redirect = process.env.REACT_APP_REACT_APP_URL;
 
   const history = useHistory();
 
@@ -17,8 +18,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      // redirectUri={window.location.origin}
-      redirectUri={"http://localhost:3000/admin/dashboard"}
+      redirectUri={`${redirect}/admin/dashboard`}
       onRedirectCallback={onRedirectCallback}
       audience={audience}
     >
