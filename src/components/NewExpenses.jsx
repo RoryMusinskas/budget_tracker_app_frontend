@@ -27,7 +27,7 @@ export function NewExpenses() {
           expense: {
             // name: name, add name/title for expense late
             description: description,
-            user_id: 1, // Substitute for user sub after changing schema/model
+            user_sub: user.sub, // Substitute for user sub after changing schema/model
             category_id: parseInt(category), // ParseInt to convert string to integer
             amount: amount,
           },
