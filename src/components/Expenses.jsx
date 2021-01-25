@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function Expenses() {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
   const [expenses, setExpenses] = useState([]);
 
   // A cleaner way to fetch with token
@@ -48,37 +48,6 @@ export function Expenses() {
       console.error(e.message);
     }
   };
-
-  // FUNCTIONS I HAVE REFACTORED - LEFT FOR REFERENCE
-  // A way to get access token not very clean
-  // useEffect(() => {
-  //   const getUserAccessToken = async () => {
-  //     try {
-  //       const accessToken = await getAccessTokenSilently({
-  //         audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-  //       });
-  //       setUserAccessToken(accessToken);
-  //     } catch (e) {
-  //       console.error("Error: ", e.message);
-  //     }
-  //   };
-  //   getUserAccessToken();
-  // }, [getAccessTokenSilently]);
-
-  // useEffect(() => {
-  //   getData();
-  // }, [userAccessToken]);
-
-  // const getData = () => {
-  //   isAuthenticated &&
-  //     fetch("http://localhost:3001/expenses", {
-  //       headers: {
-  //         Authorization: `bearer ${userAccessToken}`,
-  //       },
-  //     })
-  //       .then((response) => responseon())
-  //       .then((responseData) => setExpenses(responseData));
-  // };
 
   return (
     <>

@@ -1,81 +1,57 @@
-import React, { useState } from "react";
+// Import React code
+import React from "react";
 import { Route, Switch } from "react-router-dom";
-import ProtectedRoute from "./auth/ProtectedRoute";
-import { Profile } from "./components/UserProfile";
-import { Expenses } from "./components/Expenses";
-import LandingPage from "views/LandingPage/LandingPage";
-import { useAuth0 } from "@auth0/auth0-react";
-import Loading from "./components/Loading";
 
-// core components
+// Import Components/Views/Styles
+import "assets/css/material-dashboard-react.css?v=1.9.0";
 import Admin from "layouts/Admin";
 import RTL from "layouts/RTL";
+import LandingPage from "views/LandingPage/LandingPage";
+import { Profile } from "./components/UserProfile";
+import { Expenses } from "./components/Expenses";
+import Loading from "./components/Loading";
 
-import "assets/css/material-dashboard-react.css?v=1.9.0";
+// Import Auth0 code
+import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 export default function App() {
+  // Grab useAuth0 hooks
   const {
     isAuthenticated,
     isLoading,
-    getAccessTokenWithPopup,
     getAccessTokenSilently,
     user,
-    error,
   } = useAuth0();
 
-  const [userAccessToken, setUserAccessToken] = useState("");
-
+  // If loading, display the loading spinner
   if (isLoading) {
     return <Loading />;
   }
 
-  if (error) {
-    console.log("Error", error.message);
-  }
-
+  // Use Auth0 hook to check if user is authenticated
+  // If they are, post to the users end point to check
+  // and see if the user is already added to the users table
   if (isAuthenticated === true) {
-    // This async function will retrieve a userToken from the auth0 usermanagement endpoint
     const getUserToken = async () => {
-      // try to get this token silently with no popup
       try {
-        const UserAccessToken = await getAccessTokenSilently({
-          audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
-          scope: "read:current_user",
-        });
-        setUserAccessToken(UserAccessToken);
-        // if it can't get it silently, it will prompt the user to enable the consent (this will only happen on first login)
-      } catch (e) {
-        console.log(e);
-        const UserAccessToken = await getAccessTokenWithPopup({
-          audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/`,
-          scope: "read:current_user",
-        });
-        setUserAccessToken(UserAccessToken);
-      }
-
-      // If there is a user token, run the next try catch.
-      // This is needed the function to get the token above is async, this allows it to store the token first
-      if (userAccessToken !== "") {
-        try {
-          const token = await getAccessTokenSilently();
-          fetch("http://localhost:3001/users", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-type": "application/json",
-              Authorization: `bearer ${token}`,
+        const token = await getAccessTokenSilently();
+        fetch(`${process.env.REACT_APP_RAILS_API_URL}/users`, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `bearer ${token}`,
+          },
+          body: JSON.stringify({
+            user: {
+              email: user.email,
+              shares_preferences: ["test", "test"],
             },
-            body: JSON.stringify({
-              user: {
-                email: user.email,
-                shares_preferences: ["test", "test"],
-              },
-              UserAccessToken: userAccessToken,
-            }),
-          });
-        } catch (e) {
-          console.log(e.message);
-        }
+          }),
+        });
+      } catch (e) {
+        console.log(e.message);
       }
     };
     getUserToken();
