@@ -10,6 +10,7 @@ import LandingPage from "views/LandingPage/LandingPage";
 import { Profile } from "./components/UserProfile";
 import { Expenses } from "./components/Expenses";
 import Loading from "./components/Loading";
+import { NewExpenses } from "./components/NewExpenses";
 
 // Import Auth0 code
 import { useAuth0 } from "@auth0/auth0-react";
@@ -63,7 +64,8 @@ export default function App() {
         <ProtectedRoute path="/admin" component={Admin} />
         <ProtectedRoute path="/rtl" component={RTL} />
         <ProtectedRoute path="/profile" component={Profile} />
-        <ProtectedRoute path="/expenses" component={Expenses} />
+        <ProtectedRoute exact path="/expenses" component={Expenses} />
+        <ProtectedRoute path="/expenses/new" component={NewExpenses} />
       </Switch>
     </>
   );
