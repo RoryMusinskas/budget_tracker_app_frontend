@@ -4,17 +4,8 @@ import Button from "components/CustomButtons/Button";
 
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
-  return (
-    <Button
-      onClick={() =>
-        loginWithRedirect({
-          scope: "read:current_user",
-        })
-      }
-    >
-      Log In
-    </Button>
-  );
+
+  return <Button onClick={() => loginWithRedirect()}>Log In</Button>;
 };
 
 export default LoginButton;
