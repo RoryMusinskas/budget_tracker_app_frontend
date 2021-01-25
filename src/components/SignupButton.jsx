@@ -8,8 +8,7 @@ const SignupButton = () => {
     <Button
       onClick={() =>
         loginWithRedirect({
-          screen_hint: "signup",
-          scope: "read:current_user",
+          screen_hint: "sign up",
         })
       }
     >
