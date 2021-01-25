@@ -9,6 +9,7 @@ const SignupButton = () => {
       onClick={() =>
         loginWithRedirect({
           screen_hint: "signup",
+          scope: "read:current_user",
         })
       }
     >
