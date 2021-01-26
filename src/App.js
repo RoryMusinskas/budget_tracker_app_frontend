@@ -7,6 +7,7 @@ import "assets/css/material-dashboard-react.css?v=1.9.0";
 import Admin from "layouts/Admin";
 import RTL from "layouts/RTL";
 import LandingPage from "views/LandingPage/LandingPage";
+import SharesPage from "views/SharesPage/SharesPage";
 import { Profile } from "./components/UserProfile";
 import { Expenses } from "./components/Expenses";
 import Loading from "./components/Loading";
@@ -64,6 +65,7 @@ export default function App() {
         <ProtectedRoute path="/rtl" component={RTL} />
         <ProtectedRoute path="/profile" component={Profile} />
         <ProtectedRoute path="/expenses" component={Expenses} />
+        <ProtectedRoute path="/shares" component={SharesPage} />
       </Switch>
     </>
   );
