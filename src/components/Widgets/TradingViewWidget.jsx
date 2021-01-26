@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 export default function TradingViewWidget() {
   useEffect(() => {
     // Search the DOM for the chart element, this is a script tag added in the body
-    const script = document.getElementById("chart");
+    const script = document.getElementById("trading-view-chart");
     // Set the innerHTML for a new TradingView widget, these are the settings for the widget
     script.innerHTML = new window.TradingView.widget({
       height: "100%",
@@ -18,6 +18,7 @@ export default function TradingViewWidget() {
       enable_publishing: false,
       hide_side_toolbar: false,
       allow_symbol_change: true,
+      watchlist: ["BINANCE:ETHAUD", "BINANCE:BTCAUD"],
       details: true,
       hotlist: true,
       calendar: true,
