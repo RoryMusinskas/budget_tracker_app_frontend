@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // react plugin for creating charts
 //import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -17,22 +17,21 @@ import CardFooter from "components/Card/CardFooter";
 import StockMarket from "components/Widgets/StockMarket";
 import Button from "components/CustomButtons/Button";
 import TradingViewWidget from "components/Widgets/TradingViewWidget";
+import WatchList from "components/Watchlist/WatchList";
 
 import styles from "assets/jss/material-dashboard-react/views/sharesPageStyle";
 const useStyles = makeStyles(styles);
 
 export default function SharesPage() {
   const classes = useStyles();
+  const [watchList, setWatchList] = useState([]);
   return (
     <>
       <Grid container className={classes.sharesContainer}>
         <Grid item xs={12} md={12} lg={12} xl={8}>
           <Grid container className={classes.watchlistButtonContainer}>
             <Grid item xs={12} md={12} lg={11} xl={11}>
-              <Button id="watchlistButton">
-                <Edit />
-                Edit Watchlist
-              </Button>
+              <WatchList watchList={watchList} setWatchList={setWatchList} />
             </Grid>
             <Grid item xs={12} sm={12} lg={11} xl={11}>
               <Card chart className={classes.shareTrackerCard}>
@@ -40,7 +39,7 @@ export default function SharesPage() {
                   color="success"
                   className={classes.shareTrackerCardHeader}
                 >
-                  <TradingViewWidget />
+                  <TradingViewWidget watchList={watchList} />
                 </CardHeader>
                 <CardBody>
                   <h4 className={classes.cardTitle}>Share Tracker</h4>
