@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function Expenses() {
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const [expenses, setExpenses] = useState([]);
 
   // A cleaner way to fetch with token
