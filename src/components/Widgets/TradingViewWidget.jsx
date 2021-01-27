@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function TradingViewWidget() {
+export default function TradingViewWidget(props) {
   useEffect(() => {
     // Search the DOM for the chart element, this is a script tag added in the body
     const script = document.getElementById("trading-view-chart");
@@ -18,13 +18,13 @@ export default function TradingViewWidget() {
       enable_publishing: false,
       hide_side_toolbar: false,
       allow_symbol_change: true,
-      watchlist: ["BINANCE:ETHAUD", "BINANCE:BTCAUD"],
+      watchlist: props.watchList,
       details: true,
       hotlist: true,
       calendar: true,
       container_id: "tradingview_5ef3e",
     });
-  }, []);
+  }, [props.watchList]);
 
   return (
     <div id="trading-view-widget-container">
