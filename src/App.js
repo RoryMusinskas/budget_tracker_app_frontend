@@ -47,7 +47,6 @@ export default function App() {
           body: JSON.stringify({
             user: {
               email: user.email,
-              shares_preferences: ["test", "test"],
             },
           }),
         });
