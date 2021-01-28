@@ -84,7 +84,7 @@ export default function displayPage(props) {
 const populateList = (watchList, handleDelete) => {
   return watchList.map((value, index) => (
     <ListItem key={index}>
-      <ListItemText>{value}</ListItemText>
+      <ListItemText>{`${value.symbol} - ${value.description}`}</ListItemText>
       <ListItemSecondaryAction>
         <IconButton
           edge="end"
