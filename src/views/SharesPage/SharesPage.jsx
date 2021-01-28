@@ -1,21 +1,16 @@
+/* -------- Import React core ------------ */
 import React, { useState } from "react";
-// react plugin for creating charts
-//import ChartistGraph from "react-chartist";
-// @material-ui/core
-import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
+/* -------- Import MaterialUI core ------------ */
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
-import Edit from "@material-ui/icons/Edit";
-// core components
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+/* -------- Import Custom Components ---------- */
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
-import CardIcon from "components/Card/CardIcon";
 import CardBody from "components/Card/CardBody";
 import CardFooter from "components/Card/CardFooter";
 import StockMarket from "components/Widgets/StockMarket";
-import Button from "components/CustomButtons/Button";
 import TradingViewWidget from "components/Widgets/TradingViewWidget";
 import WatchList from "components/Watchlist/WatchList";
 

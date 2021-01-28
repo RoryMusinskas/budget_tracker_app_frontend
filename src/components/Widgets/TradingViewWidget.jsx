@@ -8,7 +8,7 @@ export default function TradingViewWidget(props) {
     script.innerHTML = new window.TradingView.widget({
       height: "100%",
       width: "100%",
-      symbol: "ASX:XAO",
+      symbol: "ETHAUD",
       interval: "60",
       timezone: "Etc/UTC",
       theme: "light",
