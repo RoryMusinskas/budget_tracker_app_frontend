@@ -18,6 +18,7 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle";
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "../auth/ProtectedRoute";
 
 let ps;
 
@@ -26,8 +27,8 @@ const switchRoutes = (
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
-          <Route
-            path={prop.layout + prop.path}
+          <ProtectedRoute
+            exact path={prop.layout + prop.path}
             component={prop.component}
             key={key}
           />
