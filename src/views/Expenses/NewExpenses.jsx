@@ -9,13 +9,12 @@ export function NewExpenses() {
   const [category, setCategory] = useState("");
 
   //Auth0 hooks
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
   async function onFormSubmit(e) {
     try {
       // Prevent default page reload on submit
       e.preventDefault();
-      console.log(user);
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses`, {
         method: "POST",
@@ -25,9 +24,8 @@ export function NewExpenses() {
         },
         body: JSON.stringify({
           expense: {
-            // name: name, add name/title for expense late
+            // name: name, add name/title for expense later
             description: description,
-            user_sub: user.sub, // Substitute for user sub after changing schema/model
             category_id: parseInt(category), // ParseInt to convert string to integer
             amount: amount,
           },
@@ -41,7 +39,6 @@ export function NewExpenses() {
   return (
     <>
       <form onSubmit={onFormSubmit}>
-        <h1>New Expense</h1>
         <div className="form-div">
           <label htmlFor="expense-name">Expense: </label>
           <input
@@ -82,7 +79,7 @@ export function NewExpenses() {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            {/* Using value as numbers to reflect schema of taking bigint for nows */}
+            {/* Using value as numbers to reflect schema of taking bigint for now */}
             <option value="1">Grocery</option>
             <option value="2">Travel</option>
             <option value="3">Entertainment</option>
