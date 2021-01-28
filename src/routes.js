@@ -24,6 +24,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
 import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
+import Assessment from "@material-ui/icons/Assessment";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard";
 import UserProfile from "views/UserProfile/UserProfile";
@@ -33,6 +34,7 @@ import Icons from "views/Icons/Icons";
 import Maps from "views/Maps/Maps";
 import NotificationsPage from "views/Notifications/Notifications";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro";
+import SharesPage from "views/SharesPage/SharesPage";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage";
 import { AttachMoney } from "@material-ui/icons";
@@ -46,15 +48,29 @@ const dashboardRoutes = [
     rtlName: "لوحة القيادة",
     icon: Dashboard,
     component: DashboardPage,
-    layout: "/admin"
+    layout: "/admin",
+  },
+  {
+    path: "/shares",
+    name: "Shares",
+    rtlName: "لوحة القيادة",
+    icon: Assessment,
+    component: SharesPage,
+    layout: "/admin",
   },
   {
     path: "/expenses",
     name: "Expenses",
     rtlName: "ملف تعريفي للمستخدم",
+<<<<<<< HEAD
     icon: AttachMoney,
     component: Expenses,
     layout: "/admin"
+=======
+    icon: Person,
+    component: UserProfile,
+    layout: "/admin",
+>>>>>>> main
   },
   {
     path: "/table",
@@ -62,7 +78,7 @@ const dashboardRoutes = [
     rtlName: "قائمة الجدول",
     icon: "content_paste",
     component: TableList,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/typography",
@@ -70,7 +86,7 @@ const dashboardRoutes = [
     rtlName: "طباعة",
     icon: LibraryBooks,
     component: Typography,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/icons",
@@ -78,7 +94,7 @@ const dashboardRoutes = [
     rtlName: "الرموز",
     icon: BubbleChart,
     component: Icons,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/maps",
@@ -86,7 +102,7 @@ const dashboardRoutes = [
     rtlName: "خرائط",
     icon: LocationOn,
     component: Maps,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/notifications",
@@ -94,7 +110,7 @@ const dashboardRoutes = [
     rtlName: "إخطارات",
     icon: Notifications,
     component: NotificationsPage,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/rtl-page",
@@ -102,9 +118,10 @@ const dashboardRoutes = [
     rtlName: "پشتیبانی از راست به چپ",
     icon: Language,
     component: RTLPage,
-    layout: "/rtl"
+    layout: "/rtl",
   },
   {
+<<<<<<< HEAD
     path: "/expenses/new",
     name: "New Expense",
     rtlName: "",
@@ -113,6 +130,15 @@ const dashboardRoutes = [
     layout: "/admin",
     invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go thorugh protected routes
   }
+=======
+    path: "/upgrade-to-pro",
+    name: "Upgrade To PRO",
+    rtlName: "التطور للاحترافية",
+    icon: Unarchive,
+    component: UpgradeToPro,
+    layout: "/admin",
+  },
+>>>>>>> main
 ];
 
 export default dashboardRoutes;
