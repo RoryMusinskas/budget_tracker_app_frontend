@@ -8,8 +8,6 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 
-/* -------- Import MaterialUI components ------ */
-
 /* -------- Import Custom Components ---------- */
 import Loading from "components/Loading";
 import Listbox from "./Listbox";
@@ -26,7 +24,7 @@ const useStyles = makeStyles({
 });
 
 // The logic to select the stock the user wants to add to watch list
-export default function SymbolSelect(props) {
+export default function SymbolSearch(props) {
   const classes = useStyles();
   const [exchangeList, setExchangeList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +51,7 @@ export default function SymbolSelect(props) {
 
   // set the state of the watchlist to the value of the share selected
   const handleSelectedShare = () => {
-    return (_event, share) => {
+    return (event, share) => {
       // As the American markets are joined together in the api, we have to see which market it is from via the mic, then convert that to the same code as tradingView has
       if (selectedExchangeCode === "US") {
         // Check to see if its in NASDAQ
@@ -63,9 +61,10 @@ export default function SymbolSelect(props) {
       }
       // set the state of the watchlist selected share
       if (share !== null) {
-        props.setSelectedShare(
-          `${tradingViewCode}:${share.symbol.split(".")[0]}`
-        );
+        props.setSelectedShare({
+          description: share.description,
+          symbol: `${tradingViewCode}:${share.symbol.split(".")[0]}`,
+        });
       }
     };
   };
