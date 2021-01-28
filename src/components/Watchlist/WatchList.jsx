@@ -6,7 +6,7 @@ import WatchlistModal from "./WatchlistModal";
 /* -------- Import Custom Components ---------- */
 
 export default function WatchList(props) {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
 
   // get the users watchlist from the database on component load
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function WatchList(props) {
       try {
         const token = await getAccessTokenSilently();
         const response = await fetch(
-          `${process.env.REACT_APP_RAILS_API_URL}/users/:id`,
+          `${process.env.REACT_APP_RAILS_API_URL}/shares`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export default function WatchList(props) {
         );
         const responseData = await response.json();
         // set the state of the watchlist in the shares page, to then pass to the trading view widget
-        props.setWatchList(responseData.shares_preferences);
+        props.setWatchList(responseData);
       } catch (e) {
         console.error("Error: ", e.message);
       }
@@ -32,21 +32,41 @@ export default function WatchList(props) {
   }, []);
 
   // update the watchlist array for the current user in the database
-  async function updateUserWatchList(data) {
+  async function updateSharesDatabase(share) {
     try {
       const token = await getAccessTokenSilently();
-      fetch(`${process.env.REACT_APP_RAILS_API_URL}/users/:id`, {
-        method: "PUT",
+      fetch(`${process.env.REACT_APP_RAILS_API_URL}/shares`, {
+        method: "POST",
         mode: "cors",
         headers: {
           "Content-type": "application/json",
           Authorization: `bearer ${token}`,
         },
         body: JSON.stringify({
-          user: {
-            shares_preferences: data,
+          share: {
+            description: share.description,
+            symbol: share.symbol,
+            user_sub: user.sub,
           },
         }),
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
+  // update the watchlist array for the current user in the database
+  async function deleteShareFromDatabase(id) {
+    console.log(id);
+    try {
+      const token = await getAccessTokenSilently();
+      fetch(`${process.env.REACT_APP_RAILS_API_URL}/shares/${id}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `bearer ${token}`,
+        },
       });
     } catch (e) {
       console.log(e.message);
@@ -57,7 +77,8 @@ export default function WatchList(props) {
     <WatchlistModal
       watchList={props.watchList}
       setWatchList={props.setWatchList}
-      updateUserWatchList={updateUserWatchList}
+      updateSharesDatabase={updateSharesDatabase}
+      deleteShareFromDatabase={deleteShareFromDatabase}
     />
   );
 }
