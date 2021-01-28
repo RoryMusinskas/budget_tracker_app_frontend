@@ -35,6 +35,9 @@ import NotificationsPage from "views/Notifications/Notifications";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage";
+import { AttachMoney } from "@material-ui/icons";
+import { Expenses } from "views/Expenses/Expenses";
+import { NewExpenses } from "views/Expenses/NewExpenses";
 
 const dashboardRoutes = [
   {
@@ -46,11 +49,11 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/user",
-    name: "User Profile",
+    path: "/expenses",
+    name: "Expenses",
     rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
-    component: UserProfile,
+    icon: AttachMoney,
+    component: Expenses,
     layout: "/admin"
   },
   {
@@ -102,12 +105,13 @@ const dashboardRoutes = [
     layout: "/rtl"
   },
   {
-    path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
-    rtlName: "التطور للاحترافية",
-    icon: Unarchive,
-    component: UpgradeToPro,
-    layout: "/admin"
+    path: "/expenses/new",
+    name: "New Expense",
+    rtlName: "",
+    icon: Language,
+    component: NewExpenses,
+    layout: "/admin",
+    invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go thorugh protected routes
   }
 ];
 

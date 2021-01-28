@@ -8,9 +8,9 @@ import Admin from "layouts/Admin";
 import RTL from "layouts/RTL";
 import LandingPage from "views/LandingPage/LandingPage";
 import { Profile } from "./components/UserProfile";
-import { Expenses } from "./components/Expenses";
+import { Expenses } from "./views/Expenses/Expenses";
 import Loading from "./components/Loading";
-import { NewExpenses } from "./components/NewExpenses";
+import { NewExpenses } from "./views/Expenses/NewExpenses";
 
 // Import Auth0 code
 import { useAuth0 } from "@auth0/auth0-react";
@@ -33,39 +33,37 @@ export default function App() {
   // Use Auth0 hook to check if user is authenticated
   // If they are, post to the users end point to check
   // and see if the user is already added to the users table
-  // if (isAuthenticated === true) {
-  //   const getUserToken = async () => {
-  //     try {
-  //       const token = await getAccessTokenSilently();
-  //       fetch(`${process.env.REACT_APP_RAILS_API_URL}/users`, {
-  //         method: "POST",
-  //         mode: "cors",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //           Authorization: `bearer ${token}`,
-  //         },
-  //         body: JSON.stringify({
-  //           user: {
-  //             email: user.email,
-  //             shares_preferences: ["test", "test"],
-  //           },
-  //         }),
-  //       });
-  //     } catch (e) {
-  //       console.log(e.message);
-  //     }
-  //   };
-  //   getUserToken();
-  // }
+  if (isAuthenticated === true) {
+    const getUserToken = async () => {
+      try {
+        const token = await getAccessTokenSilently();
+        fetch(`${process.env.REACT_APP_RAILS_API_URL}/users`, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `bearer ${token}`,
+          },
+          body: JSON.stringify({
+            user: {
+              email: user.email,
+              shares_preferences: ["test", "test"],
+            },
+          }),
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    getUserToken();
+  }
   return (
     <>
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <ProtectedRoute path="/admin" component={Admin} />
         <ProtectedRoute path="/rtl" component={RTL} />
-        <ProtectedRoute path="/profile" component={Profile} />
-        <ProtectedRoute exact path="/expenses" component={Expenses} />
-        <ProtectedRoute path="/expenses/new" component={NewExpenses} />
+        {/* <ProtectedRoute path="/profile" component={Profile} /> */}
       </Switch>
     </>
   );
