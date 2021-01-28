@@ -35,7 +35,12 @@ export default function WatchlistModal(props) {
   const [page, setPage] = useState("exchange");
   const [selectedShare, setSelectedShare] = useState("");
   const [selectedExchange, setSelectedExchange] = useState("");
-  const { watchList, setWatchList, updateUserWatchList } = props;
+  const {
+    watchList,
+    setWatchList,
+    updateSharesDatabase,
+    deleteShareFromDatabase,
+  } = props;
 
   // open the model
   const handleOpen = () => {
@@ -51,7 +56,7 @@ export default function WatchlistModal(props) {
   // add a share to the watchlist
   const addToWatchlist = async () => {
     watchList.push(selectedShare);
-    updateUserWatchList(watchList);
+    updateSharesDatabase(selectedShare);
     // close the modal
     handleClose();
     // set the current page
@@ -59,9 +64,9 @@ export default function WatchlistModal(props) {
   };
 
   // delete item from the watchlist array for the current user, then  in the database, this is ran on button click
-  const handleDelete = async (value) => {
-    const data = watchList.filter((i) => i !== value);
-    updateUserWatchList(data);
+  const handleDelete = async (shareToDelete) => {
+    const data = watchList.filter((i) => i.id !== shareToDelete.id);
+    deleteShareFromDatabase(shareToDelete.id);
     setWatchList(data);
   };
 
