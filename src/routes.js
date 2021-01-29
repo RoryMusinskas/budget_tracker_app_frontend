@@ -35,6 +35,7 @@ import Maps from "views/Maps/Maps";
 import NotificationsPage from "views/Notifications/Notifications";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro";
 import SharesPage from "views/SharesPage/SharesPage";
+import GoalsPage from "views/GoalsPage/GoalsPage";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage";
 
@@ -55,6 +56,15 @@ const dashboardRoutes = [
     component: SharesPage,
     layout: "/admin",
   },
+  {
+    path: "/goals",
+    name: "Goals",
+    rtlName: "لوحة القيادة",
+    icon: Assessment,
+    component: GoalsPage,
+    layout: "/admin",
+  },
+
   {
     path: "/user",
     name: "User Profile",
