@@ -1,13 +1,17 @@
+/* -------- Import React core ------------ */
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+/* -------- Import MaterialUI core ------------ */
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+
+/* -------- Import Custom Components ---------- */
 import allExchanges from "variables/exchanges";
 
 // get the exchanges from the imported exchange variable file
 const exchanges = allExchanges.allExchanges;
 
-// styles for the select
+// styles for the autocomplete
 const useStyles = makeStyles({
   option: {
     fontSize: 15,
@@ -18,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-// get the countryCode and convert it to a flag
+// get the country code and convert it to a flag logo
 function countryToFlag(isoCode) {
   return typeof String.fromCodePoint !== "undefined"
     ? isoCode
@@ -34,10 +38,8 @@ export default function ExchangeSelect(props) {
   const classes = useStyles();
 
   return (
+    // use the autocompleted module, this will suggest based on what the user types
     <>
-      {
-        // use the autocompleted module, this will suggest based on what the user types
-      }
       <Autocomplete
         id="exchange-select"
         style={{ width: 300 }}
@@ -50,7 +52,7 @@ export default function ExchangeSelect(props) {
         getOptionLabel={(option) => {
           return `${option.code} (${option.name})`;
         }}
-        onChange={(event, exchange) => props.setSelectedExchange(exchange)}
+        onChange={(_event, exchange) => props.setSelectedExchange(exchange)}
         // what to show for each exchange
         renderOption={(option) => (
           <>
