@@ -4,11 +4,18 @@ export default function TradingViewWidget(props) {
   useEffect(() => {
     // Search the DOM for the chart element, this is a script tag added in the body
     const script = document.getElementById("trading-view-chart");
+
+    // set the array for the watchList
+    let watchListArray = [];
+    props.watchList.map((element) => {
+      return watchListArray.push(element.symbol);
+    });
+
     // Set the innerHTML for a new TradingView widget, these are the settings for the widget
     script.innerHTML = new window.TradingView.widget({
       height: "100%",
       width: "100%",
-      symbol: "ASX:XAO",
+      symbol: "ETHAUD",
       interval: "60",
       timezone: "Etc/UTC",
       theme: "light",
@@ -18,7 +25,7 @@ export default function TradingViewWidget(props) {
       enable_publishing: false,
       hide_side_toolbar: false,
       allow_symbol_change: true,
-      watchlist: props.watchList,
+      watchlist: watchListArray,
       details: true,
       hotlist: true,
       calendar: true,
