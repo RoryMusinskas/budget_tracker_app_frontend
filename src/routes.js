@@ -62,15 +62,9 @@ const dashboardRoutes = [
     path: "/expenses",
     name: "Expenses",
     rtlName: "ملف تعريفي للمستخدم",
-<<<<<<< HEAD
     icon: AttachMoney,
     component: Expenses,
     layout: "/admin"
-=======
-    icon: Person,
-    component: UserProfile,
-    layout: "/admin",
->>>>>>> main
   },
   {
     path: "/table",
@@ -121,7 +115,6 @@ const dashboardRoutes = [
     layout: "/rtl",
   },
   {
-<<<<<<< HEAD
     path: "/expenses/new",
     name: "New Expense",
     rtlName: "",
@@ -130,15 +123,6 @@ const dashboardRoutes = [
     layout: "/admin",
     invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go thorugh protected routes
   }
-=======
-    path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
-    rtlName: "التطور للاحترافية",
-    icon: Unarchive,
-    component: UpgradeToPro,
-    layout: "/admin",
-  },
->>>>>>> main
 ];
 
 export default dashboardRoutes;

@@ -63,13 +63,9 @@ export default function App() {
         <Route exact path="/" component={LandingPage} />
         <ProtectedRoute path="/admin" component={Admin} />
         <ProtectedRoute path="/rtl" component={RTL} />
-<<<<<<< HEAD
-        {/* <ProtectedRoute path="/profile" component={Profile} /> */}
-=======
         <ProtectedRoute path="/profile" component={Profile} />
-        <ProtectedRoute path="/expenses" component={Expenses} />
+        {/* <ProtectedRoute path="/expenses" component={Expenses} /> */}
         <ProtectedRoute path="/shares" component={SharesPage} />
->>>>>>> main
       </Switch>
     </>
   );
