@@ -253,6 +253,8 @@ export default function GoalsPage() {
                     column={column}
                     goals={goals}
                     index={index}
+                    state={state}
+                    setState={setState}
                   />
                 );
               })}
