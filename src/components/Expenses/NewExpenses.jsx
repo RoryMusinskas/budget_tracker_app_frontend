@@ -9,7 +9,7 @@ export function NewExpenses() {
   const [category, setCategory] = useState("");
 
   //Auth0 hooks
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
 
   async function onFormSubmit(e) {
     try {
@@ -28,6 +28,7 @@ export function NewExpenses() {
             description: description,
             category_id: parseInt(category), // ParseInt to convert string to integer
             amount: amount,
+            user_sub: user.sub, // user_sub for idenitfying each unique user
           },
         }),
       });
