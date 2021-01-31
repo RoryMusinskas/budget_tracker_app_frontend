@@ -9,9 +9,9 @@ import RTL from "layouts/RTL";
 import LandingPage from "views/LandingPage/LandingPage";
 import SharesPage from "views/SharesPage/SharesPage";
 import { Profile } from "./components/UserProfile";
-import { Expenses } from "./views/Expenses/Expenses";
+// import { Expenses } from "./views/Expenses/Expenses";
 import Loading from "./components/Loading";
-import { NewExpenses } from "./views/Expenses/NewExpenses";
+// import { NewExpenses } from "./views/Expenses/NewExpenses";
 
 // Import Auth0 code
 import { useAuth0 } from "@auth0/auth0-react";

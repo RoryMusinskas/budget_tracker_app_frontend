@@ -38,8 +38,8 @@ import SharesPage from "views/SharesPage/SharesPage";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage";
 import { AttachMoney } from "@material-ui/icons";
-import { Expenses } from "views/Expenses/Expenses";
-import { NewExpenses } from "views/Expenses/NewExpenses";
+import { ExpensesPage } from "views/ExpensesPage/ExpensesPage";
+import { NewExpenses } from "components/Expenses/NewExpenses";
 
 const dashboardRoutes = [
   {
@@ -63,7 +63,7 @@ const dashboardRoutes = [
     name: "Expenses",
     rtlName: "ملف تعريفي للمستخدم",
     icon: AttachMoney,
-    component: Expenses,
+    component: ExpensesPage,
     layout: "/admin"
   },
   {
