@@ -4,13 +4,12 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
-import Icon from "@material-ui/core/Icon";
 /* -------- Import Custom Components ---------- */
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
-import CardIcon from "components/Card/CardIcon";
 import CardBody from "components/Card/CardBody";
 import Goal from "components/Goals/Goal";
+import GoalTitle from "./GoalTitle";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 import styles from "assets/jss/material-dashboard-react/views/goalsPageStyle";
@@ -20,6 +19,7 @@ export default function Column(props) {
   const classes = useStyles();
 
   return (
+    // this is a draggable column that contains goals as children
     <Draggable draggableId={props.column.id} index={props.index}>
       {(provided) => (
         <Grid
@@ -31,14 +31,17 @@ export default function Column(props) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
+          // the column card
           <Card className={classes.column}>
             <CardHeader {...provided.dragHandleProps}>
-              <CardIcon color="warning">
-                <Icon>announcement</Icon>
-              </CardIcon>
-              <h6>{props.column.title}</h6>
+              <GoalTitle
+                state={props.state}
+                setState={props.setState}
+                column={props.column}
+              />
             </CardHeader>
             <CardBody>
+              // the droppable section of the card, where you can drag in goals
               <Droppable droppableId={props.column.id} type="goal">
                 {(provided, snapshot) => (
                   <List
@@ -46,13 +49,16 @@ export default function Column(props) {
                     // set the backgroundColour of the list when a goal is being dragged over the container
                     style={{
                       backgroundColor: snapshot.isDraggingOver
-                        ? "cornflowerblue"
+                        ? "lightgrey"
                         : "white",
                     }}
                     {...provided.droppableProps}
                   >
+                    // map out each goal card for a goals assigned to the column
                     {props.goals.map((goal, index) => (
-                      <Goal key={goal.id} goal={goal} index={index} />
+                      <Card key={goal.id}>
+                        <Goal key={goal.id} goal={goal} index={index} />
+                      </Card>
                     ))}
                     {provided.placeholder}
                   </List>
