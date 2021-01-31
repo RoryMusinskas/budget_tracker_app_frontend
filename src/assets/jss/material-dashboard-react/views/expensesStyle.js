@@ -78,12 +78,26 @@ import {
         lineHeight: "1"
       }
     },
-    expenseHistoryCard: {
+    // user styles
+    expensesContainer: {
+      display: "flex",
+      minHeight: "80vh",
+    },
+    expensesAnalysisContainer: {
+      dipslay: "flex",
+      justifyContent: "center",
+    },
+    expensesHistoryContainer: {
+      dipslay: "flex",
+      justifyContent: "center",
+    },
+    expensesHistoryCard: {
         height: "80vh",
     },
-    newButton: {
-        position: "absolute",
+    expensesAnalysisCard: {
+        height: "80vh",
     }
+
   };
   
   export default dashboardStyle;
