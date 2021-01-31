@@ -14,30 +14,10 @@ const goalsPageStyle = {
     display: "flex",
     justifyContent: "space-around",
   },
+
   upArrowCardCategory: {
     width: "16px",
     height: "16px",
-  },
-  stats: {
-    color: grayColor[0],
-    display: "inline-flex",
-    fontSize: "12px",
-    lineHeight: "22px",
-    "& svg": {
-      top: "4px",
-      width: "16px",
-      height: "16px",
-      position: "relative",
-      marginRight: "3px",
-      marginLeft: "3px",
-    },
-    "& .fab,& .fas,& .far,& .fal,& .material-icons": {
-      top: "4px",
-      fontSize: "16px",
-      position: "relative",
-      marginRight: "3px",
-      marginLeft: "3px",
-    },
   },
   cardCategory: {
     color: grayColor[0],
@@ -81,6 +61,15 @@ const goalsPageStyle = {
       fontWeight: "400",
       lineHeight: "1",
     },
+  },
+  editGrid: {
+    display: "flex",
+    alignItems: "center",
+    justifyItems: "center",
+    cursor: "pointer",
+  },
+  goalTitle: {
+    width: "100%",
   },
 };
 
