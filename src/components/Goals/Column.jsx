@@ -23,7 +23,12 @@ export default function Column(props) {
   // logic to create a goal for a selected column
   const createGoal = () => {
     const newGoalId = `goal-${count}`;
-    const newGoal = { id: newGoalId, content: "" };
+    const newGoal = {
+      id: newGoalId,
+      content: "",
+      description: "",
+      percentage: 0,
+    };
 
     // push in the new goal to the selected column goal id array
     column.goalIds.push(newGoalId);
