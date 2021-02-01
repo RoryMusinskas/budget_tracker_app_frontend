@@ -40,6 +40,7 @@ import RTLPage from "views/RTLPage/RTLPage";
 import { AttachMoney } from "@material-ui/icons";
 import { ExpensesPage } from "views/ExpensesPage/ExpensesPage";
 import { NewExpenses } from "components/Expenses/NewExpenses";
+import { EditExpense } from "components/Expenses/EditExpense";
 
 const dashboardRoutes = [
   {
@@ -121,7 +122,16 @@ const dashboardRoutes = [
     icon: Language,
     component: NewExpenses,
     layout: "/admin",
-    invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go thorugh protected routes
+    invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
+  },
+  {
+    path: "/expenses/:id/edit",
+    name: "Edit Expense",
+    rtlName: "",
+    icon: Language,
+    component: EditExpense,
+    layout: "/admin",
+    invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
   }
 ];
 
