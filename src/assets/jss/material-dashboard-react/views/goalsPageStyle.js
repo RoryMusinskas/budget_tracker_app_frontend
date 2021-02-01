@@ -70,6 +70,22 @@ const goalsPageStyle = {
   },
   goalTitle: {
     width: "100%",
+    fontWeight: "bold",
+  },
+  goalInput: {
+    width: "100%",
+  },
+  goalContent: {
+    width: "100%",
+    marginBottom: "20px",
+    fontWeight: "bold",
+  },
+  goalDescription: {
+    width: "100%",
+    marginBottom: "20px",
+  },
+  goalPercentage: {
+    width: "100%",
   },
 };
 
