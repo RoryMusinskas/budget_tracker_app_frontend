@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ClickAwayListener } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
-import Edit from "@material-ui/icons/Edit";
 import Grid from "@material-ui/core/Grid";
+import Input from "@material-ui/core/Input";
 /* -------- Import Custom Components ---------- */
 import { Draggable } from "react-beautiful-dnd";
-import Input from "@material-ui/core/Input";
+import GoalsModal from "./GoalsModal.jsx";
 
 import styles from "assets/jss/material-dashboard-react/views/goalsPageStyle";
 const useStyles = makeStyles(styles);
@@ -28,10 +28,6 @@ export default function Goal(props) {
     }),
   });
 
-  // handle click function for the edit icon
-  const handleClick = () => {
-    console.log("clicked");
-  };
   // set the value of the input state to the value of the event target
   const handleChange = (event) => {
     setInputValue(event.target.value);
@@ -102,7 +98,7 @@ export default function Goal(props) {
                     onChange={handleChange}
                     onKeyPress={handleEnter}
                     inputProps={{ "aria-label": "description" }}
-                    className={classes.goalTitle}
+                    className={classes.goalInput}
                     inputRef={(input) => {
                       autoFocus(input);
                     }}
@@ -114,7 +110,7 @@ export default function Goal(props) {
         </Draggable>
       </Grid>
       <Grid item xs={2} className={classes.editGrid}>
-        <Edit onClick={handleClick} />
+        <GoalsModal state={state} setState={setState} goal={goal} />
       </Grid>
     </Grid>
   );
