@@ -60,7 +60,7 @@ const dashboardRoutes = [
     path: "/goals",
     name: "Goals",
     rtlName: "لوحة القيادة",
-    icon: Assessment,
+    icon: LibraryBooks,
     component: GoalsPage,
     layout: "/admin",
   },
