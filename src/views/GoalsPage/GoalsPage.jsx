@@ -18,6 +18,7 @@ export default function GoalsPage() {
   const { getAccessTokenSilently, user } = useAuth0();
   const [state, setState] = useState(initialData.default);
   const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState(1);
 
   // this function is used to persist the order of the column, it's fired on drag end of a draggable component into a droppable component
   const onDragEnd = (result) => {
@@ -203,6 +204,8 @@ export default function GoalsPage() {
 
   // update the users data in the database, this will run for every state update, except the first one when there is no data in the database for the user
   const putUserGoalData = async () => {
+    // set the count to pass to the columns, this is used for the index for each new goal
+    setCount(Object.keys(state.goals).length + 1);
     try {
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/goals/${user.sub}`, {
@@ -255,6 +258,7 @@ export default function GoalsPage() {
                     index={index}
                     state={state}
                     setState={setState}
+                    count={count}
                   />
                 );
               })}
