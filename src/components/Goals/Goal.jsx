@@ -1,35 +1,87 @@
 /* -------- Import React core ------------ */
-import React from "react";
+import React, { useState } from "react";
 /* -------- Import MaterialUI core ------------ */
 import { makeStyles } from "@material-ui/core/styles";
+import { ClickAwayListener } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Edit from "@material-ui/icons/Edit";
 import Grid from "@material-ui/core/Grid";
 /* -------- Import Custom Components ---------- */
 import { Draggable } from "react-beautiful-dnd";
+import Input from "@material-ui/core/Input";
 
 import styles from "assets/jss/material-dashboard-react/views/goalsPageStyle";
 const useStyles = makeStyles(styles);
 
-// these are the styles for each goal when they are being dragged
-const getGoalStyle = (isDragging, draggableStyle) => ({
-  // styles to apply on draggable
-  ...draggableStyle,
-
-  // when it's being dragged, add a background color
-  ...(isDragging && {
-    background: "rgb(235,235,235)",
-  }),
-});
-
-// handle click function for the edit icon
-const handleClick = () => {
-  console.log("clicked");
-};
-
 export default function Goal(props) {
   const classes = useStyles();
+  const { state, setState, goal, createGoal, removeGoal } = props;
+  const [inputValue, setInputValue] = useState(goal.content);
+  // these are the styles for each goal when they are being dragged
+  const getGoalStyle = (isDragging, draggableStyle) => ({
+    // styles to apply on draggable
+    ...draggableStyle,
+
+    // when it's being dragged, add a background color
+    ...(isDragging && {
+      background: "rgb(235,235,235)",
+    }),
+  });
+
+  // handle click function for the edit icon
+  const handleClick = () => {
+    console.log("clicked");
+  };
+  // set the value of the input state to the value of the event target
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  // run this function when the user clicks anywhere apart from the input
+  // this will then set the state of the title
+  const handleClickAway = () => {
+    setGoalState();
+    if (inputValue === "") {
+      removeGoal(goal);
+    }
+  };
+
+  // run this function when the user presses a key, and set the state if the key is enter
+  const handleEnter = (event) => {
+    if (event.key === "Enter" && event.target.value !== "") {
+      setGoalState();
+      // remove the focus from the input
+      event.target.blur();
+      createGoal();
+    }
+  };
+
+  // set the state of the Goal to update the title of the column
+  const setGoalState = () => {
+    if (inputValue !== goal.content) {
+      goal.content = inputValue;
+      setState((prevState) => ({
+        ...state,
+        goals: {
+          ...prevState.goals,
+        },
+      }));
+    }
+  };
+
+  // when a user adds a new goal, we want to add the focus to that goal, so they can instantly start typing
+  // input is passed in from the inputRef on the input
+  const autoFocus = (input) => {
+    const lastGoal = Object.keys(state.goals)[
+      Object.keys(state.goals).length - 1
+    ];
+
+    if (goal.id === lastGoal && goal.content === "") {
+      input && input.value === "" && input.focus();
+    }
+  };
+
   return (
     <Grid container>
       <Grid item xs={10}>
@@ -38,14 +90,26 @@ export default function Goal(props) {
             <ListItem
               ref={provided.innerRef}
               {...provided.draggableProps}
-              // this dragHandle is what controls the drag event. You could remove this from the container and add this to a component and make the draggable section a certain size etc.
               {...provided.dragHandleProps}
               style={getGoalStyle(
                 snapshot.isDragging,
                 provided.draggableProps.style
               )}
             >
-              <ListItemText>{props.goal.content}</ListItemText>
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Grid item xs={12}>
+                  <Input
+                    value={inputValue}
+                    onChange={handleChange}
+                    onKeyPress={handleEnter}
+                    inputProps={{ "aria-label": "description" }}
+                    className={classes.goalTitle}
+                    inputRef={(input) => {
+                      autoFocus(input);
+                    }}
+                  />
+                </Grid>
+              </ClickAwayListener>
             </ListItem>
           )}
         </Draggable>
