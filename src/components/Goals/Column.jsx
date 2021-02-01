@@ -40,10 +40,8 @@ export default function Column(props) {
 
   // logic to remove a goal from a column
   const removeGoal = (goalToRemove) => {
-    // turn the state.goals into an array, then filter out the goal if it's the passed to be removed
-    const goals = Object.keys(state.goals).filter(
-      (goal) => goal !== goalToRemove.id
-    );
+    // delete the state.goals object property that the user is trying to delete
+    delete state.goals[`${goalToRemove.id}`];
 
     // remove the passed in goal from the columns array of goals
     const columnGoals = column.goalIds.filter(
@@ -54,10 +52,7 @@ export default function Column(props) {
     setState((prevState) => ({
       ...state,
       // set the goal state
-      goals: {
-        ...prevState.goals,
-        goalIds: [...goals],
-      },
+      goals: { ...prevState.goals },
       // set the column state
       columns: {
         ...prevState.columns,
