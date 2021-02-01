@@ -27,7 +27,7 @@ const switchRoutes = (
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
-          <ProtectedRoute
+          <ProtectedRoute // Set up protected route in the admin layout so that every path in the dashboard is protected
             exact path={prop.layout + prop.path}
             component={prop.component}
             key={key}
