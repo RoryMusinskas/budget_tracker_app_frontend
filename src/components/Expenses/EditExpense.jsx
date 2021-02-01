@@ -1,24 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export function NewExpenses({ history }) {
+export function EditExpense(props) {
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const id = props.match.params.id;
 
   //Auth0 hooks
   const { getAccessTokenSilently, user } = useAuth0();
 
-  // OnSubmit post request
+  // GET request to set state to pre-fill form inputs
+  useEffect(() => {
+    async function fetchExpense() {
+      try {
+        const token = await getAccessTokenSilently();
+        const response = await fetch(
+          `${process.env.REACT_APP_RAILS_API_URL}/expenses/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const responseData = await response.json();
+        // Fills the form with data from fetch request
+        setTitle(responseData.title)
+        setAmount(responseData.amount)
+        setDescription(responseData.description)
+        setCategory(responseData.category)
+      } catch (e) {
+        console.error("Error: ", e.message);
+      }
+    }
+    fetchExpense();
+  }, [])
+
   async function onFormSubmit(e) {
     try {
       // Prevent default page reload on submit
       e.preventDefault();
       const token = await getAccessTokenSilently();
-      await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses`, {
-        method: "POST",
+      await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `bearer ${token}`,
@@ -33,16 +59,14 @@ export function NewExpenses({ history }) {
           },
         }),
       });
-      // Redirects back to expenses page
-      history.push("/admin/expenses")
     } catch (error) {
       console.log(error.message);
     }
   }
 
-  return (
+  return(
     <>
-      <form onSubmit={onFormSubmit}>
+     <form onSubmit={onFormSubmit}>
         <div className="form-div">
           <label htmlFor="expense-name">Expense: </label>
           <input
