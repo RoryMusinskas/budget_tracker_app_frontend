@@ -26,7 +26,7 @@ export default function WatchList(props) {
         }
       );
       const responseData = await response.json();
-      // set the state of the watchlist in the shares page, to then pass to the trading view widget
+      // set the state of the watchlist in the shares page
       props.setWatchList(responseData);
     } catch (e) {
       console.error("Error: ", e.message);
