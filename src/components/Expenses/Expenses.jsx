@@ -62,6 +62,7 @@ export function Expenses() {
               category_id: parseInt(expense.category), // ParseInt to convert string to integer
               amount: expense.amount,
               user_sub: user.sub, // user_sub for identifying each unique user
+              date: expense.date
             },
           }),
         });
@@ -81,6 +82,7 @@ export function Expenses() {
                     <li>Title: {expense.title}</li>
                     <li>Description: {expense.description}</li>
                     <li>Amount: ${expense.amount}</li>
+                    <li>Date: {expense.date}</li>
                 </ul>
                 <Link onClick={(e) => onClickDelete(e, expense)}><DeleteForever></DeleteForever></Link>
                 <Link to={`expenses/${expense.id}/edit`}><EditIcon></EditIcon></Link>
