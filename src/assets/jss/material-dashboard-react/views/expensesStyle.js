@@ -81,16 +81,15 @@ import {
     // user styles
     expensesContainer: {
       display: "flex",
-      minHeight: "80vh",
     },
-    expensesAnalysisContainer: {
-      dipslay: "flex",
-      justifyContent: "center",
-    },
-    expensesHistoryContainer: {
-      dipslay: "flex",
-      justifyContent: "center",
-    },
+    // expensesAnalysisContainer: {
+    //   display: "inline",
+    //   justifyContent: "center",
+    // },
+    // expensesHistoryContainer: {
+    //   display: "inline",
+    //   justifyContent: "center",
+    // },
     expensesHistoryCard: {
         height: "80vh",
     },

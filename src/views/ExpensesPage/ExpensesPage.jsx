@@ -5,11 +5,11 @@ import { ExpensesAnalysis } from "../../components/Expenses/ExpensesAnalysisChar
 
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-import GridContainer from "components/Grid/GridContainer";
-// import GridItem from "components/Grid/GridItem";
+// import GridContainer from "components/Grid/GridContainer";
+import GridItem from "components/Grid/GridItem";
 import Grid from "@material-ui/core/Grid";
 import Card from "components/Card/Card";
-// import CardHeader from "components/Card/CardHeader";
+import CardHeader from "components/Card/CardHeader";
 // import CardIcon from "components/Card/CardIcon";
 import CardBody from "components/Card/CardBody";
 // import CardFooter from "components/Card/CardFooter";
@@ -35,26 +35,33 @@ export function ExpensesPage() {
       </div>
 
       <Grid container className={classes.expensesContainer}>
-        <Grid item xs={12} md={12} lg={12} xl={8}>
+        <GridItem xs={12} md={12} lg={12} xl={12}>
           <Grid className={classes.expensesAnalysisContainer}>
-            <Grid item xs={12} md={12} lg={5} xl={5}>
+            <GridItem xs={12} md={12} lg={8} xl={8}>
               <Card className={classes.expensesAnalysisCard}>
-                <ExpensesAnalysis/>
+                <CardHeader color="success" stats icon>
+                  <h3 className={classes.cardTitle}>Expense Analysis</h3>
+                </CardHeader>
+                <CardBody>
+                  <ExpensesAnalysis/>
+                </CardBody>
               </Card>
-            </Grid>
+            </GridItem>
           </Grid>
           <Grid className={classes.expensesHistoryContainer}>
-            <Grid item xs={12} md={12} lg={5} xl={5}>
+            <GridItem xs={5} md={5} lg={4} xl={4}>
               <Card className={classes.expensesHistoryCard}>
+                <CardHeader color="success" stats icon>
                   <h3 className={classes.cardTitle}>Expenses History</h3>
+                </CardHeader>
                 <CardBody>
                   {/* Expenses component */}
                   <Expenses/> 
                 </CardBody>
               </Card>
-            </Grid>
+            </GridItem>
           </Grid>
-        </Grid>
+        </GridItem>
       </Grid >
     </>
   );
