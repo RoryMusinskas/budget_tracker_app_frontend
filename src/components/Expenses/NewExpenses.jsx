@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import DatePicker from 'react-date-picker';
 
 export function NewExpenses({ history }) {
   // Hooks
@@ -7,6 +8,7 @@ export function NewExpenses({ history }) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [date, setDate] = useState(new Date());
 
   //Auth0 hooks
   const { getAccessTokenSilently, user } = useAuth0();
@@ -30,6 +32,7 @@ export function NewExpenses({ history }) {
             category_id: parseInt(category), // ParseInt to convert string to integer
             amount: amount,
             user_sub: user.sub, // user_sub for identifying each unique user
+            date: date,
           },
         }),
       });
@@ -90,6 +93,10 @@ export function NewExpenses({ history }) {
             <option value="4">Necessity</option>
             <option value="5">Others</option>
           </select>
+        </div>
+        <div className="form-div">
+          <label htmlFor="date-select">Date:</label>
+          <DatePicker name="date-select" id="date-select" onChange={setDate} value={date} />
         </div>
         <input type="submit" id="submit" value="Add Expense" />
       </form>

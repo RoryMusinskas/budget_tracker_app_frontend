@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import DatePicker from 'react-date-picker';
 
 export function EditExpense(props) {
   // Hooks
@@ -7,6 +8,7 @@ export function EditExpense(props) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [date, setDate] = useState(new Date());
   const id = props.match.params.id;
 
   //Auth0 hooks
@@ -31,6 +33,8 @@ export function EditExpense(props) {
         setAmount(responseData.amount)
         setDescription(responseData.description)
         setCategory(responseData.category)
+        // buggy interaction with setting initial state after fetching data from API 
+        // setDate(responseData.date)
       } catch (e) {
         console.error("Error: ", e.message);
       }
@@ -56,6 +60,7 @@ export function EditExpense(props) {
             category_id: parseInt(category), // ParseInt to convert string to integer
             amount: amount,
             user_sub: user.sub, // user_sub for identifying each unique user
+            date: date,
           },
         }),
       });
@@ -114,6 +119,10 @@ export function EditExpense(props) {
             <option value="4">Necessity</option>
             <option value="5">Others</option>
           </select>
+        </div>
+        <div className="form-div">
+          <label htmlFor="date-select">Date:</label>
+          <DatePicker name="date-select" id="date-select" onChange={setDate} value={date} />
         </div>
         <input type="submit" id="submit" value="Add Expense" />
       </form>
