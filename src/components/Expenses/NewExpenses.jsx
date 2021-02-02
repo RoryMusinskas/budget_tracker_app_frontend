@@ -36,7 +36,7 @@ export function NewExpenses({ history }) {
           },
         }),
       });
-      // Redirects back to expenses page
+      // Redirects back to expenses page upon successfully creating an expense
       history.push("/admin/expenses")
     } catch (error) {
       console.log(error.message);

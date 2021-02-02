@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 
 // Icon import from material ui
 import { DeleteForever } from "@material-ui/icons";
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
 
 export function Expenses() {
-  // Hooks  
+  // Hooks
   const [expenses, setExpenses] = useState([]);
 
   // Auth0 Hook
@@ -42,30 +42,33 @@ export function Expenses() {
   }, []);
 
   // Onclick delete function
-  async function onClickDelete (e, expense) {
+  async function onClickDelete(e, expense) {
     try {
       // Prevent default page reload on submit
       e.preventDefault();
       // Confirmation to delete expense
-      if(window.confirm(`Delete expense: ${expense.title}?`)) {
+      if (window.confirm(`Delete expense: ${expense.title}?`)) {
         const token = await getAccessTokenSilently();
-        await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses/${expense.id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `bearer ${token}`,
-          },
-          body: JSON.stringify({
-            expense: {
-              title: expense.title, // title for expense
-              description: expense.description,
-              category_id: parseInt(expense.category), // ParseInt to convert string to integer
-              amount: expense.amount,
-              user_sub: user.sub, // user_sub for identifying each unique user
-              date: expense.date
+        await fetch(
+          `${process.env.REACT_APP_RAILS_API_URL}/expenses/${expense.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `bearer ${token}`,
             },
-          }),
-        });
+            body: JSON.stringify({
+              expense: {
+                title: expense.title, // title for expense
+                description: expense.description,
+                category_id: expense.category, // ParseInt to convert string to integer
+                amount: expense.amount,
+                user_sub: user.sub, // user_sub for identifying each unique user
+                date: expense.date,
+              },
+            }),
+          }
+        );
         fetchExpenses();
       }
     } catch (error) {
@@ -75,20 +78,25 @@ export function Expenses() {
 
   return (
     <>
-        {expenses.map((expense, index) => {
-            return (
-            <>
-                <ul key={index} >
-                    <li>Title: {expense.title}</li>
-                    <li>Description: {expense.description}</li>
-                    <li>Amount: ${expense.amount}</li>
-                    <li>Date: {expense.date}</li>
-                </ul>
-                <Link onClick={(e) => onClickDelete(e, expense)}><DeleteForever></DeleteForever></Link>
-                <Link to={`expenses/${expense.id}/edit`}><EditIcon></EditIcon></Link>
-            </>
-            );
-        })}
+      {expenses.map((expense, index) => {
+        return (
+          <>
+            <ul key={index}>
+              <li>Title: {expense.title}</li>
+              <li>Description: {expense.description}</li>
+              <li>Amount: ${expense.amount}</li>
+              <li>Date: {expense.date}</li>
+              <li>Category: {expense.category}</li>
+            </ul>
+            <Link onClick={(e) => onClickDelete(e, expense)}>
+              <DeleteForever></DeleteForever>
+            </Link>
+            <Link to={`expenses/${expense.id}/edit`}>
+              <EditIcon></EditIcon>
+            </Link>
+          </>
+        );
+      })}
     </>
   );
 }
