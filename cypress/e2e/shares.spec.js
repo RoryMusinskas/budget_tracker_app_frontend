@@ -25,7 +25,7 @@ describe("open and close the edit watchlist modal", () => {
     cy.get(".makeStyles-paper-113").blur();
     cy.get(
       ".MuiGrid-grid-md-12 > div > .MuiButtonBase-root > .MuiButton-label"
-    ).click();
+    ).click({ force: true });
   });
 });
 
@@ -59,28 +59,79 @@ describe("clicking the edit watchlist button", () => {
   });
 });
 
-describe("selecting an exchange", () => {
+describe("selecting a stock", () => {
+  context("it should allow the user to select an exchange", () => {
+    it("should be able to click the edit watchlist button", () => {
+      cy.visit("/admin/shares");
+      cy.get(
+        ".MuiGrid-grid-md-12 > div > .MuiButtonBase-root > .MuiButton-label"
+      ).click();
+    });
+
+    it("should render the modal once the edit watchlist button is clicked", () => {
+      cy.get("#transition-modal-title").should("exist");
+    });
+
+    it("should render the exchange search box", () => {
+      cy.get(
+        ".MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root"
+      ).should("exist");
+    });
+
+    it("should not allow the user to navigate to the share select page without selecting an exchange", () => {
+      cy.get(".makeStyles-paper-113 > :nth-child(3)").click();
+      cy.get(".makeStyles-paper-113 > :nth-child(3)").should("exist");
+    });
+
+    it("should allow the user to click the dropdown button", () => {
+      cy.get(
+        ".MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root > path"
+      ).click();
+    });
+    it("should allow the user to select one of the exchanges", () => {
+      cy.get("#exchange-select").type("asx{enter}");
+      cy.get("#exchange-select").should("have.value", "AX (AUSTRALIAN ASX)");
+    });
+    it("should allow the user to select the next button after selecting an exchange", () => {
+      cy.get(".makeStyles-paper-113 > :nth-child(3)").click();
+    });
+  });
+  context("it should allow the user to select a stock", () => {
+    it("should render the stock search box", () => {
+      cy.get("#stock-list").should("exist");
+    });
+
+    it("should not allow the user to click add stock button before they have selected a stock", () => {
+      cy.get(".makeStyles-paper-113 > :nth-child(3)").click();
+      cy.get(".makeStyles-paper-113 > :nth-child(3)").should("exist");
+    });
+
+    it("should allow the user to click the dropdown button", () => {
+      cy.get(
+        ".MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root > path"
+      ).click();
+    });
+    it("should allow the user to select one of the stocks", () => {
+      cy.get("#stock-list").type("jumbo{downArrow}{enter}");
+      cy.get("#stock-list").should("have.value", "JUMBO INTERACTIVE LTD");
+    });
+    it("should allow the user to select the add to watchlist button after selecting an stock", () => {
+      cy.get(".makeStyles-paper-113 > .MuiButton-root").click();
+      cy.get(
+        ".MuiGrid-grid-md-12 > div > .MuiButtonBase-root > .MuiButton-label"
+      ).should("exist");
+    });
+  });
+});
+
+describe("clicking the remove stock button", () => {
   it("should be able to click the edit watchlist button", () => {
     cy.visit("/admin/shares");
     cy.get(
       ".MuiGrid-grid-md-12 > div > .MuiButtonBase-root > .MuiButton-label"
     ).click();
   });
-
-  it("should render the modal once the edit watchlist button is clicked", () => {
-    cy.get("#transition-modal-title").should("exist");
-  });
-
-  it("should render the exchange search box", () => {
-    cy.get(
-      ".MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root"
-    ).should("exist");
-  });
-});
-
-describe("clicking the remove stock button", () => {
   it("should be able to click the remove stock button", () => {
-    cy.visit("/admin/shares");
     cy.get(".makeStyles-paper-113 > :nth-child(4)").click();
   });
   it("should have the remove stock from watchlist title", () => {
