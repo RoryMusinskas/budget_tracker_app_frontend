@@ -1,3 +1,14 @@
+describe("shares page should be a protected route", () => {
+  it("should not an allow a logged out user to the shares page", () => {
+    cy.visit("/admin/shares");
+    cy.get(".cc2f705b6").should("exist");
+  });
+  it("should allow the user to login with username and password", () => {
+    cy.get("#username").type(Cypress.env("auth_username"));
+    cy.get("#password").type(Cypress.env("auth_password"));
+    cy.get(".caa50eb76").click();
+  });
+});
 describe("clicking shares page", () => {
   it("renders the edit watchlist button", () => {
     cy.login();
@@ -10,7 +21,11 @@ describe("clicking shares page", () => {
   it("renders the trading view shares widget", () => {
     cy.login();
     cy.visit("/admin/shares");
-    cy.get("iframe").should("exist");
+    cy.get("#tradingview_widget > div > div > iframe").should("exist");
+  });
+  it("renders the trading view stock market overview chart", () => {
+    cy.visit("/admin/shares");
+    cy.get("#stock-market-chart > div > iframe").should("exist");
   });
 });
 
@@ -124,7 +139,7 @@ describe("selecting a stock", () => {
   });
 });
 
-describe("clicking the remove stock button", () => {
+describe("removing a selected stock from watchlist", () => {
   it("should be able to click the edit watchlist button", () => {
     cy.visit("/admin/shares");
     cy.get(
@@ -140,10 +155,31 @@ describe("clicking the remove stock button", () => {
   it("should render the close modal button", () => {
     cy.get(".makeStyles-paper-113 > .MuiButtonBase-root").should("exist");
   });
-  it("clicking the close button should close the modal", () => {
+  it("should allow the user to remove a selected stock, if they have added one", () => {
+    cy.get(
+      ":nth-child(1) > .MuiListItem-root > .MuiListItemText-root > .MuiTypography-root"
+    ).should("exist");
+    cy.get(
+      ":nth-child(1) > .MuiListItemSecondaryAction-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root > path"
+    ).click();
+    cy.get(
+      ":nth-child(1) > .MuiListItem-root > .MuiListItemText-root > .MuiTypography-root"
+    ).should("not.exist");
+  });
+  it("should render the close button and clicking it should close the modal", () => {
     cy.get(".makeStyles-paper-113 > .MuiButtonBase-root").click();
     cy.get(
       ".MuiGrid-grid-md-12 > div > .MuiButtonBase-root > .MuiButton-label"
     ).should("exist");
+  });
+});
+
+describe("logging out the user", () => {
+  it("should allow the user to logout of the application", () => {
+    cy.get(
+      ".PrivateHiddenCss-smDown-34 > :nth-child(1) > :nth-child(4) > .MuiButtonBase-root > .MuiButton-label > .MuiSvgIcon-root > path"
+    ).click();
+    cy.get("#profile-menu-list-grow > .MuiList-root > :nth-child(4)").click();
+    cy.get(".makeStyles-buttonContainer-4 > :nth-child(1)").should("exist");
   });
 });
