@@ -32,47 +32,6 @@ export const Profile = () => {
     getUserMetadata();
   }, [getAccessTokenSilently, user]);
 
-  // const getUser = async () => {
-  //   try {
-  //     const token = await getAccessTokenSilently();
-  //     let test = await fetch("http://localhost:3001/users/1", {
-  //       mode: "cors",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //         Authorization: `bearer ${token}`,
-  //       },
-  //     })
-  //     .then(response => responseon())
-  //     .then(responseData => console.log(responseData))
-  //   } catch (e) {
-  //     console.error(e.message);
-  //   }
-  // };
-  // getUser()
-
-  //   const postToDatabase = async () => {
-  //     try{
-  //       const token = await getAccessTokenSilently()
-  //       await fetch("http://localhost:3001/users", {
-  //         method: "POST",
-  //         mode: "cors",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //           Authorization: `bearer ${token}`,
-  //         },
-  //         body: JSON.stringify({
-  //           user: {
-  //             email: user.email,
-  //             shares_preferences: ['btc', 'eth']
-  //           },
-  //         }),
-  //       });
-  //     }catch(e){
-  //       console.error(e.message)
-  //     }
-  // };
-  // postToDatabase()
-
   return (
     isAuthenticated && (
       <div>
