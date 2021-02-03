@@ -2,12 +2,8 @@
 import React, { useState, useEffect } from "react";
 // React-chart-js-2 import
 import { Bar } from "react-chartjs-2";
-// Auth0 import
-import { useAuth0 } from "@auth0/auth0-react";
 
 export function ExpensesAnalysis(props) {
-  // Auth0 Hooks
-  // const { getAccessTokenSilently } = useAuth0();
   //  React hooks
   const [expenseData, setExpenseData] = useState([]);
   const [yearOfExpense, setYearOfExpense] = useState([]);
@@ -46,7 +42,7 @@ export function ExpensesAnalysis(props) {
   function setGraphData(responseData, year) {
     const tempArray = [];
     const tempData = [];
-    responseData.map((response) => {
+    responseData.forEach((response) => {
       if (response.date.split("-")[0] === year) {
         // This is to push data that corresponds to the year selected. Later used for populating title.
         tempData.push(response); 
@@ -87,6 +83,8 @@ export function ExpensesAnalysis(props) {
           case "12":
             tempArray.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, response.amount]);
             break;
+          default:
+            console.error("Wrong place")
         }
       }
     });
@@ -98,15 +96,13 @@ export function ExpensesAnalysis(props) {
   // and labels. Count is used to correspond with the array and data to populate each 
   // labels
   function formatGraphData(array, data) {
-    let count = 0;
     const final = [];
-    array.forEach((item) => {
+    array.forEach((item, index) => {
       final.push({
-        label: `${data[count].title}`,
+        label: `${data[index].title}`,
         data: item,
         backgroundColor: `${"#" + (((1 << 24) * Math.random()) | 0).toString(16)}`,
       });
-      count++;
     });
     setExpenseData(final);
   }
@@ -148,7 +144,7 @@ export function ExpensesAnalysis(props) {
         <select value={selectedYear} onChange={yearSelectedChange}>
           {yearOfExpense.map((array, key) => {
             return (
-              <option key={key} value={array}>
+              <option key={`${key} - ${array[key]}`} value={array}>
                 {array}
               </option>
             );
