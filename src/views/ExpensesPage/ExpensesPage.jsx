@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Expenses } from "../../components/Expenses/Expenses"
 import { ExpensesAnalysis } from "../../components/Expenses/ExpensesAnalysisChart";
@@ -23,6 +23,7 @@ const useStyles = makeStyles(styles);
 
 export function ExpensesPage() {
   const classes = useStyles();
+  const [expenses, setExpenses] = useState([]);
 
   return (
     <>
@@ -43,7 +44,7 @@ export function ExpensesPage() {
                   <h3 className={classes.cardTitle}>Expense Analysis</h3>
                 </CardHeader>
                 <CardBody>
-                  <ExpensesAnalysis/>
+                  <ExpensesAnalysis expenses={expenses}/>
                 </CardBody>
               </Card>
             </GridItem>
@@ -56,7 +57,7 @@ export function ExpensesPage() {
                 </CardHeader>
                 <CardBody>
                   {/* Expenses component */}
-                  <Expenses/> 
+                  <Expenses expenses={expenses} setExpenses={setExpenses}/> 
                 </CardBody>
               </Card>
             </GridItem>

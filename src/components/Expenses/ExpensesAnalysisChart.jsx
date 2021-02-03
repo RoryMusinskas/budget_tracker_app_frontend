@@ -5,9 +5,9 @@ import { Bar } from "react-chartjs-2";
 // Auth0 import
 import { useAuth0 } from "@auth0/auth0-react";
 
-export function ExpensesAnalysis() {
+export function ExpensesAnalysis(props) {
   // Auth0 Hooks
-  const { getAccessTokenSilently } = useAuth0();
+  // const { getAccessTokenSilently } = useAuth0();
   //  React hooks
   const [expenseData, setExpenseData] = useState([]);
   const [yearOfExpense, setYearOfExpense] = useState([]);
@@ -19,26 +19,13 @@ export function ExpensesAnalysis() {
 
   // useEffect to re-render based on selectedYears state change
   useEffect(() => {
-    async function fetchExpensesForChart() {
-      try {
-        const token = await getAccessTokenSilently();
-        const response = await fetch(
-          `${process.env.REACT_APP_RAILS_API_URL}/expenses`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const responseData = await response.json();
-        setOptionSelect(responseData); // Sets option select
-        setGraphData(responseData, selectedYear); // Sets graph data according to year
-      } catch (e) {
-        console.error("Error: ", e.message);
-      }
-    }
     fetchExpensesForChart();
-  }, [selectedYear]);
+  }, [selectedYear, props] );
+  
+  function fetchExpensesForChart() {
+    setOptionSelect(props.expenses); // Sets option select
+    setGraphData(props.expenses, selectedYear); // Sets graph data according to year
+  }
 
   // setOptionSelect is to set the option select for expenses that 
   // are created in which year. This will populate option selections 

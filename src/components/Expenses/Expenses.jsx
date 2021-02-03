@@ -11,14 +11,14 @@ import { Link } from "react-router-dom";
 import { DeleteForever } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 
-export function Expenses() {
+export function Expenses(props) {
   // Hooks
-  const [expenses, setExpenses] = useState([]);
+  // const [expenses, setExpenses] = useState([]);
 
   // Auth0 Hook
   const { getAccessTokenSilently, user } = useAuth0();
 
-  // A cleaner way to fetch with token
+  // Fetching data from backend
   async function fetchExpenses() {
     try {
       const token = await getAccessTokenSilently();
@@ -31,7 +31,7 @@ export function Expenses() {
         }
       );
       const responseData = await response.json();
-      setExpenses(responseData);
+      props.setExpenses(responseData); // Sets state for prop drilling/lifting state
     } catch (e) {
       console.error("Error: ", e.message);
     }
@@ -78,7 +78,7 @@ export function Expenses() {
 
   return (
     <>
-      {expenses.map((expense, index) => {
+      {props.expenses.map((expense, index) => {
         return (
           <>
             <ul key={index}>
