@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Expenses } from "../../components/Expenses/Expenses"
 import { ExpensesAnalysis } from "../../components/Expenses/ExpensesAnalysisChart";
+import { ExpensesAnalysisPie } from "../../components/Expenses/ExpensesAnalysisPie";
 
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-// import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Grid from "@material-ui/core/Grid";
 import Card from "components/Card/Card";
@@ -15,7 +15,6 @@ import CardBody from "components/Card/CardBody";
 // import CardFooter from "components/Card/CardFooter";
 import { makeStyles } from "@material-ui/core/styles";
 
-// import { useAuth0 } from "@auth0/auth0-react";
 
 import styles from "assets/jss/material-dashboard-react/views/expensesStyle";
 
@@ -24,6 +23,15 @@ const useStyles = makeStyles(styles);
 export function ExpensesPage() {
   const classes = useStyles();
   const [expenses, setExpenses] = useState([]);
+  const [ viewBarChart, setViewBarChart ] = useState(true);
+
+  function onClickToChangeChart() {
+    if(!viewBarChart) {
+      setViewBarChart(true)
+    } else {
+      setViewBarChart(false)
+    }
+  }
 
   return (
     <>
@@ -44,7 +52,11 @@ export function ExpensesPage() {
                   <h3 className={classes.cardTitle}>Expense Analysis</h3>
                 </CardHeader>
                 <CardBody>
-                  <ExpensesAnalysis expenses={expenses}/>
+                  {viewBarChart && <ExpensesAnalysis expenses={expenses} />}
+                  {!viewBarChart && <ExpensesAnalysisPie expenses={expenses}/>}
+                  <div className="toggle-button">
+                    <Button variant="contained" color="primary" onClick={onClickToChangeChart}>Sort By</Button>
+                  </div>
                 </CardBody>
               </Card>
             </GridItem>
