@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import DatePicker from 'react-date-picker';
+import DatePicker from "react-date-picker";
 
 export function NewExpenses({ history }) {
   // Hooks
@@ -37,7 +37,7 @@ export function NewExpenses({ history }) {
         }),
       });
       // Redirects back to expenses page upon successfully creating an expense
-      history.push("/admin/expenses")
+      history.push("/admin/expenses");
     } catch (error) {
       console.log(error.message);
     }
@@ -86,7 +86,6 @@ export function NewExpenses({ history }) {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            {/* Using value as numbers to reflect schema of taking bigint for now */}
             <option value="1">Grocery</option>
             <option value="2">Travel</option>
             <option value="3">Entertainment</option>
@@ -96,7 +95,12 @@ export function NewExpenses({ history }) {
         </div>
         <div className="form-div">
           <label htmlFor="date-select">Date:</label>
-          <DatePicker name="date-select" id="date-select" onChange={setDate} value={date} />
+          <DatePicker
+            name="date-select"
+            id="date-select"
+            onChange={setDate}
+            value={date}
+          />
         </div>
         <input type="submit" id="submit" value="Add Expense" />
       </form>
