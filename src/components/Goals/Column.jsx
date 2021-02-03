@@ -77,9 +77,9 @@ export default function Column(props) {
       {(provided) => (
         <Grid
           item
-          xs={12}
-          md={12}
-          lg={3}
+          xs={4}
+          md={4}
+          lg={4}
           className={classes.columnContainer}
           {...provided.draggableProps}
           ref={provided.innerRef}
