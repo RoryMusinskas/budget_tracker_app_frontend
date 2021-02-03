@@ -26,21 +26,21 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     maxWidth: 752,
   },
+  background: {
+    backgroundColor: theme.palette.background.paper,
+  },
+  title: {
+    margin: theme.spacing(4, 0, 2),
+  },
 }));
 
-// the watchlist modal
+// the watchlist modal that is displayed when the user clicks edit watchlist
 export default function WatchlistModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState("exchange");
   const [selectedShare, setSelectedShare] = useState("");
   const [selectedExchange, setSelectedExchange] = useState("");
-  const {
-    watchList,
-    setWatchList,
-    updateSharesDatabase,
-    deleteShareFromDatabase,
-  } = props;
 
   // open the model
   const handleOpen = () => {
@@ -53,23 +53,7 @@ export default function WatchlistModal(props) {
     setPage("exchange");
   };
 
-  // add a share to the watchlist
-  const addToWatchlist = async () => {
-    watchList.push(selectedShare);
-    updateSharesDatabase(selectedShare);
-    // close the modal
-    handleClose();
-    // set the current page
-    setPage("exchange");
-  };
-
-  // delete item from the watchlist array for the current user, then  in the database, this is ran on button click
-  const handleDelete = async (shareToDelete) => {
-    const data = watchList.filter((i) => i.id !== shareToDelete.id);
-    deleteShareFromDatabase(shareToDelete.id);
-    setWatchList(data);
-  };
-
+  // return the modal component
   return (
     <div>
       <Button onClick={handleOpen}>Edit watch list</Button>
@@ -94,12 +78,12 @@ export default function WatchlistModal(props) {
               setSelectedExchange={setSelectedExchange}
               selectedShare={selectedShare}
               setSelectedShare={setSelectedShare}
-              addToWatchlist={addToWatchlist}
-              setWatchList={setWatchList}
               classes={classes}
               handleClose={handleClose}
               watchList={props.watchList}
-              handleDelete={handleDelete}
+              setWatchList={props.setWatchList}
+              updateSharesDatabase={props.updateSharesDatabase}
+              deleteShareFromDatabase={props.deleteShareFromDatabase}
             />
           </div>
         </Fade>
