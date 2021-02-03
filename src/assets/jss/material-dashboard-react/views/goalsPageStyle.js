@@ -12,9 +12,12 @@ const goalsPageStyle = {
   goalsContainer: {
     minHeight: "80vh",
     display: "flex",
-    justifyContent: "space-around",
+    flexWrap: "nowrap",
+    overflowX: "auto",
   },
-
+  columnContainer: {
+    minWidth: "300px",
+  },
   upArrowCardCategory: {
     width: "16px",
     height: "16px",

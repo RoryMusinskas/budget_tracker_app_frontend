@@ -133,6 +133,7 @@ export default function GoalsPage() {
               className={classes.goalsContainer}
               {...provided.droppableProps}
               ref={provided.innerRef}
+              spacing={3}
             >
               {state.columnOrder.map((columnId, index) => {
                 const column = state.columns[columnId];
