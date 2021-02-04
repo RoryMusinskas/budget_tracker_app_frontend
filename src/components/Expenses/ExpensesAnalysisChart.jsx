@@ -8,6 +8,7 @@ export function ExpensesAnalysis(props) {
   const [expenseData, setExpenseData] = useState([]);
   const [yearOfExpense, setYearOfExpense] = useState([]);
   const [selectedYear, setSelectedYear] = useState(`${new Date().getFullYear()}`); // Initial state of the current year
+  const [yearlyTotal, setYearlyTotal] = useState();
   // Constants
   const yearArray = [];
   const labels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
@@ -89,6 +90,19 @@ export function ExpensesAnalysis(props) {
       }
     });
     formatGraphData(tempArray, tempData); // Formatted graph array and data passed
+    setYearTotalExpense(tempArray)
+  }
+
+  // Set yearly total
+  function setYearTotalExpense(array) {
+    const total = array.map( arr => arr.reduce(
+      ( accumulator, currentValue ) => accumulator + currentValue, 0
+    )
+    )
+    const final = total.reduce( 
+      ( accumulator, currentValue ) => accumulator + currentValue, 0
+    )
+    setYearlyTotal(final);
   }
 
   // formatGraphData is used to format and return the correct format and extra 
@@ -152,6 +166,9 @@ export function ExpensesAnalysis(props) {
         </select>
       </div>
       <Bar data={barGraphData} options={barGraphOptions} />
+      <div>
+        Total: ${yearlyTotal}
+      </div>
     </>
   );
 }
