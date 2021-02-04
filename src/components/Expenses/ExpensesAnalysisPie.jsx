@@ -11,6 +11,7 @@ export function ExpensesAnalysisPie(props) {
 
   // Constants
   const yearArray = [];
+  const categoryArray = ["Grocery", "Travel", "Entertainment", "Necessity", "Others"]
 
   // Use effect runs with changes to change in prop
   // and when a user selects which year to view
@@ -73,7 +74,7 @@ export function ExpensesAnalysisPie(props) {
 
   // react-chart-js data structure for pie chart
   const pieChartData = {
-    labels: ["Grocery", "Travel", "Entertainment", "Necessity", "Others"],
+    labels: categoryArray,
     datasets:[{
       data: expenseData,
       backgroundColor: [
@@ -108,6 +109,11 @@ export function ExpensesAnalysisPie(props) {
         </select>
       </div>
       <Pie data={pieChartData}></Pie>
+      {expenseData.map((data, index) => {
+        return(
+          <li key={`PieList${index}`}>{`${categoryArray[index]}: $${data}`}</li>
+        )
+      })}
     </>
   );
 }
