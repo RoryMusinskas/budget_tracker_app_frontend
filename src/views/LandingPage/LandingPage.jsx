@@ -3,7 +3,6 @@ import React, { useState } from "react";
 //import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
 import shares from "../../assets/img/shares-computer.svg";
 import wallet from "../../assets/img/expenses-wallet.svg";
 import todo from "../../assets/img/todo-list.svg";
@@ -18,7 +17,6 @@ import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
 import Link from "@material-ui/core/Link";
-import Button from "@material-ui/core/Button";
 
 import styles from "assets/jss/material-dashboard-react/views/landingPageStyle";
 const useStyles = makeStyles(styles);
@@ -58,7 +56,7 @@ export default function LandingPage() {
         </Grid>
         <Hidden xsDown>
           <Grid xs={10}>
-            <img src={website} style={{ width: "100%" }} />
+            <img src={website} alt='website overview'style={{ width: "100%" }} />
           </Grid>
         </Hidden>
         <Grid xs={12} className={classes.headerFooterContainer}>
@@ -85,14 +83,14 @@ export default function LandingPage() {
             </Grid>
             <Grid item xs={12} lg={5}>
               <Slide right>
-                <img src={wallet} className={classes.featureImage} />
+                <img src={wallet} alt='expenses tracking' className={classes.featureImage} />
               </Slide>
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.featureContainer}>
             <Grid item xs={12} lg={5}>
               <Zoom>
-                <img src={shares} className={classes.featureImage} />
+                <img src={shares} alt='shares tracking' className={classes.featureImage} />
               </Zoom>
             </Grid>
             <Grid item xs={12} lg={5}>
@@ -118,7 +116,7 @@ export default function LandingPage() {
             </Slide>
             <Slide right>
               <Grid item xs={12} lg={5}>
-                <img src={todo} className={classes.featureImage} />
+                <img src={todo} alt='financial goals' className={classes.featureImage} />
               </Grid>
             </Slide>
           </Grid>
