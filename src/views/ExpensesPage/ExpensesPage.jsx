@@ -6,13 +6,10 @@ import { ExpensesAnalysisPie } from "../../components/Expenses/ExpensesAnalysisP
 
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-import GridItem from "components/Grid/GridItem";
 import Grid from "@material-ui/core/Grid";
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
-// import CardIcon from "components/Card/CardIcon";
 import CardBody from "components/Card/CardBody";
-// import CardFooter from "components/Card/CardFooter";
 import { makeStyles } from "@material-ui/core/styles";
 
 
@@ -37,44 +34,45 @@ export function ExpensesPage() {
     <>
       <div className={classes.newButton}>
       <NavLink to="/admin/expenses/new">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" className={classes.addExpenseButton}>
           <Icon >add_circle</Icon> New Expense
         </Button>
       </NavLink>
       </div>
 
       <Grid container className={classes.expensesContainer}>
-        <GridItem xs={12} md={12} lg={12} xl={12}>
+        <Grid item xs={12} md={12} lg={8} xl={8}>
           <Grid className={classes.expensesAnalysisContainer}>
-            <GridItem xs={12} md={12} lg={8} xl={8}>
-              <Card className={classes.expensesAnalysisCard}>
-                <CardHeader color="success" stats icon>
+            <Grid item xs={12} md={12} lg={11} xl={11}>
+              <Card chart className={classes.expensesAnalysisCard}>
+                <CardHeader>
                   <h3 className={classes.cardTitle}>Expense Analysis</h3>
                 </CardHeader>
                 <CardBody>
                   {viewBarChart && <ExpensesAnalysis expenses={expenses} />}
                   {!viewBarChart && <ExpensesAnalysisPie expenses={expenses}/>}
                   <div className="toggle-button">
-                    <Button variant="contained" color="primary" onClick={onClickToChangeChart}>Sort By</Button>
+                    <Button variant="contained" color="primary" onClick={onClickToChangeChart} className={classes.sortButton}>Sort By</Button>
                   </div>
                 </CardBody>
               </Card>
-            </GridItem>
+            </Grid>
           </Grid>
+        </Grid>
+        <Grid item xs={12} md={12} lg={4} xl={4} >
           <Grid className={classes.expensesHistoryContainer}>
-            <GridItem xs={5} md={5} lg={4} xl={4}>
+            <Grid item xs={12} md={12} lg={12} xl={12}>
               <Card className={classes.expensesHistoryCard}>
-                <CardHeader color="success" stats icon>
+                <CardHeader className={classes.expensesHistoryCardHeader}>
                   <h3 className={classes.cardTitle}>Expenses History</h3>
                 </CardHeader>
-                <CardBody>
-                  {/* Expenses component */}
+                <CardBody className={classes.expensesHistoryCardBody}>
                   <Expenses expenses={expenses} setExpenses={setExpenses}/> 
                 </CardBody>
               </Card>
-            </GridItem>
+            </Grid>
           </Grid>
-        </GridItem>
+        </Grid>
       </Grid >
     </>
   );
