@@ -5,7 +5,6 @@ import { Route, Switch } from "react-router-dom";
 // Import Components/Views/Styles
 import "assets/css/material-dashboard-react.css?v=1.9.0";
 import Admin from "layouts/Admin";
-import RTL from "layouts/RTL";
 import LandingPage from "views/LandingPage/LandingPage";
 import SharesPage from "views/SharesPage/SharesPage";
 import { Profile } from "./components/UserProfile";

@@ -84,7 +84,7 @@ export default function SymbolSearch(props) {
         <Loading />
       ) : (
         <Autocomplete
-          id="virtualize-demo"
+          id="stock-list"
           style={{ width: 300 }}
           disableListWrap
           classes={classes}

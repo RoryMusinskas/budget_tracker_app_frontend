@@ -58,6 +58,7 @@ export default function displayPage(props) {
           <Button
             onClick={() => {
               if (selectedShare !== "") {
+                // update the database when the user has selected their share
                 updateSharesDatabase(selectedShare);
                 // close the modal
                 handleClose();
