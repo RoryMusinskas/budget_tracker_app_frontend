@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -16,6 +16,7 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle";
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "../auth/ProtectedRoute";
 
 let ps;
 
@@ -24,8 +25,8 @@ const switchRoutes = (
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
-          <Route
-            path={prop.layout + prop.path}
+          <ProtectedRoute // Set up protected route in the admin layout so that every path in the dashboard is protected
+            exact path={prop.layout + prop.path}
             component={prop.component}
             key={key}
           />

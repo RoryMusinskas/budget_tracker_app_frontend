@@ -28,6 +28,9 @@ export default function Sidebar(props) {
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
+        if(prop.invisible) {
+          return null; // This hides extra routes to not show up on the sidebar
+        } else {
         var activePro = " ";
         var listItemClasses;
         if (prop.path === "/upgrade-to-pro") {
@@ -76,6 +79,7 @@ export default function Sidebar(props) {
             </ListItem>
           </NavLink>
         );
+              }
       })}
     </List>
   );
