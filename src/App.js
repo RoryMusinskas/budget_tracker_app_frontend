@@ -30,9 +30,6 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <ProtectedRoute path="/admin" component={Admin} />
-        <ProtectedRoute path="/profile" component={Profile} />
-        {/* <ProtectedRoute path="/expenses" component={Expenses} /> */}
-        <ProtectedRoute path="/shares" component={SharesPage} />
       </Switch>
     </>
   );
