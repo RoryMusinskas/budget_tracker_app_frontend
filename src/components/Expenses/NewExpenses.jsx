@@ -7,7 +7,7 @@ export function NewExpenses({ history }) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("1"); // default choice is "Grocery", which is 1
   const [date, setDate] = useState(new Date());
 
   //Auth0 hooks
