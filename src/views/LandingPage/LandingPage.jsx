@@ -1,159 +1,126 @@
-import React from "react";
+import React, { useState } from "react";
 // react plugin for creating charts
 //import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
+import shares from "../../assets/img/shares-computer.svg";
+import wallet from "../../assets/img/expenses-wallet.svg";
+import todo from "../../assets/img/todo-list.svg";
+import website from "../../assets/img/website.svg";
+import Hidden from "@material-ui/core/Hidden";
 // core components
 import Grid from "@material-ui/core/Grid";
-import Card from "components/Card/Card";
-import CardHeader from "components/Card/CardHeader";
-import CardIcon from "components/Card/CardIcon";
-import CardBody from "components/Card/CardBody";
 import LoginButton from "components/LoginButton";
 import SignupButton from "components/SignupButton";
+import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
+import Slide from "react-reveal/Slide";
+import Zoom from "react-reveal/Zoom";
+import Fade from "react-reveal/Fade";
+import Link from "@material-ui/core/Link";
+import Button from "@material-ui/core/Button";
 
 import styles from "assets/jss/material-dashboard-react/views/landingPageStyle";
 const useStyles = makeStyles(styles);
 
 export default function LandingPage() {
   const classes = useStyles();
+
+  const [heading, setHeading] = useState(true);
+  const [blurb, setBlurb] = useState(false);
+
   return (
     <>
       <Grid container className={classes.landingPageContainer}>
-        <Grid item xs={12} className={classes.headerContainer}>
-          <h1>Budget Tracker App</h1>
+        <Grid xs={12} className={classes.loginContainer}>
+          <Link className={classes.buttons}>
+            <LoginButton color="primary">Login</LoginButton>
+          </Link>
+          <Link className={classes.buttons}>
+            <SignupButton color="primary">Sign Up</SignupButton>
+          </Link>
         </Grid>
-        <Grid item xs={12} className={classes.buttonContainer}>
-          <LoginButton className={classes.button} />
-          <SignupButton className={classes.button} />
-        </Grid>
-      </Grid>
-
-      <Grid container className={classes.aboutPageContainer}>
-        <Grid item xs={12} className={classes.aboutHeaderContainer}>
-          <h3>About</h3>
-        </Grid>
-        <Grid container className={classes.aboutContainer}>
-          <Grid item xs={12} md={12} lg={5}>
-            <Card className={classes.aboutInfoContainer}>
-              <CardHeader>
-                <CardIcon color="warning">
-                  <Icon>announcement</Icon>
-                </CardIcon>
-                <h6>Some information about the website</h6>
-              </CardHeader>
-              <CardBody>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-                  aut molestiae facere fuga mollitia dolores asperiores minus
-                  vero atque blanditiis dolorum nemo pariatur, amet illum sunt
-                  deserunt corporis, ea iste!
-                </p>
-              </CardBody>
-            </Card>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={12}
-            lg={5}
-            className={classes.aboutImageContainer}
+        <Grid xs={12} className={classes.headerContainer}>
+          <Fade
+            bottom
+            wait={2000}
+            when={heading}
+            onReveal={() => {
+              setHeading(false);
+              setBlurb(true);
+            }}
           >
-            <img
-              src={require("../../assets/img/cover.jpeg")}
-              alt="placeholder-img"
-              className={classes.aboutImage}
-            />
+            <h1>Need help tracking your budget?</h1>
+          </Fade>
+          <Fade bottom when={blurb}>
+            <h1>You're in the right place..</h1>
+          </Fade>
+        </Grid>
+        <Hidden xsDown>
+          <Grid xs={10}>
+            <img src={website} style={{ width: "100%" }} />
           </Grid>
+        </Hidden>
+        <Grid xs={12} className={classes.headerFooterContainer}>
+          <Link href="#features">
+            <ArrowDropDownCircleIcon className={classes.dropDownArrow} />
+          </Link>
         </Grid>
       </Grid>
 
-      <Grid container className={classes.featuresPageContainer}>
-        <Grid item xs={12} className={classes.featuresHeaderContainer}>
-          <h3>Features</h3>
-        </Grid>
+      <Grid container className={classes.featurePageContainer} id="features">
         <Grid container className={classes.featuresContainer}>
-          <Grid item xs={12} md={12} lg={3} className={classes.incomeContainer}>
-            <Card className={classes.incomeCard}>
-              <CardHeader>
-                <CardIcon color="primary">
-                  <Icon>monetization_on</Icon>
-                </CardIcon>
-                <h6>Income Tracking</h6>
-              </CardHeader>
-              <CardBody>
-                <Grid item xs={12} md={12} lg={12}>
-                  <img
-                    src={require("../../assets/img/sidebar-1.jpg")}
-                    alt="placeholder-img"
-                    className={classes.featuresIncomeImage}
-                  />
-                </Grid>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-                  aut molestiae facere fuga mollitia dolores asperiores minus
-                  vero atque blanditiis dolorum nemo pariatur, amet illum sunt
-                  deserunt corporis, ea iste!
-                </p>
-              </CardBody>
-            </Card>
+          <Grid item xs={12} className={classes.featureContainer}>
+            <Grid item xs={12} lg={5}>
+              <Slide left>
+                <div>
+                  <h3>Expenses Tracking</h3>
+                  <p>
+                    Are you bleeding money in areas you aren't aware of? Use our
+                    range of graphs and charts to ensure you know where your
+                    hard earned money is going.
+                  </p>
+                </div>
+              </Slide>
+            </Grid>
+            <Grid item xs={12} lg={5}>
+              <Slide right>
+                <img src={wallet} className={classes.featureImage} />
+              </Slide>
+            </Grid>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={12}
-            lg={3}
-            className={classes.expensesContainer}
-          >
-            <Card className={classes.expensesCard}>
-              <CardHeader>
-                <CardIcon color="info">
-                  <Icon>credit_card</Icon>
-                </CardIcon>
-                <h6>Expense Tracking</h6>
-              </CardHeader>
-              <CardBody>
-                <Grid item xs={12} md={12} lg={12}>
-                  <img
-                    src={require("../../assets/img/sidebar-2.jpg")}
-                    alt="placeholder-img"
-                    className={classes.featuresExpenseImage}
-                  />
-                </Grid>
+          <Grid item xs={12} className={classes.featureContainer}>
+            <Grid item xs={12} lg={5}>
+              <Zoom>
+                <img src={shares} className={classes.featureImage} />
+              </Zoom>
+            </Grid>
+            <Grid item xs={12} lg={5}>
+              <Slide right>
+                <h3>Shares Tracking</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-                  aut molestiae facere fuga mollitia dolores asperiores minus
-                  vero atque blanditiis dolorum nemo pariatur, amet illum sunt
-                  deserunt corporis, ea iste!
+                  Want to be able to get an overview of how your share portfolio
+                  is going? This app has inbuilt widgets to help you track your
+                  performance.
                 </p>
-              </CardBody>
-            </Card>
+              </Slide>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={12} lg={3} className={classes.sharesContainer}>
-            <Card className={classes.sharesCard}>
-              <CardHeader>
-                <CardIcon color="success">
-                  <Icon>toc</Icon>
-                </CardIcon>
-                <h6>Share Tracking</h6>
-              </CardHeader>
-              <CardBody>
-                <Grid item xs={12} md={12} lg={12}>
-                  <img
-                    src={require("../../assets/img/sidebar-3.jpg")}
-                    alt="placeholder-img"
-                    className={classes.featuresSharesImage}
-                  />
-                </Grid>
+          <Grid item xs={12} className={classes.featureContainer}>
+            <Slide left>
+              <Grid item xs={12} lg={5}>
+                <h3>Financial Goals</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-                  aut molestiae facere fuga mollitia dolores asperiores minus
-                  vero atque blanditiis dolorum nemo pariatur, amet illum sunt
-                  deserunt corporis, ea iste!
+                  Need to change bank providers, but keep forgetting? Use the
+                  drag and drop goals board to ensure you never forget again.
                 </p>
-              </CardBody>
-            </Card>
+              </Grid>
+            </Slide>
+            <Slide right>
+              <Grid item xs={12} lg={5}>
+                <img src={todo} className={classes.featureImage} />
+              </Grid>
+            </Slide>
           </Grid>
         </Grid>
       </Grid>
