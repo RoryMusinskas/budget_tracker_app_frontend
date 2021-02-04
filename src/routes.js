@@ -65,6 +65,8 @@ const dashboardRoutes = [
     name: "New Expense",
     icon: Language,
     component: NewExpenses,
+    layout: "/admin",
+    invisible: true,
   },
   {
     path: "/user",
