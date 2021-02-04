@@ -6,7 +6,7 @@ export default function TradingViewWidget(props) {
     const script = document.getElementById("trading-view-chart");
 
     // set the array for the watchList
-    let watchListArray = [];
+    const watchListArray = [];
     props.watchList.map((element) => {
       return watchListArray.push(element.symbol);
     });
@@ -29,13 +29,13 @@ export default function TradingViewWidget(props) {
       details: true,
       hotlist: true,
       calendar: true,
-      container_id: "tradingview_5ef3e",
+      container_id: "tradingview_widget",
     });
   }, [props.watchList]);
 
   return (
     <div id="trading-view-widget-container">
-      <div id="tradingview_5ef3e"></div>
+      <div id="tradingview_widget"></div>
     </div>
   );
 }
