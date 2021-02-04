@@ -5,7 +5,7 @@ import {
     hexToRgb
   } from "assets/jss/material-dashboard-react.js";
   
-  const dashboardStyle = {
+  const expensesStyle = {
     successText: {
       color: successColor[0]
     },
@@ -81,23 +81,41 @@ import {
     // user styles
     expensesContainer: {
       display: "flex",
+      minHeight: "80vh",
+      justifyContent: "center",
     },
-    // expensesAnalysisContainer: {
-    //   display: "inline",
-    //   justifyContent: "center",
-    // },
-    // expensesHistoryContainer: {
-    //   display: "inline",
-    //   justifyContent: "center",
-    // },
-    expensesHistoryCard: {
-        height: "80vh",
+    expensesAnalysisContainer: {
+      height: "80vh",
     },
     expensesAnalysisCard: {
-        height: "80vh",
+      height: "80vh",
+    },
+    expensesHistoryContainer: {
+      height: "80vh",
+    },
+    expensesHistoryCard: {
+      height: "80vh",
+    },
+    expensesHistoryCardHeader:{
+      position: "relative",
+    },
+    expensesHistoryCardBody: {
+      overflowY: "scroll",
+      maxHeight: "80vh",
+      marginTop: "20px",
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+    },
+    sortButton: {
+      position: "absolute",
+      bottom: "20px",
+      right: "20px",
+    },
+    addExpenseButton: {
+      margin: "20px",
     }
-
   };
   
-  export default dashboardStyle;
+  export default expensesStyle;
   

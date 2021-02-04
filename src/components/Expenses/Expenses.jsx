@@ -1,5 +1,5 @@
 // Import React
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // Import Auth0
 import { useAuth0 } from "@auth0/auth0-react";
@@ -11,12 +11,21 @@ import { Link } from "react-router-dom";
 import { DeleteForever } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 
-export function Expenses(props) {
-  // Hooks
-  // const [expenses, setExpenses] = useState([]);
+import Card from "components/Card/Card";
+import CardHeader from "components/Card/CardHeader";
+import CardFooter from "components/Card/CardFooter";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+  card: {
+    maxWidth: "50%",
+  }
+})
+
+export function Expenses(props) {
   // Auth0 Hook
   const { getAccessTokenSilently, user } = useAuth0();
+  const classes = useStyles();
 
   // Fetching data from backend
   async function fetchExpenses() {
@@ -37,6 +46,7 @@ export function Expenses(props) {
     }
   }
 
+  // useEffect mounts the API call
   useEffect(() => {
     fetchExpenses();
   }, []);
@@ -61,7 +71,7 @@ export function Expenses(props) {
               expense: {
                 title: expense.title, // title for expense
                 description: expense.description,
-                category_id: expense.category, // ParseInt to convert string to integer
+                category_id: expense.category,
                 amount: expense.amount,
                 user_sub: user.sub, // user_sub for identifying each unique user
                 date: expense.date,
@@ -78,23 +88,26 @@ export function Expenses(props) {
 
   return (
     <>
-      {props.expenses.map((expense, index) => {
+      {props.expenses.map((expense) => {
         return (
-          <>
-            <ul key={index}>
-              <li>Title: {expense.title}</li>
-              <li>Description: {expense.description}</li>
-              <li>Amount: ${expense.amount}</li>
-              <li>Date: {expense.date}</li>
-              <li>Category: {expense.category}</li>
-            </ul>
-            <Link onClick={(e) => onClickDelete(e, expense)}>
+          <Card className={classes.card}>
+            <CardHeader>
+            <h3>{expense.title}</h3>
+
+            </CardHeader>
+            <p>Description: {expense.description}</p>
+            <p>Amount: ${expense.amount}</p>
+            <p>Date: {expense.date}</p>
+            <p>Category: {expense.category_id}</p>
+            <CardFooter>
+            <Link onClick={(e) => onClickDelete(e, expense)} to="/expenses">
               <DeleteForever></DeleteForever>
             </Link>
             <Link to={`expenses/${expense.id}/edit`}>
               <EditIcon></EditIcon>
             </Link>
-          </>
+            </CardFooter>
+        </Card>
         );
       })}
     </>
