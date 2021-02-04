@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import Button from "components/CustomButtons/Button";
+import Button from "@material-ui/core/Button";
 
 const SignupButton = () => {
   const { loginWithRedirect } = useAuth0();
@@ -8,7 +8,7 @@ const SignupButton = () => {
     <Button
       onClick={() =>
         loginWithRedirect({
-          screen_hint: "sign up",
+          screen_hint: "signup",
         })
       }
     >
