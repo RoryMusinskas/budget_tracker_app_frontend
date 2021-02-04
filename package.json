@@ -1,21 +1,22 @@
 {
-  "name": "material-dashboard-react",
-  "version": "1.9.0",
-  "description": "Material Dashboard React. Coded by Creative Tim",
+  "name": "Budget-Tracking-App",
   "private": false,
-  "main": "dist/index.js",
   "dependencies": {
     "@auth0/auth0-react": "^1.2.0",
     "@material-ui/core": "4.10.0",
     "@material-ui/icons": "4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.57",
+    "chart.js": "^2.9.4",
     "chartist": "0.10.1",
     "classnames": "2.2.6",
     "history": "4.10.1",
     "perfect-scrollbar": "1.5.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-chartist": "0.14.3",
+    "react-chartjs-2": "^2.11.1",
+    "react-date-picker": "^8.0.7",
     "react-dom": "16.13.1",
     "react-google-maps": "9.4.5",
     "react-router-dom": "^5.2.0",
@@ -24,7 +25,7 @@
     "react-window": "^1.8.6"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_PATH=./src react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -32,31 +33,21 @@
     "lint:check": "eslint . --ext=js,jsx;  exit 0",
     "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
     "build-package-css": "cp src/assets/css/material-dashboard-react.css dist/material-dashboard-react.css",
-    "build-package": "npm run build-package-css && babel src --out-dir dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
-  },
-  "keywords": [],
-  "author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
-  },
-  "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
-  "optionalDependencies": {
-    "@types/googlemaps": "3.39.6",
-    "@types/markerclustererplus": "2.1.33",
-    "ajv": "6.12.2",
-    "typescript": "3.9.3"
+    "build-package": "npm run build-package-css && babel src --out-dir dist",
+    "cypress": "cypress open",
+    "e2e": "start-server-and-test 'BROWSER=none yarn start' http://localhost:3000 'yarn cypress'",
+    "deploy": "yarn build && netlify deploy --prod --dir=build"
   },
   "devDependencies": {
+    "@jackfranklin/test-data-bot": "^1.3.0",
+    "@testing-library/cypress": "^7.0.3",
+    "cypress": "^6.4.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.3",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "start-server-and-test": "^1.12.0"
   },
   "browserslist": {
     "production": [

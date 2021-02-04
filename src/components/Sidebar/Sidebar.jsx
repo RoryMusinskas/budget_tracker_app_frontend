@@ -13,7 +13,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks";
-import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks";
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle";
 
@@ -29,6 +28,9 @@ export default function Sidebar(props) {
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
+        if(prop.invisible) {
+          return null; // This hides extra routes to not show up on the sidebar
+        } else {
         var activePro = " ";
         var listItemClasses;
         if (prop.path === "/upgrade-to-pro") {
@@ -77,13 +79,14 @@ export default function Sidebar(props) {
             </ListItem>
           </NavLink>
         );
+              }
       })}
     </List>
   );
   var brand = (
     <div className={classes.logo}>
       <a
-        href="https://www.creative-tim.com?ref=mdr-sidebar"
+        href="/admin/user"
         className={classNames(classes.logoLink, {
           [classes.logoLinkRTL]: props.rtlActive
         })}

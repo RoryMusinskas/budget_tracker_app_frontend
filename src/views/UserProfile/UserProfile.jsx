@@ -37,7 +37,6 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const { user } = useAuth0();
-  console.log(user);
   const classes = useStyles();
   return (
     <div>

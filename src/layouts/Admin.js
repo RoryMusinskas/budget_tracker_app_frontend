@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -7,9 +7,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Navbar from "components/Navbars/Navbar";
-import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin";
 
 import routes from "routes";
 
@@ -18,6 +16,7 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle";
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "../auth/ProtectedRoute";
 
 let ps;
 
@@ -26,8 +25,8 @@ const switchRoutes = (
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
-          <Route
-            path={prop.layout + prop.path}
+          <ProtectedRoute // Set up protected route in the admin layout so that every path in the dashboard is protected
+            exact path={prop.layout + prop.path}
             component={prop.component}
             key={key}
           />
@@ -48,23 +47,8 @@ export default function Admin({ ...rest }) {
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  const [image, setImage] = React.useState(bgImage);
-  const [color, setColor] = React.useState("blue");
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleImageClick = (image) => {
-    setImage(image);
-  };
-  const handleColorClick = (color) => {
-    setColor(color);
-  };
-  const handleFixedClick = () => {
-    if (fixedClasses === "dropdown") {
-      setFixedClasses("dropdown show");
-    } else {
-      setFixedClasses("dropdown");
-    }
-  };
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -100,10 +84,9 @@ export default function Admin({ ...rest }) {
         routes={routes}
         logoText={`${user.given_name} ${user.family_name}`}
         logo={logo}
-        image={image}
+        image={bgImage}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
-        color={color}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
@@ -120,15 +103,6 @@ export default function Admin({ ...rest }) {
         ) : (
           <div className={classes.map}>{switchRoutes}</div>
         )}
-        {getRoute() ? <Footer /> : null}
-        <FixedPlugin
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleFixedClick={handleFixedClick}
-          fixedClasses={fixedClasses}
-        />
       </div>
     </div>
   );
