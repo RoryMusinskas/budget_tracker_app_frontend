@@ -10,26 +10,28 @@ export default function WatchList(props) {
 
   // get the users watchlist from the database on component load
   useEffect(() => {
-    const getWatchList = async () => {
-      try {
-        const token = await getAccessTokenSilently();
-        const response = await fetch(
-          `${process.env.REACT_APP_RAILS_API_URL}/shares`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const responseData = await response.json();
-        // set the state of the watchlist in the shares page, to then pass to the trading view widget
-        props.setWatchList(responseData);
-      } catch (e) {
-        console.error("Error: ", e.message);
-      }
-    };
     getWatchList();
   }, []);
+
+  // Moved this function out of the useEffect so that the updateSharesDatabase function can call it, this will re render the trading view widget
+  const getWatchList = async () => {
+    try {
+      const token = await getAccessTokenSilently();
+      const response = await fetch(
+        `${process.env.REACT_APP_RAILS_API_URL}/shares`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const responseData = await response.json();
+      // set the state of the watchlist in the shares page
+      props.setWatchList(responseData);
+    } catch (e) {
+      console.error("Error: ", e.message);
+    }
+  };
 
   // update the watchlist array for the current user in the database
   async function updateSharesDatabase(share) {
@@ -50,6 +52,8 @@ export default function WatchList(props) {
           },
         }),
       });
+      // call the getWatchList function, this will rerender the trading view widget
+      getWatchList();
     } catch (e) {
       console.log(e.message);
     }
@@ -57,7 +61,6 @@ export default function WatchList(props) {
 
   // update the watchlist array for the current user in the database
   async function deleteShareFromDatabase(id) {
-    console.log(id);
     try {
       const token = await getAccessTokenSilently();
       fetch(`${process.env.REACT_APP_RAILS_API_URL}/shares/${id}`, {

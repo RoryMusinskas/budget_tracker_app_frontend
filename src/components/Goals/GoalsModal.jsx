@@ -6,8 +6,8 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 /* -------- Import Custom Components ---------- */
-import Button from "components/CustomButtons/Button";
-import ModalPage from "components/Watchlist/ModalPage";
+import ModalContent from "./ModalContent";
+import Edit from "@material-ui/icons/Edit";
 
 // the styles for the modal
 const useStyles = makeStyles((theme) => ({
@@ -38,9 +38,12 @@ const useStyles = makeStyles((theme) => ({
 export default function WatchlistModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [page, setPage] = useState("exchange");
-  const [selectedShare, setSelectedShare] = useState("");
-  const [selectedExchange, setSelectedExchange] = useState("");
+  const { state, setState, goal } = props;
+
+  // copied from share modal
+  // const [page, setPage] = useState("exchange");
+  // const [selectedShare, setSelectedShare] = useState("");
+  // const [selectedExchange, setSelectedExchange] = useState("");
 
   // open the model
   const handleOpen = () => {
@@ -50,13 +53,13 @@ export default function WatchlistModal(props) {
   // close the model
   const handleClose = () => {
     setOpen(false);
-    setPage("exchange");
+    // setPage("exchange");
   };
 
   // return the modal component
   return (
     <div>
-      <Button onClick={handleOpen}>Edit watch list</Button>
+      <Edit onClick={handleOpen} />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -71,20 +74,7 @@ export default function WatchlistModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <ModalPage
-              page={page}
-              setPage={setPage}
-              selectedExchange={selectedExchange}
-              setSelectedExchange={setSelectedExchange}
-              selectedShare={selectedShare}
-              setSelectedShare={setSelectedShare}
-              classes={classes}
-              handleClose={handleClose}
-              watchList={props.watchList}
-              setWatchList={props.setWatchList}
-              updateSharesDatabase={props.updateSharesDatabase}
-              deleteShareFromDatabase={props.deleteShareFromDatabase}
-            />
+            <ModalContent state={state} setState={setState} goal={goal} />
           </div>
         </Fade>
       </Modal>
