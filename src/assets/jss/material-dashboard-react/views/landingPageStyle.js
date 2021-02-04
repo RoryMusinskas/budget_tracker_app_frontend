@@ -1,9 +1,4 @@
-import {
-  successColor,
-  whiteColor,
-  grayColor,
-  hexToRgb,
-} from "assets/jss/material-dashboard-react";
+import { successColor } from "assets/jss/material-dashboard-react";
 
 const landingPageStyle = {
   landingPageContainer: {
