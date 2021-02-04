@@ -20,14 +20,12 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Assessment from "@material-ui/icons/Assessment";
+import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard";
 import UserProfile from "views/UserProfile/UserProfile";
 import SharesPage from "views/SharesPage/SharesPage";
 import GoalsPage from "views/GoalsPage/GoalsPage";
-// core components/views for RTL layout
-
-import RTLPage from "views/RTLPage/RTLPage";
 import { AttachMoney } from "@material-ui/icons";
 import { ExpensesPage } from "views/ExpensesPage/ExpensesPage";
 import { NewExpenses } from "components/Expenses/NewExpenses";
@@ -49,82 +47,41 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-
     path: "/expenses",
     name: "Expenses",
-    rtlName: "ملف تعريفي للمستخدم",
     icon: AttachMoney,
     component: ExpensesPage,
-    layout: "/admin"
-  },
-  {
-    path: "/table",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
-    icon: "content_paste",
-    component: TableList,
     layout: "/admin",
   },
   {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
-
     path: "/goals",
     name: "Goals",
-
     icon: LibraryBooks,
     component: GoalsPage,
     layout: "/admin",
   },
   {
-    path: "/maps",
-    name: "Maps",
-    rtlName: "خرائط",
-    icon: LocationOn,
-    component: Maps,
-    layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    rtlName: "إخطارات",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/admin",
-  },
-  {
-    path: "/rtl-page",
-    name: "RTL Support",
-    rtlName: "پشتیبانی از راست به چپ",
-    icon: Language,
-    component: RTLPage,
-    layout: "/rtl",
-  },
-  {
     path: "/expenses/new",
     name: "New Expense",
-    rtlName: "",
     icon: Language,
     component: NewExpenses,
-
+  },
+  {
     path: "/user",
     name: "User Profile",
     icon: Person,
     component: UserProfile,
-
     layout: "/admin",
     invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
   },
   {
     path: "/expenses/:id/edit",
     name: "Edit Expense",
-    rtlName: "",
     icon: Language,
     component: EditExpense,
     layout: "/admin",
     invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
-  }
+  },
 ];
 
 export default dashboardRoutes;
