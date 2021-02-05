@@ -110,7 +110,7 @@ export function Expenses(props) {
           <Card key={`CardComponent${index}`} className={classes.card} variant="outlined">
             <CardHeader key={`CardHeader${index}`} className={classes.expenseCardHeader}>
             <DeleteForever key={`DeleteIcon${index}`} style={{color: "black"}} onClick={(e) => onClickDelete(e, expense)} className={classes.expenseDeleteButton} ></DeleteForever>
-            <EditExpenseModal key={`EditIcon${index}`} expenseId={expense.id} deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated}></EditExpenseModal>
+            <EditExpenseModal key={`EditIcon${index}`} expenseId={expense.id} deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated} expenses={expenses}></EditExpenseModal>
               <h3 key={`${expense.title}${index}`}><strong>{expense.title}</strong></h3>
               <p key={`${expense.date}${index}`}>{expense.date}</p>
             </CardHeader>

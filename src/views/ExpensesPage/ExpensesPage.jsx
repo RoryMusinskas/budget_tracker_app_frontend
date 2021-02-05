@@ -36,7 +36,7 @@ export function ExpensesPage() {
   return (
     <>
       <div className={classes.newButton}>
-        <NewExpenseModal deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated}></NewExpenseModal>
+        <NewExpenseModal deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated} expenses={expenses}></NewExpenseModal>
       </div>
 
       <Grid container className={classes.expensesContainer}>
