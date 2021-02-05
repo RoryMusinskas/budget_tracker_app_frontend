@@ -55,6 +55,7 @@ import {
       minHeight: "auto",
       fontWeight: "300",
       fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+      fontSize: "40px",
       marginBottom: "3px",
       textAlign: "center",
       textDecoration: "none",
@@ -95,6 +96,7 @@ import {
     },
     expensesHistoryCard: {
       height: "80vh",
+      maxWidth: "100%",
     },
     expensesHistoryCardHeader:{
       position: "relative",
@@ -102,10 +104,12 @@ import {
     expensesHistoryCardBody: {
       overflowY: "scroll",
       maxHeight: "80vh",
-      marginTop: "20px",
+      width: "94%",
+      margin: "0 auto",
       display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
+      alignItems: "flex-start",
+      flexWrap: "wrap",
+      justifyContent: "space-between"
     },
     sortButton: {
       position: "absolute",
@@ -118,4 +122,3 @@ import {
   };
   
   export default expensesStyle;
-  
