@@ -10,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
 export function NewExpensesForm(props) {
-  const { handleClose, classes, deletedOrUpdated, setDeletedOrUpdated } = props
+  const { handleClose, classes, deletedOrUpdated, setDeletedOrUpdated, expenses } = props
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -24,8 +24,16 @@ export function NewExpensesForm(props) {
   // OnSubmit post request
   async function onFormSubmit(e) {
     try {
-      // Prevent default page reload on submit
+      // Prevent default
       e.preventDefault();
+      // Validate if title is existing, if exist, will alert user
+      expenses.forEach(item => {
+        if(item.title === title) {
+          window.alert("Please use another unique title!")
+          throw new Error("Error on title")
+        }
+      })
+      // Prevent default page reload on submit
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses`, {
         method: "POST",
@@ -44,12 +52,14 @@ export function NewExpensesForm(props) {
           },
         }),
       });
+      // sets state to render everytime a new expense is made
       if(deletedOrUpdated) {
         setDeletedOrUpdated(false)
       } else if(!deletedOrUpdated) {
         setDeletedOrUpdated(true)
       }
-      handleClose(false); // On submit, closes modal
+      // On submit, closes modal
+      handleClose(false); 
     } catch (error) {
       console.log(error.message);
     }

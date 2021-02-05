@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 // NewExpenseModal function
 export function NewExpenseModal(props) {
-  const { deletedOrUpdated, setDeletedOrUpdated} = props
+  const { deletedOrUpdated, setDeletedOrUpdated, expenses} = props
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -76,6 +76,7 @@ export function NewExpenseModal(props) {
               classes={classes}
               deletedOrUpdated={deletedOrUpdated}
               setDeletedOrUpdated={setDeletedOrUpdated}
+              expenses={expenses}
             ></NewExpensesForm>
           </div>
         </Fade>
