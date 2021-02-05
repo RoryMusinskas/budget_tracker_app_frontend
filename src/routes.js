@@ -28,8 +28,6 @@ import SharesPage from "views/SharesPage/SharesPage";
 import GoalsPage from "views/GoalsPage/GoalsPage";
 import { AttachMoney } from "@material-ui/icons";
 import { ExpensesPage } from "views/ExpensesPage/ExpensesPage";
-import { NewExpenses } from "components/Expenses/NewExpenses";
-import { EditExpense } from "components/Expenses/EditExpense";
 
 const dashboardRoutes = [
   {
@@ -61,29 +59,13 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/expenses/new",
-    name: "New Expense",
-    icon: Language,
-    component: NewExpenses,
-    layout: "/admin",
-    invisible: true,
-  },
-  {
     path: "/user",
     name: "User Profile",
     icon: Person,
     component: UserProfile,
     layout: "/admin",
     invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
-  },
-  {
-    path: "/expenses/:id/edit",
-    name: "Edit Expense",
-    icon: Language,
-    component: EditExpense,
-    layout: "/admin",
-    invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
-  },
+  }
 ];
 
 export default dashboardRoutes;
