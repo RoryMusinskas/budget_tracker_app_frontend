@@ -8,7 +8,6 @@ import ExchangeSelect from "components/Watchlist/ExchangeSelect";
 import SymbolSelect from "components/Watchlist/SymbolSelect";
 import Button from "components/CustomButtons/Button";
 import PopulateList from "components/Watchlist/PopulateList";
-import { makeStyles } from "@material-ui/core";
 
 // add all the elements from the watchlist to a list with a delete button each
 // choose which page should be displayed based on the current page state
