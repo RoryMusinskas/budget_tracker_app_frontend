@@ -1,43 +1,21 @@
 // Import React
 import React, { useEffect } from "react";
-
 // Import Auth0
 import { useAuth0 } from "@auth0/auth0-react";
-
 // Import from react-router-dom
 import { Link } from "react-router-dom";
-
 // Icon import from material ui
 import { DeleteForever } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 import Box from '@material-ui/core/Box';
-
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
 import { makeStyles } from "@material-ui/core/styles";
+// Style import
+import styles from "../../assets/jss/material-dashboard-react/components/ExpensesComponent/expensesComponentStyle"
 
-const useStyles = makeStyles({
-  card: {
-    maxWidth: "40%",
-    height: "50%",
-    backgroundColor: "rgba(238,238,238,0.4)",
-    margin: "20px",
-  },
-  expenseDeleteButton: {
-    position: "absolute",
-    right: "20px",
-    top: "20px",
-  },
-  expenseEditButton: {
-    position: "absolute",
-    right: "40px",
-    top: "20px",
-  },
-  expenseCardHeader: {
-    textAlign: "center",
-  }
-})
+const useStyles = makeStyles(styles);
 
 export function Expenses(props) {
   // Auth0 Hook
@@ -106,6 +84,7 @@ export function Expenses(props) {
   return (
     <>
       {props.expenses.map((expense) => {
+        // Switch statement to render category name instead of id
         switch(expense.category_id) {
           case 1:
             expense.category = "Grocery"
