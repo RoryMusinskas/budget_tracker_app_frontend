@@ -9,7 +9,8 @@ import Button from "components/CustomButtons/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
-export function EditExpenseForm({ expenseId, classes, handleClose }) {
+export function EditExpenseForm(props) {
+  const { expenseId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated } = props
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -72,6 +73,12 @@ export function EditExpenseForm({ expenseId, classes, handleClose }) {
           },
         }),
       });
+      // sets state to render everytime an edit is made
+      if(deletedOrUpdated) {
+        setDeletedOrUpdated(false)
+      } else if(!deletedOrUpdated) {
+        setDeletedOrUpdated(true)
+      }
       // On submit, closes modal
       handleClose(false);
     } catch (error) {
