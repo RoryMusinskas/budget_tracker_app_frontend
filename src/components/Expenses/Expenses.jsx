@@ -10,15 +10,32 @@ import { Link } from "react-router-dom";
 // Icon import from material ui
 import { DeleteForever } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
+import Box from '@material-ui/core/Box';
 
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
-import CardFooter from "components/Card/CardFooter";
+import CardBody from "components/Card/CardBody";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: "50%",
+    maxWidth: "40%",
+    height: "50%",
+    backgroundColor: "rgba(238,238,238,0.4)",
+    margin: "20px",
+  },
+  expenseDeleteButton: {
+    position: "absolute",
+    right: "20px",
+    top: "20px",
+  },
+  expenseEditButton: {
+    position: "absolute",
+    right: "40px",
+    top: "20px",
+  },
+  expenseCardHeader: {
+    textAlign: "center",
   }
 })
 
@@ -89,24 +106,48 @@ export function Expenses(props) {
   return (
     <>
       {props.expenses.map((expense) => {
+        switch(expense.category_id) {
+          case 1:
+            expense.category = "Grocery"
+            break
+          case 2:
+            expense.category = "Travel"
+            break
+          case 3:
+            expense.category = "Entertainment"
+            break
+          case 4:
+            expense.category = "Necessity"
+            break
+          case 5:
+            expense.category = "Others"
+            break
+          default:
+            expense.category = "Wrong category"
+            break
+        }
         return (
-          <Card className={classes.card}>
-            <CardHeader>
-            <h3>{expense.title}</h3>
-
-            </CardHeader>
-            <p>Description: {expense.description}</p>
-            <p>Amount: ${expense.amount}</p>
-            <p>Date: {expense.date}</p>
-            <p>Category: {expense.category_id}</p>
-            <CardFooter>
-            <Link onClick={(e) => onClickDelete(e, expense)} to="/expenses">
-              <DeleteForever></DeleteForever>
+          <Card className={classes.card} variant="outlined">
+            <CardHeader className={classes.expenseCardHeader}>
+              <Link onClick={(e) => onClickDelete(e, expense)} to="/expenses">
+              <DeleteForever style={{color: "black"}} className={classes.expenseDeleteButton}></DeleteForever>
             </Link>
             <Link to={`expenses/${expense.id}/edit`}>
-              <EditIcon></EditIcon>
+              <EditIcon style={{color: "black"}} className={classes.expenseEditButton}></EditIcon>
             </Link>
-            </CardFooter>
+              <h3><strong>{expense.title}</strong></h3>
+              <p>{expense.date}</p>
+            </CardHeader>
+            <CardBody>
+              <p><strong>Amount:</strong> ${expense.amount}</p>
+              <p><strong>Category</strong>: {expense.category}</p>
+              <p><strong>Description</strong>:</p> 
+              <div style={{maxHeight: "100px", overflowY: "scroll"}}>
+                <Box component="div">
+                  {expense.description}
+                </Box>
+              </div>
+            </CardBody>
         </Card>
         );
       })}
