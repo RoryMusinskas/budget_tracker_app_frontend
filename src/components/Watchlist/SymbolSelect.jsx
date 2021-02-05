@@ -104,7 +104,7 @@ export default function SymbolSearch(props) {
             />
           )}
           renderOption={(option) => {
-            return <Typography noWrap>Select a stock</Typography>;
+            return <Typography noWrap>{option.description}</Typography>;
           }}
         />
       )}
