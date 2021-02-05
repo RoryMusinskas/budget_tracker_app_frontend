@@ -1,7 +1,5 @@
 // React import
 import React, { useState } from "react";
-// react-router-dom import
-import { NavLink } from "react-router-dom";
 // Expenses component import
 import { Expenses } from "../../components/Expenses/Expenses";
 import { ExpensesAnalysis } from "../../components/Expenses/ExpensesAnalysisChart";
@@ -9,7 +7,6 @@ import { ExpensesAnalysisPie } from "../../components/Expenses/ExpensesAnalysisP
 import { NewExpenseModal } from "../../components/Expenses/NewExpenseModal"
 // Material-ui import
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
@@ -25,6 +22,7 @@ export function ExpensesPage() {
   // State hooks
   const [expenses, setExpenses] = useState([]);
   const [viewBarChart, setViewBarChart] = useState(true);
+  const [deletedOrUpdated, setDeletedOrUpdated] = useState(true);
 
   // Sort button onclick to change between pie and bar chart
   function onClickToChangeChart() {
@@ -38,7 +36,7 @@ export function ExpensesPage() {
   return (
     <>
       <div className={classes.newButton}>
-        <NewExpenseModal></NewExpenseModal>
+        <NewExpenseModal deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated}></NewExpenseModal>
       </div>
 
       <Grid container className={classes.expensesContainer}>
@@ -75,7 +73,7 @@ export function ExpensesPage() {
                   <h3 className={classes.cardTitle}>Expenses History</h3>
                 </CardHeader>
                 <CardBody className={classes.expensesHistoryCardBody}>
-                  <Expenses expenses={expenses} setExpenses={setExpenses} />
+                  <Expenses deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated}expenses={expenses} setExpenses={setExpenses} />
                 </CardBody>
               </Card>
             </Grid>
