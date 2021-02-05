@@ -11,7 +11,6 @@ import Hidden from "@material-ui/core/Hidden";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import AdminNavbarLinks from "./AdminNavbarLinks";
-import Button from "components/CustomButtons/Button";
 
 import styles from "assets/jss/material-dashboard-react/components/headerStyle";
 
@@ -38,9 +37,7 @@ export default function Header(props) {
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
-            {makeBrand()}
-          </Button>
+          <h3 className={classes.title}>{makeBrand()}</h3>
         </div>
         <Hidden smDown implementation="css">
           <AdminNavbarLinks />

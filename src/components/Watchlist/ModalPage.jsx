@@ -2,6 +2,7 @@
 import React from "react";
 /* -------- Import MaterialUI core ------------ */
 import Typography from "@material-ui/core/Typography";
+import CloseIcon from "@material-ui/icons/Close";
 /* -------- Import Custom Components ---------- */
 import ExchangeSelect from "components/Watchlist/ExchangeSelect";
 import SymbolSelect from "components/Watchlist/SymbolSelect";
@@ -32,6 +33,7 @@ export default function displayPage(props) {
     case "exchange":
       return (
         <>
+          <CloseIcon onClick={handleClose} className={classes.closeIcon} />
           <h2 id="transition-modal-title">Select an exchange</h2>
           <ExchangeSelect setSelectedExchange={setSelectedExchange} />
           <Button
@@ -40,17 +42,21 @@ export default function displayPage(props) {
                 setPage("symbol");
               }
             }}
+            className={classes.button}
           >
             Next
           </Button>
-          <Button onClick={() => setPage("remove")}>Remove Stock</Button>
+          <Button onClick={() => setPage("remove")} className={classes.button}>
+            Remove Stock
+          </Button>
         </>
       );
     // show this after the user has selected an exchange, they can then confirm the share selection
     case "symbol":
       return (
         <>
-          <h2 id="transition-modal-title">{`Select a ${selectedExchange.country} stock`}</h2>
+          <CloseIcon onClick={handleClose} className={classes.closeIcon} />
+          <h2 id="transition-modal-title">Select a stock</h2>
           <SymbolSelect
             selectedExchange={selectedExchange}
             setSelectedShare={setSelectedShare}
@@ -66,6 +72,7 @@ export default function displayPage(props) {
                 setPage("exchange");
               }
             }}
+            className={classes.button}
           >
             Add to watchlist
           </Button>
@@ -75,6 +82,7 @@ export default function displayPage(props) {
     case "remove":
       return (
         <>
+          <CloseIcon onClick={handleClose} className={classes.closeIcon} />
           <Typography variant="h6" className={classes.title}>
             Remove stock from watchlist
           </Typography>
@@ -85,7 +93,9 @@ export default function displayPage(props) {
               deleteShareFromDatabase={deleteShareFromDatabase}
             />
           </div>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={handleClose} className={classes.button}>
+            Close
+          </Button>
         </>
       );
     default:

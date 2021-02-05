@@ -32,6 +32,13 @@ const useStyles = makeStyles((theme) => ({
   title: {
     margin: theme.spacing(4, 0, 2),
   },
+  closeIcon: {
+    cursor: "pointer",
+    marginLeft: "100%",
+  },
+  button: {
+    marginTop: "20px",
+  },
 }));
 
 // the watchlist modal that is displayed when the user clicks edit watchlist

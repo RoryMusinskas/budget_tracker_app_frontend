@@ -36,9 +36,10 @@ export default function Goal(props) {
   // run this function when the user clicks anywhere apart from the input
   // this will then set the state of the title
   const handleClickAway = () => {
-    setGoalState();
     if (inputValue === "") {
       removeGoal(goal);
+    } else {
+      setGoalState();
     }
   };
 
