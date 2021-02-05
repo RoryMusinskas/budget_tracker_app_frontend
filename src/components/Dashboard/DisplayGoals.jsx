@@ -38,6 +38,8 @@ export default function DisplayGoals() {
           })}
         </>
       );
+    } else {
+      return <li>You haven't set a goal yet</li>;
     }
   }
 
