@@ -1,13 +1,20 @@
+// React import
 import React, { useState } from "react";
+// Auth0 import
 import { useAuth0 } from "@auth0/auth0-react";
+// react-date-picker import
 import DatePicker from "react-date-picker";
+// Material-ui import
+import Button from "components/CustomButtons/Button";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 
-export function NewExpenses({ history }) {
+export function NewExpensesForm({ handleClose, classes }) {
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("1"); // default choice is "Grocery", which is 1
+  const [category, setCategory] = useState(); // default choice is "Grocery", which is 1
   const [date, setDate] = useState(new Date());
 
   //Auth0 hooks
@@ -36,8 +43,7 @@ export function NewExpenses({ history }) {
           },
         }),
       });
-      // Redirects back to expenses page upon successfully creating an expense
-      history.push("/admin/expenses");
+      handleClose(false); // On submit, closes modal
     } catch (error) {
       console.log(error.message);
     }
@@ -45,56 +51,61 @@ export function NewExpenses({ history }) {
 
   return (
     <>
-      <form onSubmit={onFormSubmit}>
+      <form className={classes.root} onSubmit={onFormSubmit}>
+        <h3>Add Expense</h3>
         <div className="form-div">
-          <label htmlFor="expense-name">Expense: </label>
-          <input
-            type="text"
-            name="spending-name"
-            id="spending-name"
-            value={title}
-            placeholder="What did you spend it on? e.g. KFC, Coles, JB-HIFI"
+          <TextField
+            id="title-input"
+            label="Title"
             onChange={(e) => setTitle(e.target.value)}
-          ></input>
+          ></TextField>
         </div>
         <div className="form-div">
-          <label htmlFor="expense-amount">Amount($): </label>
-          <input
+          <TextField
+            id="amount-input"
+            label="Amount($)"
             type="number"
-            name="expense-amount"
-            id="expense-amount"
-            placeholder="30"
-            value={amount}
             onChange={(e) => setAmount(e.target.value)}
-          ></input>
+          ></TextField>
         </div>
-        <div className="form-div">
-          <label htmlFor="expense-description">Description</label>
-          <textarea
-            name="expense-description"
-            id="expense-description"
-            placeholder="Describe your expense"
-            value={description}
+        <div className={classes.formDescriptionDiv}>
+          <TextField
+            id="description-input"
+            label="Description"
+            multiline
+            rows={4}
+            placeholder="Description of your expense"
+            variant="outlined"
             onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
+          ></TextField>
         </div>
         <div className="form-div">
-          <label htmlFor="category-select">Category</label>
-          <select
-            name="category-select"
-            id="category-select"
+          <TextField
+            id="select-category"
+            select
+            label="Select"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            helperText="Please select the category for your expense"
           >
-            <option value="1">Grocery</option>
-            <option value="2">Travel</option>
-            <option value="3">Entertainment</option>
-            <option value="4">Necessity</option>
-            <option value="5">Others</option>
-          </select>
+            <MenuItem key={"grocery-select-key"} value={"1"}>
+              Grocery
+            </MenuItem>
+            <MenuItem key={"travel-select-key"} value={"2"}>
+              Travel
+            </MenuItem>
+            <MenuItem key={"entertainment-select-key"} value={"3"}>
+              Entertainment
+            </MenuItem>
+            <MenuItem key={"necessity-select-key"} value={"4"}>
+              Necessity
+            </MenuItem>
+            <MenuItem key={"others-select-key"} value={"5"}>
+              Others
+            </MenuItem>
+          </TextField>
         </div>
         <div className="form-div">
-          <label htmlFor="date-select">Date:</label>
           <DatePicker
             name="date-select"
             id="date-select"
@@ -102,7 +113,9 @@ export function NewExpenses({ history }) {
             value={date}
           />
         </div>
-        <input type="submit" id="submit" value="Add Expense" />
+        <Button type="submit" id="submit-button">
+          Add Expense
+        </Button>
       </form>
     </>
   );
