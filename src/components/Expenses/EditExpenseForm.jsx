@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from "react";
+// React import
+import React, { useState, useEffect } from "react";
+// Auth0 import
 import { useAuth0 } from "@auth0/auth0-react";
+// react-date-picker import
 import DatePicker from "react-date-picker";
+// Material-ui import
+import Button from "components/CustomButtons/Button";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 
-export function EditExpense(props) {
+export function EditExpenseForm({ expenseId, classes, handleClose }) {
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [date, setDate] = useState(new Date());
-  const id = props.match.params.id;
+  const [date, setDate] = useState();
+  const id = expenseId;
 
   //Auth0 hooks
   const { getAccessTokenSilently, user } = useAuth0();
@@ -28,11 +35,12 @@ export function EditExpense(props) {
           }
         );
         const responseData = await response.json();
+        console.log(responseData);
         // Fills the form with data from fetch request
         setTitle(responseData.title);
         setAmount(responseData.amount);
         setDescription(responseData.description);
-        setCategory(responseData.category);
+        setCategory(responseData.category_id);
         // buggy interaction with setting initial state after fetching data from API
         // setDate(responseData.date)
       } catch (e) {
@@ -64,6 +72,8 @@ export function EditExpense(props) {
           },
         }),
       });
+      // On submit, closes modal
+      handleClose(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -71,57 +81,64 @@ export function EditExpense(props) {
 
   return (
     <>
-      <form onSubmit={onFormSubmit}>
+      <form className={classes.root} onSubmit={onFormSubmit}>
+        <h3>Edit Expense</h3>
         <div className="form-div">
-          <label htmlFor="expense-name">Expense: </label>
-          <input
-            type="text"
-            name="spending-name"
-            id="spending-name"
+          <TextField
+            id="title-input"
+            label="Title"
             value={title}
-            placeholder="What did you spend it on? e.g. KFC, Coles, JB-HIFI"
             onChange={(e) => setTitle(e.target.value)}
-          ></input>
+          ></TextField>
         </div>
         <div className="form-div">
-          <label htmlFor="expense-amount">Amount($): </label>
-          <input
+          <TextField
+            id="amount-input"
+            label="Amount($)"
             type="number"
-            name="expense-amount"
-            id="expense-amount"
-            placeholder="30"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-          ></input>
+          ></TextField>
         </div>
-        <div className="form-div">
-          <label htmlFor="expense-description">Description</label>
-          <textarea
-            name="expense-description"
-            id="expense-description"
-            placeholder="Describe your expense"
+        <div className={classes.formDescriptionDiv}>
+          <TextField
+            id="description-input"
+            label="Description"
             value={description}
+            multiline
+            rows={4}
+            placeholder="Description of your expense"
+            variant="outlined"
             onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
+          ></TextField>
         </div>
         <div className="form-div">
-          <label htmlFor="category-select">Category</label>
-          <select
-            name="category-select"
-            id="category-select"
+          <TextField
+            id="select-category"
+            select
+            label="Select"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            helperText="Please select the category for your expense"
           >
-            {/* Using value as numbers to reflect schema of taking bigint for now */}
-            <option value="1">Grocery</option>
-            <option value="2">Travel</option>
-            <option value="3">Entertainment</option>
-            <option value="4">Necessity</option>
-            <option value="5">Others</option>
-          </select>
+            <MenuItem key={"grocery-select-key"} value={"1"}>
+              Grocery
+            </MenuItem>
+            <MenuItem key={"travel-select-key"} value={"2"}>
+              Travel
+            </MenuItem>
+            <MenuItem key={"entertainment-select-key"} value={"3"}>
+              Entertainment
+            </MenuItem>
+            <MenuItem key={"necessity-select-key"} value={"4"}>
+              Necessity
+            </MenuItem>
+            <MenuItem key={"others-select-key"} value={"5"}>
+              Others
+            </MenuItem>
+          </TextField>
         </div>
         <div className="form-div">
-          <label htmlFor="date-select">Date:</label>
           <DatePicker
             name="date-select"
             id="date-select"
@@ -129,7 +146,9 @@ export function EditExpense(props) {
             value={date}
           />
         </div>
-        <input type="submit" id="submit" value="Add Expense" />
+        <Button type="submit" id="submit-button">
+          Save Expense
+        </Button>
       </form>
     </>
   );
