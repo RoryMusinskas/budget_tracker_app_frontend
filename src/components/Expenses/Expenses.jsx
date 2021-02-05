@@ -2,11 +2,8 @@
 import React, { useEffect } from "react";
 // Import Auth0
 import { useAuth0 } from "@auth0/auth0-react";
-// Import from react-router-dom
-import { Link } from "react-router-dom";
 // Icon import from material ui
 import { DeleteForever } from "@material-ui/icons";
-import EditIcon from "@material-ui/icons/Edit";
 import Box from '@material-ui/core/Box';
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
@@ -19,6 +16,7 @@ import styles from "../../assets/jss/material-dashboard-react/components/Expense
 const useStyles = makeStyles(styles);
 
 export function Expenses(props) {
+  const { expenses, setExpenses, deletedOrUpdated, setDeletedOrUpdated } = props
   const classes = useStyles();
   // Auth0 Hook
   const { getAccessTokenSilently, user } = useAuth0();
@@ -36,7 +34,7 @@ export function Expenses(props) {
         }
       );
       const responseData = await response.json();
-      props.setExpenses(responseData); // Sets state for prop drilling/lifting state
+      setExpenses(responseData); // Sets state for prop drilling/lifting state
     } catch (e) {
       console.error("Error: ", e.message);
     }
@@ -45,7 +43,7 @@ export function Expenses(props) {
   // useEffect mounts the API call
   useEffect(() => {
     fetchExpenses();
-  }, []);
+  }, [deletedOrUpdated]);
 
   // Onclick delete function
   async function onClickDelete(e, expense) {
@@ -84,7 +82,7 @@ export function Expenses(props) {
 
   return (
     <>
-      {props.expenses.map((expense) => {
+      {expenses.map((expense, index) => {
         // Switch statement to render category name instead of id
         switch(expense.category_id) {
           case 1:
@@ -106,25 +104,22 @@ export function Expenses(props) {
             expense.category = "Wrong category"
             break
         }
-
         // EditExpenseModal component is propped drilled expense.id for
         // identifying each unique expense
         return (
-          <Card className={classes.card} variant="outlined">
-            <CardHeader className={classes.expenseCardHeader}>
-              <Link onClick={(e) => onClickDelete(e, expense)} to="/expenses">
-              <DeleteForever style={{color: "black"}} className={classes.expenseDeleteButton}></DeleteForever>
-            </Link>
-            <EditExpenseModal expenseId={expense.id}></EditExpenseModal>
-              <h3><strong>{expense.title}</strong></h3>
-              <p>{expense.date}</p>
+          <Card key={`CardComponent${index}`} className={classes.card} variant="outlined">
+            <CardHeader key={`CardHeader${index}`} className={classes.expenseCardHeader}>
+            <DeleteForever key={`DeleteIcon${index}`} style={{color: "black"}} onClick={(e) => onClickDelete(e, expense)} className={classes.expenseDeleteButton} ></DeleteForever>
+            <EditExpenseModal key={`EditIcon${index}`} expenseId={expense.id} deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated}></EditExpenseModal>
+              <h3 key={`${expense.title}${index}`}><strong>{expense.title}</strong></h3>
+              <p key={`${expense.date}${index}`}>{expense.date}</p>
             </CardHeader>
-            <CardBody>
-              <p><strong>Amount:</strong> ${expense.amount}</p>
-              <p><strong>Category</strong>: {expense.category}</p>
-              <p><strong>Description</strong>:</p> 
-              <div style={{maxHeight: "100px", overflowY: "scroll"}}>
-                <Box component="div">
+            <CardBody key={`CardBody${index}`}>
+              <p key={`${expense.amount}${index}`}><strong>Amount:</strong> ${expense.amount}</p>
+              <p key={`${expense.category}${index}`}><strong>Category</strong>: {expense.category}</p>
+              <p key={`${expense.description.charAt(0)}${index}`}><strong>Description</strong>:</p> 
+              <div key={`div${index}`}style={{maxHeight: "100px", overflowY: "scroll"}}>
+                <Box key={`description${expense.description.charAt(0)}${index}`}component="div">
                   {expense.description}
                 </Box>
               </div>
