@@ -32,7 +32,7 @@ export function ExpensesAnalysis(props) {
     responseArray.forEach((response) => {
       yearArray.push(response.date.split("-")[0]);
     });
-    setYearOfExpense([...new Set(yearArray)]);
+    setYearOfExpense([...new Set(yearArray)].sort());
   }
 
   // setGraphData is responsible for converting each expense into
