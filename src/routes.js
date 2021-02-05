@@ -20,7 +20,6 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Assessment from "@material-ui/icons/Assessment";
-import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard";
 import UserProfile from "views/UserProfile/UserProfile";
