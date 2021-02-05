@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 // React-chart-js-2 import
 import { Pie } from "react-chartjs-2";
+import Box from "@material-ui/core/Box";
 
-export function ExpensesAnalysisPie(props) {
+export function ExpensesAnalysisPie({ expenses }) {
   //  React hooks
   const [ expenseData, setExpenseData ] = useState([]);
   const [ yearOfExpense, setYearOfExpense ] = useState([]);
@@ -17,12 +18,12 @@ export function ExpensesAnalysisPie(props) {
   // and when a user selects which year to view
   useEffect(() => {
     fetchExpensesForPie();
-  }, [selectedYear, props] );
+  }, [selectedYear, expenses] );
 
   // Fetches from prop.expense to pass into functions
   function fetchExpensesForPie() {
-    setOptionSelect(props.expenses); // Sets option select
-    setGraphData(props.expenses, selectedYear); // Sets graph data according to year
+    setOptionSelect(expenses); // Sets option select
+    setGraphData(expenses, selectedYear); // Sets graph data according to year
   }
 
   // Setting up data structure for pie chart. 
@@ -57,9 +58,7 @@ export function ExpensesAnalysisPie(props) {
     setExpenseData(tempArray)
   }
 
-  // setOptionSelect is to set the option select for expenses that 
-  // are created in which year. This will populate option selections 
-  // for years into an array that only has unique years so no overlapping happens
+  // function to set sorted existing years to arrays
   function setOptionSelect(responseArray) {
     responseArray.forEach((response) => {
       yearArray.push(response.date.split("-")[0]);
@@ -109,11 +108,15 @@ export function ExpensesAnalysisPie(props) {
         </select>
       </div>
       <Pie data={pieChartData}></Pie>
+      <div style={{maxHeight: "200px", maxWidth: "600px", display: "flex", flexDirection: "column"}}>
       {expenseData.map((data, index) => {
         return(
-          <li key={`PieList${index}`}>{`${categoryArray[index]}: $${data}`}</li>
-        )
-      })}
+          <Box >
+            <li style={{listStyle: "none"}}><strong>{categoryArray[index]}:</strong> ${data}</li>
+          </Box>
+          )
+        })}
+      </div>
     </>
   );
 }
