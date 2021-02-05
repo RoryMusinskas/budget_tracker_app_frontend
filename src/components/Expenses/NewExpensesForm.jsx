@@ -9,12 +9,13 @@ import Button from "components/CustomButtons/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
-export function NewExpensesForm({ handleClose, classes }) {
+export function NewExpensesForm(props) {
+  const { handleClose, classes, deletedOrUpdated, setDeletedOrUpdated } = props
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(); // default choice is "Grocery", which is 1
+  const [category, setCategory] = useState("");
   const [date, setDate] = useState(new Date());
 
   //Auth0 hooks
@@ -43,6 +44,11 @@ export function NewExpensesForm({ handleClose, classes }) {
           },
         }),
       });
+      if(deletedOrUpdated) {
+        setDeletedOrUpdated(false)
+      } else if(!deletedOrUpdated) {
+        setDeletedOrUpdated(true)
+      }
       handleClose(false); // On submit, closes modal
     } catch (error) {
       console.log(error.message);
@@ -85,7 +91,11 @@ export function NewExpensesForm({ handleClose, classes }) {
             select
             label="Select"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => {
+              setCategory(e.target.value)
+              console.log(category)
+              console.log(e.target.value)
+            }}
             helperText="Please select the category for your expense"
           >
             <MenuItem key={"grocery-select-key"} value={"1"}>
@@ -109,7 +119,7 @@ export function NewExpensesForm({ handleClose, classes }) {
           <DatePicker
             name="date-select"
             id="date-select"
-            onChange={setDate}
+            onChange={(e) => console.log(e.target)}
             value={date}
           />
         </div>

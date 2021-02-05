@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // NewExpenseModal function
-export function NewExpenseModal() {
+export function NewExpenseModal(props) {
+  const { deletedOrUpdated, setDeletedOrUpdated} = props
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -49,7 +50,13 @@ export function NewExpenseModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Expense</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleOpen}
+      >
+        Add Expense
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -67,6 +74,8 @@ export function NewExpenseModal() {
             <NewExpensesForm
               handleClose={handleClose}
               classes={classes}
+              deletedOrUpdated={deletedOrUpdated}
+              setDeletedOrUpdated={setDeletedOrUpdated}
             ></NewExpensesForm>
           </div>
         </Fade>
