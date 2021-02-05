@@ -8,6 +8,7 @@ import DatePicker from "react-date-picker";
 import Button from "components/CustomButtons/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import expensesStyle from "../../assets/jss/material-dashboard-react/components/ExpensesComponent/expensesComponentStyle";
 
 export function EditExpenseForm(props) {
   const { expenseId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated } = props
@@ -55,6 +56,12 @@ export function EditExpenseForm(props) {
     try {
       // Prevent default page reload on submit
       e.preventDefault();
+      // Validate if title is existing, if exist, will alert user
+      expensesStyle.forEach(item => {
+        if(item.title === title) {
+          window.alert(`"${title}" is an existing expense. Please use another title`)
+        }
+      })
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses/${id}`, {
         method: "PUT",

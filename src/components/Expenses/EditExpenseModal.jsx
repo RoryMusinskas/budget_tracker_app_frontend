@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 // EditExpenseModal function
 export function EditExpenseModal(props) {
-  const { expenseId, deletedOrUpdated, setDeletedOrUpdated } = props;
+  const { expenseId, deletedOrUpdated, setDeletedOrUpdated, expenses } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -77,6 +77,7 @@ export function EditExpenseModal(props) {
               expenseId={expenseId}
               deletedOrUpdated={deletedOrUpdated}
               setDeletedOrUpdated={setDeletedOrUpdated}
+              expenses={expenses}
             ></EditExpenseForm>
           </div>
         </Fade>
