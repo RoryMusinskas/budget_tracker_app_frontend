@@ -12,15 +12,16 @@ import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
 import { makeStyles } from "@material-ui/core/styles";
+import { EditExpenseModal } from "./EditExpenseModal";
 // Style import
 import styles from "../../assets/jss/material-dashboard-react/components/ExpensesComponent/expensesComponentStyle"
 
 const useStyles = makeStyles(styles);
 
 export function Expenses(props) {
+  const classes = useStyles();
   // Auth0 Hook
   const { getAccessTokenSilently, user } = useAuth0();
-  const classes = useStyles();
 
   // Fetching data from backend
   async function fetchExpenses() {
@@ -105,15 +106,16 @@ export function Expenses(props) {
             expense.category = "Wrong category"
             break
         }
+
+        // EditExpenseModal component is propped drilled expense.id for
+        // identifying each unique expense
         return (
           <Card className={classes.card} variant="outlined">
             <CardHeader className={classes.expenseCardHeader}>
               <Link onClick={(e) => onClickDelete(e, expense)} to="/expenses">
               <DeleteForever style={{color: "black"}} className={classes.expenseDeleteButton}></DeleteForever>
             </Link>
-            <Link to={`expenses/${expense.id}/edit`}>
-              <EditIcon style={{color: "black"}} className={classes.expenseEditButton}></EditIcon>
-            </Link>
+            <EditExpenseModal expenseId={expense.id}></EditExpenseModal>
               <h3><strong>{expense.title}</strong></h3>
               <p>{expense.date}</p>
             </CardHeader>
