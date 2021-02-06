@@ -1,6 +1,4 @@
 import React from "react";
-// react plugin for creating charts
-import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
@@ -16,9 +14,10 @@ import CardHeader from "components/Card/CardHeader";
 import CardIcon from "components/Card/CardIcon";
 import CardBody from "components/Card/CardBody";
 import CardFooter from "components/Card/CardFooter";
-import StockMarket from "components/Widgets/StockMarket";
+import DisplayGoals from "../../components/Dashboard/DisplayGoals";
+import DisplayExpenses from "../../components/Dashboard/DisplayExpenses";
 
-import { expensesChart } from "variables/charts";
+import StockMarket from "components/Widgets/StockMarket";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle";
 
@@ -38,22 +37,14 @@ export default function Dashboard() {
                     <Icon>content_copy</Icon>
                   </CardIcon>
                   <p className={classes.cardCategory}>Goals</p>
-                  <h3 className={classes.cardTitle}>Finance goals</h3>
                 </CardHeader>
                 <CardBody>
-                  <ul className={classes.goalsList}>
-                    <li>Goal 1</li>
-                    <li>Goal 2</li>
-                    <li>Goal 3</li>
-                    <li>Goal 4</li>
-                    <li>Goal 5</li>
-                    <li>Goal 6</li>
-                  </ul>
+                  <DisplayGoals />
                 </CardBody>
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <DateRange />
-                    For this year?
+                    Your oldest 15 goals
                   </div>
                 </CardFooter>
               </Card>
@@ -68,19 +59,12 @@ export default function Dashboard() {
                   <h3 className={classes.cardTitle}>$34,245</h3>
                 </CardHeader>
                 <CardBody>
-                  <ul className={classes.goalsList}>
-                    <li>Expense 1</li>
-                    <li>Expense 2</li>
-                    <li>Expense 3</li>
-                    <li>Expense 4</li>
-                    <li>Expense 5</li>
-                    <li>Expense 6</li>
-                  </ul>
+                  <ul className={classes.goalsList}></ul>
                 </CardBody>
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <DateRange />
-                    Last 24 Hours
+                    This year
                   </div>
                 </CardFooter>
               </Card>
@@ -91,27 +75,15 @@ export default function Dashboard() {
                   color="success"
                   className={classes.expensesCardHeader}
                 >
-                  <ChartistGraph
-                    className={("ct-chart", classes.expensesChart)}
-                    data={expensesChart.data}
-                    type="Line"
-                    options={expensesChart.options}
-                    listener={expensesChart.animation}
-                  />
+                  <DisplayExpenses classes={classes} />
                 </CardHeader>
                 <CardBody>
                   <h4 className={classes.cardTitle}>Your Expenses</h4>
-                  <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} />
-                      55%
-                    </span>
-                    increase in your expenses.
-                  </p>
+                  <p className={classes.cardCategory}></p>
                 </CardBody>
                 <CardFooter chart>
                   <div className={classes.stats}>
-                    <AccessTime /> updated 4 minutes ago
+                    <AccessTime /> This year
                   </div>
                 </CardFooter>
               </Card>

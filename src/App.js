@@ -6,8 +6,6 @@ import { Route, Switch } from "react-router-dom";
 import "assets/css/material-dashboard-react.css?v=1.9.0";
 import Admin from "layouts/Admin";
 import LandingPage from "views/LandingPage/LandingPage";
-import SharesPage from "views/SharesPage/SharesPage";
-import { Profile } from "./components/UserProfile";
 // import { Expenses } from "./views/Expenses/Expenses";
 import Loading from "./components/Loading";
 // import { NewExpenses } from "./views/Expenses/NewExpenses";
@@ -30,9 +28,6 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <ProtectedRoute path="/admin" component={Admin} />
-        <ProtectedRoute path="/profile" component={Profile} />
-        {/* <ProtectedRoute path="/expenses" component={Expenses} /> */}
-        <ProtectedRoute path="/shares" component={SharesPage} />
       </Switch>
     </>
   );
