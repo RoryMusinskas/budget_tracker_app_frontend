@@ -8,7 +8,6 @@ import DatePicker from "react-date-picker";
 import Button from "components/CustomButtons/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import expensesStyle from "../../assets/jss/material-dashboard-react/components/ExpensesComponent/expensesComponentStyle";
 
 export function EditExpenseForm(props) {
   const { expenseId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated, expenses } = props
@@ -75,7 +74,7 @@ export function EditExpenseForm(props) {
           },
         }),
       });
-      // sets state to render everytime an edit is made
+      // sets state to render every time an edit is made
       if(deletedOrUpdated) {
         setDeletedOrUpdated(false)
       } else if(!deletedOrUpdated) {

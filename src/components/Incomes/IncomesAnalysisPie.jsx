@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import Box from "@material-ui/core/Box";
 
-export function ExpensesAnalysisPie({ expenses }) {
+export function IncomesAnalysisPie({ incomes }) {
   //  React hooks
-  const [ expenseData, setExpenseData ] = useState([]);
-  const [ yearOfExpense, setYearOfExpense ] = useState([]);
+  const [ incomeData, setIncomeData ] = useState([]);
+  const [ yearOfIncome, setYearOfIncome ] = useState([]);
   const [ selectedYear, setSelectedYear ] = useState(`${new Date().getFullYear()}`); // Initial state of the current year
 
   // Constants
@@ -17,13 +17,13 @@ export function ExpensesAnalysisPie({ expenses }) {
   // Use effect runs with changes to change in prop
   // and when a user selects which year to view
   useEffect(() => {
-    fetchExpensesForPie();
-  }, [selectedYear, expenses] );
+    fetchIncomesForPie();
+  }, [selectedYear, incomes] );
 
-  // Fetches from prop.expense to pass into functions
-  function fetchExpensesForPie() {
-    setOptionSelect(expenses); // Sets option select
-    setGraphData(expenses, selectedYear); // Sets graph data according to year
+  // Fetches from prop.income to pass into functions
+  function fetchIncomesForPie() {
+    setOptionSelect(incomes); // Sets option select
+    setGraphData(incomes, selectedYear); // Sets graph data according to year
   }
 
   // Setting up data structure for pie chart. 
@@ -55,7 +55,7 @@ export function ExpensesAnalysisPie({ expenses }) {
         }
       }
     })
-    setExpenseData(tempArray)
+    setIncomeData(tempArray)
   }
 
   // function to set sorted existing years to arrays
@@ -63,7 +63,7 @@ export function ExpensesAnalysisPie({ expenses }) {
     responseArray.forEach((response) => {
       yearArray.push(response.date.split("-")[0]);
     });
-    setYearOfExpense([...new Set(yearArray)]);
+    setYearOfIncome([...new Set(yearArray)]);
   }
 
   // Onchange function for dropdown select
@@ -75,7 +75,7 @@ export function ExpensesAnalysisPie({ expenses }) {
   const pieChartData = {
     labels: categoryArray,
     datasets:[{
-      data: expenseData,
+      data: incomeData,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -98,7 +98,7 @@ export function ExpensesAnalysisPie({ expenses }) {
       <div className="year-select-div">
         <label>Year: </label>
         <select value={selectedYear} onChange={yearSelectedChange}>
-          {yearOfExpense.map((array, key) => {
+          {yearOfIncome.map((array, key) => {
             return (
               <option key={key} value={array}>
                 {array}
@@ -109,7 +109,7 @@ export function ExpensesAnalysisPie({ expenses }) {
       </div>
       <Pie data={pieChartData}></Pie>
       <div style={{maxHeight: "200px", maxWidth: "600px", display: "flex", flexDirection: "column"}}>
-      {expenseData.map((data, index) => {
+      {incomeData.map((data, index) => {
         return(
           <Box >
             <li style={{listStyle: "none"}}><strong>{categoryArray[index]}:</strong> ${data}</li>

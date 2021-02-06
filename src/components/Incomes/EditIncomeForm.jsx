@@ -8,28 +8,27 @@ import DatePicker from "react-date-picker";
 import Button from "components/CustomButtons/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import expensesStyle from "../../assets/jss/material-dashboard-react/components/ExpensesComponent/expensesComponentStyle";
 
-export function EditExpenseForm(props) {
-  const { expenseId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated, expenses } = props
+export function EditIncomeForm(props) {
+  const { incomeId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated, incomes } = props
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState();
-  const id = expenseId;
+  const id = incomeId;
 
   //Auth0 hooks
   const { getAccessTokenSilently, user } = useAuth0();
 
   // GET request to set state to pre-fill form inputs
   useEffect(() => {
-    async function fetchExpense() {
+    async function fetchIncome() {
       try {
         const token = await getAccessTokenSilently();
         const response = await fetch(
-          `${process.env.REACT_APP_RAILS_API_URL}/expenses/${id}`,
+          `${process.env.REACT_APP_RAILS_API_URL}/incomes/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -48,7 +47,7 @@ export function EditExpenseForm(props) {
         console.error("Error: ", e.message);
       }
     }
-    fetchExpense();
+    fetchIncome();
   }, []);
 
   async function onFormSubmit(e) {
@@ -56,17 +55,17 @@ export function EditExpenseForm(props) {
       // Prevent default page reload on submit
       e.preventDefault();
       // Validate if empty input or existing title
-      validateInput(expenses, title)
+      validateInput(incomes, title)
       const token = await getAccessTokenSilently();
-      await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses/${id}`, {
+      await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `bearer ${token}`,
         },
         body: JSON.stringify({
-          expense: {
-            title: title, // title for expense
+          income: {
+            title: title, // title for income
             description: description,
             category_id: parseInt(category), // ParseInt to convert string to integer
             amount: amount,
@@ -100,7 +99,7 @@ export function EditExpenseForm(props) {
       throw new Error("Missing some input")
     }
     else if(item.title === title) {
-      window.alert(`"${title}" is an existing expense. Please use another title`)
+      window.alert(`"${title}" is an existing income. Please use another title`)
       throw new Error("Title already exist")
     }
     })
@@ -109,7 +108,7 @@ export function EditExpenseForm(props) {
   return (
     <>
       <form className={classes.root} onSubmit={onFormSubmit}>
-        <h3>Edit Expense</h3>
+        <h3>Edit Income</h3>
         <div className="form-div">
           <TextField
             id="title-input"
@@ -134,7 +133,7 @@ export function EditExpenseForm(props) {
             value={description}
             multiline
             rows={4}
-            placeholder="Description of your expense"
+            placeholder="Description of your income"
             variant="outlined"
             onChange={(e) => setDescription(e.target.value)}
           ></TextField>
@@ -146,7 +145,7 @@ export function EditExpenseForm(props) {
             label="Select"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            helperText="Please select the category for your expense"
+            helperText="Please select the category for your income"
           >
             <MenuItem key={"grocery-select-key"} value={"1"}>
               Grocery
@@ -174,7 +173,7 @@ export function EditExpenseForm(props) {
           />
         </div>
         <Button type="submit" id="submit-button">
-          Save Expense
+          Save Income
         </Button>
       </form>
     </>

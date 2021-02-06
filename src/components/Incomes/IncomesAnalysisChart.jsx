@@ -5,10 +5,10 @@ import { Bar } from "react-chartjs-2";
 // Material ui import
 import Box from "@material-ui/core/Box";
 
-export function ExpensesAnalysis({ expenses }) {
+export function IncomesAnalysis({ incomes }) {
   //  React hooks
-  const [expenseData, setExpenseData] = useState([]);
-  const [yearOfExpense, setYearOfExpense] = useState([]);
+  const [incomeData, setIncomeData] = useState([]);
+  const [yearOfIncome, setYearOfIncome] = useState([]);
   const [selectedYear, setSelectedYear] = useState(`${new Date().getFullYear()}`); // Initial state of the current year
   const [yearlyTotal, setYearlyTotal] = useState();
   // Constants
@@ -19,12 +19,12 @@ export function ExpensesAnalysis({ expenses }) {
 
   // useEffect to re-render based on selectedYears state change
   useEffect(() => {
-    fetchExpensesForChart();
-  }, [selectedYear, expenses]);
+    fetchIncomesForChart();
+  }, [selectedYear, incomes]);
 
-  function fetchExpensesForChart() {
-    setOptionSelect(expenses); // Sets option select
-    setGraphData(expenses, selectedYear); // Sets graph data according to year
+  function fetchIncomesForChart() {
+    setOptionSelect(incomes); // Sets option select
+    setGraphData(incomes, selectedYear); // Sets graph data according to year
   }
 
   // function to set sorted existing years to array
@@ -32,10 +32,10 @@ export function ExpensesAnalysis({ expenses }) {
     responseArray.forEach((response) => {
       yearArray.push(response.date.split("-")[0]);
     });
-    setYearOfExpense([...new Set(yearArray)].sort());
+    setYearOfIncome([...new Set(yearArray)].sort());
   }
 
-  // setGraphData sets the state for yearTotalExpense and is
+  // setGraphData sets the state for yearTotalIncome and is
   // responsible for setting up correct array format for react-chart-js
   function setGraphData(responseData, year) {
     const tempArray = [];
@@ -87,11 +87,11 @@ export function ExpensesAnalysis({ expenses }) {
       }
     });
     formatGraphData(tempArray, tempData); // Formatted graph array and data passed
-    setYearTotalExpense(tempArray); // sets state for yearTotalExpense
+    setYearTotalIncome(tempArray); // sets state for yearTotalIncome
   }
 
   // Set yearly total
-  function setYearTotalExpense(array) {
+  function setYearTotalIncome(array) {
     const total = array.map((arr) =>
       arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
     );
@@ -103,7 +103,7 @@ export function ExpensesAnalysis({ expenses }) {
   }
 
   // formatGraphData formats the passed array and data to be 
-  // set ExpenseData state to be displayed in react-chart-js barchart
+  // set IncomeData state to be displayed in react-chart-js barchart
   function formatGraphData(array, data) {
     let colourCount = 0;
     const final = [];
@@ -123,13 +123,13 @@ export function ExpensesAnalysis({ expenses }) {
       });
       colourCount++;
     });
-    setExpenseData(final);
+    setIncomeData(final);
   }
 
   // react-chart-js data
   const barGraphData = {
     labels: labels,
-    datasets: expenseData, // Data populated from backend
+    datasets: incomeData, // Data populated from backend
   };
 
   // react-chart-js options
@@ -164,7 +164,7 @@ export function ExpensesAnalysis({ expenses }) {
       <div className="yearSelectDiv" style={{marginBottom: "50px"}}>
         <label>Year: </label>
         <select value={selectedYear} onChange={yearSelectedChange}>
-          {yearOfExpense.map((array, key) => {
+          {yearOfIncome.map((array, key) => {
             return (
               <option key={`${key} - ${array[key]}`} value={array}>
                 {array}

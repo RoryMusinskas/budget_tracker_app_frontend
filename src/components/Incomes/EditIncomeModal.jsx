@@ -1,7 +1,7 @@
 // React import
 import React, { useState } from "react";
-// EditExpenseForm component import
-import { EditExpenseForm } from "./EditExpenseForm";
+// EditIncomeForm component import
+import { EditIncomeForm } from "./EditIncomeForm";
 // Material-ui import
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// EditExpenseModal function
-export function EditExpenseModal(props) {
-  const { expenseId, deletedOrUpdated, setDeletedOrUpdated, expenses } = props;
+// EditIncomeModal function
+export function EditIncomeModal(props) {
+  const { incomeId, deletedOrUpdated, setDeletedOrUpdated, incomes } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -71,14 +71,14 @@ export function EditExpenseModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <EditExpenseForm
+            <EditIncomeForm
               handleClose={handleClose}
               classes={classes}
-              expenseId={expenseId}
+              incomeId={incomeId}
               deletedOrUpdated={deletedOrUpdated}
               setDeletedOrUpdated={setDeletedOrUpdated}
-              expenses={expenses}
-            ></EditExpenseForm>
+              incomes={incomes}
+            ></EditIncomeForm>
           </div>
         </Fade>
       </Modal>
