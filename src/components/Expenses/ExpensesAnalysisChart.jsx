@@ -134,6 +134,9 @@ export function ExpensesAnalysis({ expenses }) {
 
   // react-chart-js options
   const barGraphOptions = {
+    legend: {
+      display: false,
+    },
     scales: {
       yAxes: [
         {
@@ -158,7 +161,7 @@ export function ExpensesAnalysis({ expenses }) {
 
   return (
     <>
-      <div className="yearSelectDiv">
+      <div className="yearSelectDiv" style={{marginBottom: "50px"}}>
         <label>Year: </label>
         <select value={selectedYear} onChange={yearSelectedChange}>
           {yearOfExpense.map((array, key) => {
