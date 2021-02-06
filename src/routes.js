@@ -51,10 +51,10 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/income",
-    name: "Income",
+    path: "/incomes",
+    name: "Incomes",
     icon: AttachMoney,
-    component: IncomePage,
+    component: IncomesPage,
     layout: "/admin",
   },
   {
