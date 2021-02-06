@@ -17,6 +17,7 @@ const expensesStyle = {
   },
   expenseCardHeader: {
     textAlign: "center",
+    marginTop: "20px",
   }
 }
 
