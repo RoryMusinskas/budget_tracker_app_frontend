@@ -11,7 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import expensesStyle from "../../assets/jss/material-dashboard-react/components/ExpensesComponent/expensesComponentStyle";
 
 export function EditExpenseForm(props) {
-  const { expenseId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated } = props
+  const { expenseId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated, expenses } = props
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -37,7 +37,6 @@ export function EditExpenseForm(props) {
           }
         );
         const responseData = await response.json();
-        console.log(responseData);
         // Fills the form with data from fetch request
         setTitle(responseData.title);
         setAmount(responseData.amount);
@@ -56,12 +55,8 @@ export function EditExpenseForm(props) {
     try {
       // Prevent default page reload on submit
       e.preventDefault();
-      // Validate if title is existing, if exist, will alert user
-      expensesStyle.forEach(item => {
-        if(item.title === title) {
-          window.alert(`"${title}" is an existing expense. Please use another title`)
-        }
-      })
+      // Validate if empty input or existing title
+      validateInput(expenses, title)
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses/${id}`, {
         method: "PUT",
@@ -91,6 +86,24 @@ export function EditExpenseForm(props) {
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+  function validateInput(array) {
+    const sortedArray = array.filter(element => {
+      if(element.title !== title) {
+        return element
+      }
+    })
+    sortedArray.forEach(item => {
+    if (title === undefined || amount === "" || category === "" || description === "" || date === "") {
+      window.alert("One or more of your field is empty! Please fill them up and try again")
+      throw new Error("Missing some input")
+    }
+    else if(item.title === title) {
+      window.alert(`"${title}" is an existing expense. Please use another title`)
+      throw new Error("Title already exist")
+    }
+    })
   }
 
   return (
