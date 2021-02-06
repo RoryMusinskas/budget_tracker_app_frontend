@@ -9,8 +9,8 @@ import Button from "components/CustomButtons/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
-export function NewExpensesForm(props) {
-  const { handleClose, classes, deletedOrUpdated, setDeletedOrUpdated, expenses } = props
+export function NewIncomesForm(props) {
+  const { handleClose, classes, deletedOrUpdated, setDeletedOrUpdated, incomes } = props
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -27,17 +27,17 @@ export function NewExpensesForm(props) {
       // Prevent default
       e.preventDefault();
       // validation function
-      validateInput(expenses)
+      validateInput(incomes)
       const token = await getAccessTokenSilently();
-      await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses`, {
+      await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `bearer ${token}`,
         },
         body: JSON.stringify({
-          expense: {
-            title: title, // title for expense
+          income: {
+            title: title, // title for income
             description: description,
             category_id: parseInt(category), // ParseInt to convert string to integer
             amount: amount,
@@ -46,7 +46,7 @@ export function NewExpensesForm(props) {
           },
         }),
       });
-      // sets state to render everytime a new expense is made
+      // sets state to render everytime a new income is made
       if(deletedOrUpdated) {
         setDeletedOrUpdated(false)
       } else if(!deletedOrUpdated) {
@@ -66,7 +66,7 @@ export function NewExpensesForm(props) {
         throw new Error("Missing some input")
       }
       else if(item.title === title) {
-        window.alert(`"${title}" is an existing expense. Please use another title`)
+        window.alert(`"${title}" is an existing income. Please use another title`)
         throw new Error("Title already exist")
       }
     })
@@ -75,7 +75,7 @@ export function NewExpensesForm(props) {
   return (
     <>
       <form className={classes.root} onSubmit={onFormSubmit}>
-        <h3>Add Expense</h3>
+        <h3>Add Income</h3>
         <div className="form-div">
           <TextField
             id="title-input"
@@ -97,7 +97,7 @@ export function NewExpensesForm(props) {
             label="Description"
             multiline
             rows={4}
-            placeholder="Description of your expense"
+            placeholder="Description of your income"
             variant="outlined"
             onChange={(e) => setDescription(e.target.value)}
           ></TextField>
@@ -113,7 +113,7 @@ export function NewExpensesForm(props) {
               console.log(category)
               console.log(e.target.value)
             }}
-            helperText="Please select the category for your expense"
+            helperText="Please select the category for your income"
           >
             <MenuItem key={"grocery-select-key"} value={"1"}>
               Grocery
@@ -141,7 +141,7 @@ export function NewExpensesForm(props) {
           />
         </div>
         <Button type="submit" id="submit-button">
-          Add Expense
+          Add Income
         </Button>
       </form>
     </>

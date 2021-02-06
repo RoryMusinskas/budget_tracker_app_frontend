@@ -1,7 +1,7 @@
 // React import
 import React, { useState } from "react";
-// NewExpenseForm component import
-import { NewExpensesForm } from "./NewExpensesForm";
+// NewIncomeForm component import
+import { NewIncomesForm } from "./NewIncomesForm";
 // Material-ui import
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// NewExpenseModal function
-export function NewExpenseModal(props) {
-  const { deletedOrUpdated, setDeletedOrUpdated, expenses} = props
+// NewIncomeModal function
+export function NewIncomesModal(props) {
+  const { deletedOrUpdated, setDeletedOrUpdated, incomes} = props
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -55,7 +55,7 @@ export function NewExpenseModal(props) {
         color="primary"
         onClick={handleOpen}
       >
-        Add Expense
+        Add Income
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -71,13 +71,13 @@ export function NewExpenseModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <NewExpensesForm
+            <NewIncomesForm
               handleClose={handleClose}
               classes={classes}
               deletedOrUpdated={deletedOrUpdated}
               setDeletedOrUpdated={setDeletedOrUpdated}
-              expenses={expenses}
-            ></NewExpensesForm>
+              incomes={incomes}
+            ></NewIncomesForm>
           </div>
         </Fade>
       </Modal>
