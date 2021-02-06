@@ -10,11 +10,6 @@ const expensesStyle = {
     right: "20px",
     top: "20px",
   },
-  expenseEditButton: {
-    position: "absolute",
-    right: "40px",
-    top: "20px",
-  },
   expenseCardHeader: {
     textAlign: "center",
     marginTop: "20px",
