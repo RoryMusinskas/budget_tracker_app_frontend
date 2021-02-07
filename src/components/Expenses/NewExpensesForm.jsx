@@ -108,11 +108,7 @@ export function NewExpensesForm(props) {
             select
             label="Select"
             value={category}
-            onChange={(e) => {
-              setCategory(e.target.value)
-              console.log(category)
-              console.log(e.target.value)
-            }}
+            onChange={(e) => setCategory(e.target.value)}
             helperText="Please select the category for your expense"
           >
             <MenuItem key={"grocery-select-key"} value={"1"}>
@@ -136,7 +132,7 @@ export function NewExpensesForm(props) {
           <DatePicker
             name="date-select"
             id="date-select"
-            onChange={(e) => console.log(e.target)}
+            onChange={setDate}
             value={date}
           />
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
@@ -16,6 +16,8 @@ import CardBody from "components/Card/CardBody";
 import CardFooter from "components/Card/CardFooter";
 import DisplayGoals from "../../components/Dashboard/DisplayGoals";
 import DisplayExpenses from "../../components/Dashboard/DisplayExpenses";
+import { DisplayIncome } from "../../components/Dashboard/DisplayIncome"
+
 
 import StockMarket from "components/Widgets/StockMarket";
 
@@ -24,6 +26,8 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle";
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
+  const [yearTotal, setYearTotal] = useState("");
+  const currentYear = ((new Date().getFullYear())) // sets current year
   const classes = useStyles();
   return (
     <>
@@ -55,16 +59,16 @@ export default function Dashboard() {
                   <CardIcon color="success">
                     <Store />
                   </CardIcon>
-                  <p className={classes.cardCategory}>Income</p>
-                  <h3 className={classes.cardTitle}>$34,245</h3>
+                  <p className={classes.cardCategory}>Total Income</p>
+                  <h3 className={classes.cardTitle}>${yearTotal}</h3>
                 </CardHeader>
                 <CardBody>
-                  <ul className={classes.goalsList}></ul>
+                  <DisplayIncome setYearTotal={setYearTotal} currentYear={currentYear} />
                 </CardBody>
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <DateRange />
-                    This year
+                    This Year
                   </div>
                 </CardFooter>
               </Card>
@@ -83,7 +87,7 @@ export default function Dashboard() {
                 </CardBody>
                 <CardFooter chart>
                   <div className={classes.stats}>
-                    <AccessTime /> This year
+                    <AccessTime /> All Expenses
                   </div>
                 </CardFooter>
               </Card>
