@@ -27,6 +27,8 @@ import SharesPage from "views/SharesPage/SharesPage";
 import GoalsPage from "views/GoalsPage/GoalsPage";
 import { AttachMoney } from "@material-ui/icons";
 import { ExpensesPage } from "views/ExpensesPage/ExpensesPage";
+import { IncomesPage } from "views/IncomesPage/IncomesPage"
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 const dashboardRoutes = [
   {
@@ -48,6 +50,13 @@ const dashboardRoutes = [
     name: "Expenses",
     icon: AttachMoney,
     component: ExpensesPage,
+    layout: "/admin",
+  },
+  {
+    path: "/incomes",
+    name: "Income",
+    icon: AccountBalanceIcon,
+    component: IncomesPage,
     layout: "/admin",
   },
   {
