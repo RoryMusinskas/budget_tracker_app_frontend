@@ -18,7 +18,7 @@ const useStyles = makeStyles(styles);
 
 export default function Column(props) {
   const classes = useStyles();
-  const { state, setState, count, column } = props;
+  const { state, setState, count, column, goals, index } = props;
 
   // logic to create a goal for a selected column
   const createGoal = () => {
@@ -45,14 +45,12 @@ export default function Column(props) {
 
   // logic to remove a goal from a column
   const removeGoal = (goalToRemove) => {
-    // delete the state.goals object property that the user is trying to delete
-    delete state.goals[`${goalToRemove.id}`];
-
     // remove the passed in goal from the columns array of goals
     const columnGoals = column.goalIds.filter(
       (goal) => goal !== goalToRemove.id
     );
-
+    // delete the state.goals object property that the user is trying to delete
+    delete state.goals[`${goalToRemove.id}`];
     // set the state for the above changes
     setState((prevState) => ({
       ...state,
@@ -65,7 +63,7 @@ export default function Column(props) {
         [`${column.id}`]: {
           id: column.id,
           title: column.title,
-          goalIds: [...columnGoals],
+          goalIds: columnGoals,
         },
       },
     }));
@@ -73,7 +71,7 @@ export default function Column(props) {
 
   return (
     // this is a draggable column that contains goals as children
-    <Draggable draggableId={props.column.id} index={props.index}>
+    <Draggable draggableId={column.id} index={index}>
       {(provided) => (
         <Grid
           item
@@ -87,17 +85,14 @@ export default function Column(props) {
           {/* the column card */}
           <Card className={classes.column}>
             <CardHeader {...provided.dragHandleProps}>
-              <GoalTitle
-                state={props.state}
-                setState={props.setState}
-                column={props.column}
-              />
+              <GoalTitle state={state} setState={setState} column={column} />
             </CardHeader>
             <CardBody>
               {/* the droppable section of the card, where you can drag in goals */}
-              <Droppable droppableId={props.column.id} type="goal">
+              <Droppable droppableId={column.id} type="goal">
                 {(provided, snapshot) => (
                   <List
+                    key
                     ref={provided.innerRef}
                     // set the backgroundColour of the list when a goal is being dragged over the container
                     style={{
@@ -108,18 +103,22 @@ export default function Column(props) {
                     {...provided.droppableProps}
                   >
                     {/* map out each goal card for a goals assigned to the column */}
-                    {props.goals.map((goal, index) => (
-                      <Card key={goal.id}>
-                        <Goal
-                          key={goal.id}
-                          goal={goal}
-                          index={index}
-                          state={state}
-                          setState={setState}
-                          createGoal={createGoal}
-                          removeGoal={removeGoal}
-                        />
-                      </Card>
+                    {goals.map((goal, index) => (
+                      <>
+                        {typeof goal !== "undefined" && (
+                          <Card key={goal.id}>
+                            <Goal
+                              key={goal.id}
+                              goal={goal}
+                              index={index}
+                              state={state}
+                              setState={setState}
+                              createGoal={createGoal}
+                              removeGoal={removeGoal}
+                            />
+                          </Card>
+                        )}
+                      </>
                     ))}
                     {provided.placeholder}
                   </List>

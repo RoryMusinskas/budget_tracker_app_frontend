@@ -58,6 +58,13 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+    path: "/expenses/new",
+    name: "New Expense",
+    icon: Language,
+    layout: "/admin",
+    component: NewExpenses,
+  },
+  {
     path: "/user",
     name: "User Profile",
     icon: Person,
