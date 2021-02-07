@@ -18,6 +18,7 @@ import DisplayGoals from "../../components/Dashboard/DisplayGoals";
 import DisplayExpenses from "../../components/Dashboard/DisplayExpenses";
 import { DisplayIncome } from "../../components/Dashboard/DisplayIncome"
 
+
 import StockMarket from "components/Widgets/StockMarket";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle";
