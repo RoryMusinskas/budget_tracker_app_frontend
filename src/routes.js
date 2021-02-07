@@ -20,7 +20,6 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Assessment from "@material-ui/icons/Assessment";
-import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard";
 import UserProfile from "views/UserProfile/UserProfile";
@@ -28,8 +27,6 @@ import SharesPage from "views/SharesPage/SharesPage";
 import GoalsPage from "views/GoalsPage/GoalsPage";
 import { AttachMoney } from "@material-ui/icons";
 import { ExpensesPage } from "views/ExpensesPage/ExpensesPage";
-import { NewExpenses } from "components/Expenses/NewExpenses";
-import { EditExpense } from "components/Expenses/EditExpense";
 
 const dashboardRoutes = [
   {
@@ -74,15 +71,7 @@ const dashboardRoutes = [
     component: UserProfile,
     layout: "/admin",
     invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
-  },
-  {
-    path: "/expenses/:id/edit",
-    name: "Edit Expense",
-    icon: Language,
-    component: EditExpense,
-    layout: "/admin",
-    invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
-  },
+  }
 ];
 
 export default dashboardRoutes;

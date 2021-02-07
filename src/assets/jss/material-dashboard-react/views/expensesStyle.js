@@ -5,7 +5,7 @@ import {
     hexToRgb
   } from "assets/jss/material-dashboard-react.js";
   
-  const dashboardStyle = {
+  const expensesStyle = {
     successText: {
       color: successColor[0]
     },
@@ -55,6 +55,7 @@ import {
       minHeight: "auto",
       fontWeight: "300",
       fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+      fontSize: "40px",
       marginBottom: "3px",
       textAlign: "center",
       textDecoration: "none",
@@ -81,23 +82,43 @@ import {
     // user styles
     expensesContainer: {
       display: "flex",
+      minHeight: "80vh",
+      justifyContent: "center",
     },
-    // expensesAnalysisContainer: {
-    //   display: "inline",
-    //   justifyContent: "center",
-    // },
-    // expensesHistoryContainer: {
-    //   display: "inline",
-    //   justifyContent: "center",
-    // },
-    expensesHistoryCard: {
-        height: "80vh",
+    expensesAnalysisContainer: {
+      height: "80vh",
     },
     expensesAnalysisCard: {
-        height: "80vh",
+      height: "80vh",
+    },
+    expensesHistoryContainer: {
+      height: "80vh",
+    },
+    expensesHistoryCard: {
+      height: "80vh",
+      maxWidth: "100%",
+    },
+    expensesHistoryCardHeader:{
+      position: "relative",
+    },
+    expensesHistoryCardBody: {
+      overflowY: "scroll",
+      maxHeight: "80vh",
+      width: "94%",
+      margin: "0 auto",
+      display: "flex",
+      alignItems: "flex-start",
+      flexWrap: "wrap",
+      justifyContent: "space-between"
+    },
+    sortButton: {
+      position: "absolute",
+      bottom: "20px",
+      right: "20px",
+    },
+    addExpenseButton: {
+      margin: "20px",
     }
-
   };
   
-  export default dashboardStyle;
-  
+  export default expensesStyle;
