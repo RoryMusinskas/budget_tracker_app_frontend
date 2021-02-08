@@ -5,7 +5,6 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
 import DateRange from "@material-ui/icons/DateRange";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 // core components
 import Grid from "@material-ui/core/Grid";
@@ -78,7 +77,7 @@ export default function Dashboard() {
                   color="success"
                   className={classes.expensesCardHeader}
                 >
-                  <DisplayExpenses classes={classes} />
+                  <DisplayExpenses classes={classes} currentYear={currentYear} />
                 </CardHeader>
                 <CardBody>
                   <h4 className={classes.cardTitle}>Your Expenses</h4>
@@ -86,7 +85,7 @@ export default function Dashboard() {
                 </CardBody>
                 <CardFooter chart>
                   <div className={classes.stats}>
-                    <AccessTime /> All Expenses
+                    <AccessTime /> This year
                   </div>
                 </CardFooter>
               </Card>
@@ -112,18 +111,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardBody>
                 <h4 className={classes.cardTitle}>Share Market Overview</h4>
-                <p className={classes.cardCategory}>
-                  <span className={classes.successText}>
-                    <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                  </span>
-                  increase in your shares.
-                </p>
               </CardBody>
-              <CardFooter chart>
-                <div className={classes.stats}>
-                  <AccessTime /> updated 4 minutes ago
-                </div>
-              </CardFooter>
             </Card>
           </Grid>
         </Grid>
