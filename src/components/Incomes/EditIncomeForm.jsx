@@ -16,7 +16,9 @@ export function EditIncomeForm(props) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [date, setDate] = useState();
+  const [date, setDate] = useState("");
+  const [editedTitle, setEditedTitle] = useState("");
+  const [loaded, setLoaded] = useState(true);
   const id = incomeId;
 
   //Auth0 hooks
@@ -41,8 +43,13 @@ export function EditIncomeForm(props) {
         setAmount(responseData.amount);
         setDescription(responseData.description);
         setCategory(responseData.category_id);
+                if(loaded === true) {
+          setLoaded(false)
+        } else if(loaded === false) {
+          setLoaded(true)
+        }
         // buggy interaction with setting initial state after fetching data from API
-        // setDate(responseData.date)
+        // setDate("")
       } catch (e) {
         console.error("Error: ", e.message);
       }
@@ -50,12 +57,18 @@ export function EditIncomeForm(props) {
     fetchIncome();
   }, []);
 
+  // sets the current edited title 
+  useEffect(() => {
+    setEditedTitle(title)
+  },[loaded])
+
   async function onFormSubmit(e) {
     try {
       // Prevent default page reload on submit
       e.preventDefault();
       // Validate if empty input or existing title
-      validateInput(incomes, title)
+      await validateInput(incomes)
+      // token
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes/${id}`, {
         method: "PUT",
@@ -87,19 +100,19 @@ export function EditIncomeForm(props) {
     }
   }
 
+  // Validation function to not have duplicate titles
   function validateInput(array) {
     const sortedArray = array.filter(element => {
-      if(element.title !== title) {
-        return element
-      }
+      return element.title !== editedTitle
     })
+
     sortedArray.forEach(item => {
-    if (title === undefined || amount === "" || category === "" || description === "" || date === "") {
+    if (title === "" || amount === "" || category === "" || description === "" || date === "") {
       window.alert("One or more of your field is empty! Please fill them up and try again")
       throw new Error("Missing some input")
     }
     else if(item.title === title) {
-      window.alert(`"${title}" is an existing income. Please use another title`)
+      window.alert(`"${title}" is an existing expense. Please use another title`)
       throw new Error("Title already exist")
     }
     })

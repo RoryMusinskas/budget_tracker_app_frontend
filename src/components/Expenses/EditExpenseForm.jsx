@@ -17,6 +17,8 @@ export function EditExpenseForm(props) {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState();
+  const [editedTitle, setEditedTitle] = useState("");
+  const [loaded, setLoaded] = useState(true);
   const id = expenseId;
 
   //Auth0 hooks
@@ -41,6 +43,12 @@ export function EditExpenseForm(props) {
         setAmount(responseData.amount);
         setDescription(responseData.description);
         setCategory(responseData.category_id);
+        // logic for useEffect to run when first fetch is done
+        if(loaded === true) {
+          setLoaded(false)
+        } else if(loaded === false) {
+          setLoaded(true)
+        }
         // buggy interaction with setting initial state after fetching data from API
         // setDate(responseData.date)
       } catch (e) {
@@ -49,13 +57,18 @@ export function EditExpenseForm(props) {
     }
     fetchExpense();
   }, []);
+  
+  // sets the current edited title 
+  useEffect(() => {
+    setEditedTitle(title)
+  },[loaded])
 
   async function onFormSubmit(e) {
     try {
       // Prevent default page reload on submit
       e.preventDefault();
       // Validate if empty input or existing title
-      validateInput(expenses, title)
+      validateInput(expenses)
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses/${id}`, {
         method: "PUT",
@@ -87,14 +100,13 @@ export function EditExpenseForm(props) {
     }
   }
 
+  // validates input to not have duplicate titles
   function validateInput(array) {
     const sortedArray = array.filter(element => {
-      if(element.title !== title) {
-        return element
-      }
+      return element.title !== editedTitle
     })
     sortedArray.forEach(item => {
-    if (title === undefined || amount === "" || category === "" || description === "" || date === "") {
+    if (title === "" || amount === "" || category === "" || description === "" || date === "") {
       window.alert("One or more of your field is empty! Please fill them up and try again")
       throw new Error("Missing some input")
     }
