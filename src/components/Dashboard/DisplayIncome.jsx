@@ -35,9 +35,7 @@ export function DisplayIncome(props){
   // setData function returns array that corresponds to the current year
   function setData(data) {
     const tempArr = data.filter(item => {
-      if(item.date.split('-')[0] === `${currentYear}`) {
-        return data
-      }
+      return item.date.split('-')[0] === `${currentYear}`
     })
     setIncome(tempArr)
     setTotal(tempArr)
