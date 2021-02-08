@@ -27,8 +27,8 @@ import SharesPage from "views/SharesPage/SharesPage";
 import GoalsPage from "views/GoalsPage/GoalsPage";
 import { AttachMoney } from "@material-ui/icons";
 import { ExpensesPage } from "views/ExpensesPage/ExpensesPage";
-import { IncomesPage } from "views/IncomesPage/IncomesPage"
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import { IncomesPage } from "views/IncomesPage/IncomesPage";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 
 const dashboardRoutes = [
   {
@@ -73,7 +73,7 @@ const dashboardRoutes = [
     component: UserProfile,
     layout: "/admin",
     invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
-  }
+  },
 ];
 
 export default dashboardRoutes;

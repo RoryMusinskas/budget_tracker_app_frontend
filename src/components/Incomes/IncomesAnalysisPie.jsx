@@ -12,7 +12,7 @@ export function IncomesAnalysisPie({ incomes }) {
 
   // Constants
   const yearArray = [];
-  const categoryArray = ["Grocery", "Travel", "Entertainment", "Necessity", "Others"]
+  const categoryArray = ["Wages", "Shares", "Interest", "Investments", "Others"]
 
   // Use effect runs with changes to change in prop
   // and when a user selects which year to view
@@ -35,16 +35,16 @@ export function IncomesAnalysisPie({ incomes }) {
     responseData.forEach((response) => {
       if(response.date.split('-')[0] === year){
         switch(response.category_id) {
-          case 1:
+          case 6:
             tempArray[0] += response.amount
             break;
-          case 2:
+          case 7:
             tempArray[1] += response.amount
             break;
-          case 3:
+          case 8:
             tempArray[2] += response.amount
             break;
-          case 4:
+          case 9:
             tempArray[3] += response.amount
             break;
           case 5:
