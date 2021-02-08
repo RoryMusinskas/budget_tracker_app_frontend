@@ -111,17 +111,17 @@ export function NewIncomesForm(props) {
             onChange={(e) => {setCategory(e.target.value)}}
             helperText="Please select the category for your income"
           >
-            <MenuItem key={"grocery-select-key"} value={"1"}>
-              Grocery
+            <MenuItem key={"grocery-select-key"} value={"6"}>
+              Wages
             </MenuItem>
-            <MenuItem key={"travel-select-key"} value={"2"}>
-              Travel
+            <MenuItem key={"travel-select-key"} value={"7"}>
+              Shares
             </MenuItem>
-            <MenuItem key={"entertainment-select-key"} value={"3"}>
-              Entertainment
+            <MenuItem key={"entertainment-select-key"} value={"8"}>
+              Interest
             </MenuItem>
-            <MenuItem key={"necessity-select-key"} value={"4"}>
-              Necessity
+            <MenuItem key={"necessity-select-key"} value={"9"}>
+              Investment
             </MenuItem>
             <MenuItem key={"others-select-key"} value={"5"}>
               Others
