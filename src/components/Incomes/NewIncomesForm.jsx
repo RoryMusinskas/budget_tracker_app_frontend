@@ -10,7 +10,13 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
 export function NewIncomesForm(props) {
-  const { handleClose, classes, deletedOrUpdated, setDeletedOrUpdated, incomes } = props
+  const {
+    handleClose,
+    classes,
+    deletedOrUpdated,
+    setDeletedOrUpdated,
+    incomes,
+  } = props;
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -27,7 +33,7 @@ export function NewIncomesForm(props) {
       // Prevent default
       e.preventDefault();
       // validation function
-      validateInput(incomes)
+      validateInput(incomes);
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes`, {
         method: "POST",
@@ -47,29 +53,38 @@ export function NewIncomesForm(props) {
         }),
       });
       // sets state to render everytime a new income is made
-      if(deletedOrUpdated) {
-        setDeletedOrUpdated(false)
-      } else if(!deletedOrUpdated) {
-        setDeletedOrUpdated(true)
+      if (deletedOrUpdated) {
+        setDeletedOrUpdated(false);
+      } else if (!deletedOrUpdated) {
+        setDeletedOrUpdated(true);
       }
       // On submit, closes modal
-      handleClose(false); 
+      handleClose(false);
     } catch (error) {
       console.log(error.message);
     }
   }
 
   function validateInput(array) {
-      array.forEach(item => {
-      if (title === undefined || amount === "" || category === "" || description === "" || date === "") {
-        window.alert("One or more of your field is empty! Please fill them up and try again")
-        throw new Error("Missing some input")
+    array.forEach((item) => {
+      if (
+        title === undefined ||
+        amount === "" ||
+        category === "" ||
+        description === "" ||
+        date === ""
+      ) {
+        window.alert(
+          "One or more of your field is empty! Please fill them up and try again"
+        );
+        throw new Error("Missing some input");
+      } else if (item.title === title) {
+        window.alert(
+          `"${title}" is an existing income. Please use another title`
+        );
+        throw new Error("Title already exist");
       }
-      else if(item.title === title) {
-        window.alert(`"${title}" is an existing income. Please use another title`)
-        throw new Error("Title already exist")
-      }
-    })
+    });
   }
 
   return (
@@ -108,7 +123,9 @@ export function NewIncomesForm(props) {
             select
             label="Select"
             value={category}
-            onChange={(e) => {setCategory(e.target.value)}}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
             helperText="Please select the category for your income"
           >
             <MenuItem key={"grocery-select-key"} value={"1"}>

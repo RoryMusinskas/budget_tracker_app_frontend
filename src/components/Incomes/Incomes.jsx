@@ -4,19 +4,19 @@ import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 // Icon import from material ui
 import { DeleteForever } from "@material-ui/icons";
-import Box from '@material-ui/core/Box';
+import Box from "@material-ui/core/Box";
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
 import { makeStyles } from "@material-ui/core/styles";
 import { EditIncomeModal } from "./EditIncomeModal";
 // Style import
-import styles from "../../assets/jss/material-dashboard-react/components/IncomesComponent/incomesComponentStyle"
+import styles from "../../assets/jss/material-dashboard-react/components/IncomesComponent/incomesComponentStyle";
 
 const useStyles = makeStyles(styles);
 
 export function Incomes(props) {
-  const { incomes, setIncomes, deletedOrUpdated, setDeletedOrUpdated } = props
+  const { incomes, setIncomes, deletedOrUpdated, setDeletedOrUpdated } = props;
   const classes = useStyles();
   // Auth0 Hook
   const { getAccessTokenSilently, user } = useAuth0();
@@ -84,47 +84,79 @@ export function Incomes(props) {
     <>
       {incomes.map((income, index) => {
         // Switch statement to render category name instead of id
-        switch(income.category_id) {
+        switch (income.category_id) {
           case 1:
-            income.category = "Grocery"
-            break
+            income.category = "Grocery";
+            break;
           case 2:
-            income.category = "Travel"
-            break
+            income.category = "Travel";
+            break;
           case 3:
-            income.category = "Entertainment"
-            break
+            income.category = "Entertainment";
+            break;
           case 4:
-            income.category = "Necessity"
-            break
+            income.category = "Necessity";
+            break;
           case 5:
-            income.category = "Others"
-            break
+            income.category = "Others";
+            break;
           default:
-            income.category = "Wrong category"
-            break
+            income.category = "Wrong category";
+            break;
         }
         // EditIncomeModal component is propped drilled income.id for
         // identifying each unique income
         return (
-          <Card key={`IncomeCardComponent${index}`} className={classes.card} variant="outlined">
-            <CardHeader key={`IncomeCardHeader${index}`} className={classes.incomeCardHeader}>
-            <DeleteForever key={`IncomeDeleteIcon${index}`} style={{color: "black"}} onClick={(e) => onClickDelete(e, income)} className={classes.incomeDeleteButton} ></DeleteForever>
-            <EditIncomeModal key={`IncomeEditIcon${index}`} incomeId={income.id} deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated} incomes={incomes}></EditIncomeModal>
-              <h3 key={`${income.title}${index}`}><strong>{income.title}</strong></h3>
+          <Card
+            key={`IncomeCardComponent${index}`}
+            className={classes.card}
+            variant="outlined"
+          >
+            <CardHeader
+              key={`IncomeCardHeader${index}`}
+              className={classes.incomeCardHeader}
+            >
+              <DeleteForever
+                key={`IncomeDeleteIcon${index}`}
+                style={{ color: "black" }}
+                onClick={(e) => onClickDelete(e, income)}
+                className={classes.incomeDeleteButton}
+              ></DeleteForever>
+              <EditIncomeModal
+                key={`IncomeEditIcon${index}`}
+                incomeId={income.id}
+                deletedOrUpdated={deletedOrUpdated}
+                setDeletedOrUpdated={setDeletedOrUpdated}
+                incomes={incomes}
+              ></EditIncomeModal>
+              <h3 key={`${income.title}${index}`}>
+                <strong>{income.title}</strong>
+              </h3>
               <p key={`${income.date}${index}`}>{income.date}</p>
             </CardHeader>
             <CardBody key={`IncomeCardBody${index}`}>
-              <p key={`${income.amount}${index}`}><strong>Amount:</strong> ${income.amount}</p>
-              <p key={`${income.category}${index}`}><strong>Category</strong>: {income.category}</p>
-              <p key={`${income.description.charAt(0)}${index}`}><strong>Description</strong>:</p> 
-              <div key={`div${index}`}style={{maxHeight: "100px", overflowY: "scroll"}}>
-                <Box key={`description${income.description.charAt(0)}${index}`}component="div">
+              <p key={`${income.amount}${index}`}>
+                <strong>Amount:</strong> ${income.amount}
+              </p>
+              <p key={`${income.category}${index}`}>
+                <strong>Category</strong>: {income.category}
+              </p>
+              <p key={`${income.description.charAt(0)}${index}`}>
+                <strong>Description</strong>:
+              </p>
+              <div
+                key={`div${index}`}
+                style={{ maxHeight: "100px", overflowY: "scroll" }}
+              >
+                <Box
+                  key={`description${income.description.charAt(0)}${index}`}
+                  component="div"
+                >
                   {income.description}
                 </Box>
               </div>
             </CardBody>
-        </Card>
+          </Card>
         );
       })}
     </>

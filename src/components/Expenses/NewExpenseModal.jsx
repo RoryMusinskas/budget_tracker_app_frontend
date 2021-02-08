@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 // NewExpenseModal function
 export function NewExpenseModal(props) {
-  const { deletedOrUpdated, setDeletedOrUpdated, expenses} = props
+  const { deletedOrUpdated, setDeletedOrUpdated, expenses } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -50,11 +50,7 @@ export function NewExpenseModal(props) {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleOpen}
-      >
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         Add Expense
       </Button>
       <Modal

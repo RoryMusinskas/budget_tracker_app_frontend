@@ -9,13 +9,52 @@ export function IncomesAnalysis({ incomes }) {
   //  React hooks
   const [incomeData, setIncomeData] = useState([]);
   const [yearOfIncome, setYearOfIncome] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(`${new Date().getFullYear()}`); // Initial state of the current year
+  const [selectedYear, setSelectedYear] = useState(
+    `${new Date().getFullYear()}`
+  ); // Initial state of the current year
   const [yearlyTotal, setYearlyTotal] = useState();
   // Constants
   const yearArray = [];
-  const labels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
-  const colourForBar = ["rgba(220, 20,	60, 0.4)", "rgba(255, 192, 203, 0.4)", "rgba(218, 112, 214, 0.4)", "rgba(75, 0, 130, 0.4)", "rgba(0, 0, 205, 0.4)", "rgba(152, 245, 255, 0.4)", "rgba(0, 255, 127, 0.4)", "rgba(255, 255,	0, 0.4)", "rgba(255, 165, 0, 0.4)", "rgba(255, 97, 3, 0.4)", "rgba(255, 0, 0, 0.4)"];
-  const colourForOutline = ["rgba(220, 20,	60, 1)", "rgba(255, 192, 203, 1)", "rgba(218, 112, 214, 1)", "rgba(75, 0, 130, 1)", "rgba(0, 0, 205, 1)", "rgba(152, 245, 255, 1)", "rgba(0, 255, 127, 1)", "rgba(255, 255,	0, 1)", "rgba(255, 165, 0, 1)", "rgba(255, 97, 3, 1)", "rgba(255, 0, 0, 1)"];
+  const labels = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const colourForBar = [
+    "rgba(220, 20,	60, 0.4)",
+    "rgba(255, 192, 203, 0.4)",
+    "rgba(218, 112, 214, 0.4)",
+    "rgba(75, 0, 130, 0.4)",
+    "rgba(0, 0, 205, 0.4)",
+    "rgba(152, 245, 255, 0.4)",
+    "rgba(0, 255, 127, 0.4)",
+    "rgba(255, 255,	0, 0.4)",
+    "rgba(255, 165, 0, 0.4)",
+    "rgba(255, 97, 3, 0.4)",
+    "rgba(255, 0, 0, 0.4)",
+  ];
+  const colourForOutline = [
+    "rgba(220, 20,	60, 1)",
+    "rgba(255, 192, 203, 1)",
+    "rgba(218, 112, 214, 1)",
+    "rgba(75, 0, 130, 1)",
+    "rgba(0, 0, 205, 1)",
+    "rgba(152, 245, 255, 1)",
+    "rgba(0, 255, 127, 1)",
+    "rgba(255, 255,	0, 1)",
+    "rgba(255, 165, 0, 1)",
+    "rgba(255, 97, 3, 1)",
+    "rgba(255, 0, 0, 1)",
+  ];
 
   // useEffect to re-render based on selectedYears state change
   useEffect(() => {
@@ -102,7 +141,7 @@ export function IncomesAnalysis({ incomes }) {
     setYearlyTotal(final);
   }
 
-  // formatGraphData formats the passed array and data to be 
+  // formatGraphData formats the passed array and data to be
   // set IncomeData state to be displayed in react-chart-js barchart
   function formatGraphData(array, data) {
     let colourCount = 0;
@@ -161,7 +200,7 @@ export function IncomesAnalysis({ incomes }) {
 
   return (
     <>
-      <div className="yearSelectDiv" style={{marginBottom: "50px"}}>
+      <div className="yearSelectDiv" style={{ marginBottom: "50px" }}>
         <label>Year: </label>
         <select value={selectedYear} onChange={yearSelectedChange}>
           {yearOfIncome.map((array, key) => {
@@ -175,7 +214,11 @@ export function IncomesAnalysis({ incomes }) {
       </div>
       <Bar data={barGraphData} options={barGraphOptions} />
       <div>
-        <Box component="div" display="inline"><h4><strong>Total:</strong> ${yearlyTotal} </h4></Box>
+        <Box component="div" display="inline">
+          <h4>
+            <strong>Total:</strong> ${yearlyTotal}{" "}
+          </h4>
+        </Box>
       </div>
     </>
   );

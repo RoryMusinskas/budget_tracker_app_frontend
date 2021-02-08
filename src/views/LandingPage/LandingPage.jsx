@@ -10,8 +10,8 @@ import website from "../../assets/img/website.svg";
 import Hidden from "@material-ui/core/Hidden";
 // core components
 import Grid from "@material-ui/core/Grid";
-import LoginButton from "components/LoginButton";
-import SignupButton from "components/SignupButton";
+import LoginButton from "components/Authentication/LoginButton";
+import SignupButton from "components/Authentication/SignupButton";
 import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
 import Slide from "react-reveal/Slide";
 import Zoom from "react-reveal/Zoom";
@@ -56,7 +56,11 @@ export default function LandingPage() {
         </Grid>
         <Hidden xsDown>
           <Grid xs={10}>
-            <img src={website} alt='website overview'style={{ width: "100%" }} />
+            <img
+              src={website}
+              alt="website overview"
+              style={{ width: "100%" }}
+            />
           </Grid>
         </Hidden>
         <Grid xs={12} className={classes.headerFooterContainer}>
@@ -83,14 +87,22 @@ export default function LandingPage() {
             </Grid>
             <Grid item xs={12} lg={5}>
               <Slide right>
-                <img src={wallet} alt='expenses tracking' className={classes.featureImage} />
+                <img
+                  src={wallet}
+                  alt="expenses tracking"
+                  className={classes.featureImage}
+                />
               </Slide>
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.featureContainer}>
             <Grid item xs={12} lg={5}>
               <Zoom>
-                <img src={shares} alt='shares tracking' className={classes.featureImage} />
+                <img
+                  src={shares}
+                  alt="shares tracking"
+                  className={classes.featureImage}
+                />
               </Zoom>
             </Grid>
             <Grid item xs={12} lg={5}>
@@ -116,7 +128,11 @@ export default function LandingPage() {
             </Slide>
             <Slide right>
               <Grid item xs={12} lg={5}>
-                <img src={todo} alt='financial goals' className={classes.featureImage} />
+                <img
+                  src={todo}
+                  alt="financial goals"
+                  className={classes.featureImage}
+                />
               </Grid>
             </Slide>
           </Grid>

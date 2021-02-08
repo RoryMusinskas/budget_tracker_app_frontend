@@ -140,7 +140,6 @@ export default function GoalsPage() {
                 const goals = column.goalIds.map(
                   (goalId) => state.goals[goalId]
                 );
-
                 return (
                   <Column
                     key={column.id}

@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
   editButton: {
     position: "absolute",
     top: "20px",
-    right: "40px"
-  }
+    right: "40px",
+  },
 }));
 
 // EditIncomeModal function
@@ -48,7 +48,7 @@ export function EditIncomeModal(props) {
     setOpen(true);
   };
 
-  // Closes modal on call, is prop drilled to handle 
+  // Closes modal on call, is prop drilled to handle
   // exiting modal
   const handleClose = () => {
     setOpen(false);

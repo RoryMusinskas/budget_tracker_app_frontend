@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Incomes } from "../../components/Incomes/Incomes";
 import { IncomesAnalysis } from "../../components/Incomes/IncomesAnalysisChart";
 import { IncomesAnalysisPie } from "../../components/Incomes/IncomesAnalysisPie";
-import { NewIncomesModal } from "../../components/Incomes/NewIncomesModal"
+import { NewIncomesModal } from "../../components/Incomes/NewIncomesModal";
 // Material-ui import
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -36,7 +36,11 @@ export function IncomesPage() {
   return (
     <>
       <div className={classes.newButton}>
-        <NewIncomesModal deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated} incomes={incomes}></NewIncomesModal>
+        <NewIncomesModal
+          deletedOrUpdated={deletedOrUpdated}
+          setDeletedOrUpdated={setDeletedOrUpdated}
+          incomes={incomes}
+        ></NewIncomesModal>
       </div>
 
       <Grid container className={classes.incomesContainer}>
@@ -73,7 +77,12 @@ export function IncomesPage() {
                   <h3 className={classes.cardTitle}>Income History</h3>
                 </CardHeader>
                 <CardBody className={classes.incomesHistoryCardBody}>
-                  <Incomes deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated} incomes={incomes} setIncomes={setIncomes} />
+                  <Incomes
+                    deletedOrUpdated={deletedOrUpdated}
+                    setDeletedOrUpdated={setDeletedOrUpdated}
+                    incomes={incomes}
+                    setIncomes={setIncomes}
+                  />
                 </CardBody>
               </Card>
             </Grid>

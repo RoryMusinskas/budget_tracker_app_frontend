@@ -10,7 +10,14 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
 export function EditIncomeForm(props) {
-  const { incomeId, classes, handleClose, deletedOrUpdated, setDeletedOrUpdated, incomes } = props
+  const {
+    incomeId,
+    classes,
+    handleClose,
+    deletedOrUpdated,
+    setDeletedOrUpdated,
+    incomes,
+  } = props;
   // Hooks
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -55,7 +62,7 @@ export function EditIncomeForm(props) {
       // Prevent default page reload on submit
       e.preventDefault();
       // Validate if empty input or existing title
-      validateInput(incomes, title)
+      validateInput(incomes, title);
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes/${id}`, {
         method: "PUT",
@@ -75,10 +82,10 @@ export function EditIncomeForm(props) {
         }),
       });
       // sets state to render everytime an edit is made
-      if(deletedOrUpdated) {
-        setDeletedOrUpdated(false)
-      } else if(!deletedOrUpdated) {
-        setDeletedOrUpdated(true)
+      if (deletedOrUpdated) {
+        setDeletedOrUpdated(false);
+      } else if (!deletedOrUpdated) {
+        setDeletedOrUpdated(true);
       }
       // On submit, closes modal
       handleClose(false);
@@ -88,21 +95,30 @@ export function EditIncomeForm(props) {
   }
 
   function validateInput(array) {
-    const sortedArray = array.filter(element => {
-      if(element.title !== title) {
-        return element
+    const sortedArray = array.filter((element) => {
+      if (element.title !== title) {
+        return element;
       }
-    })
-    sortedArray.forEach(item => {
-    if (title === undefined || amount === "" || category === "" || description === "" || date === "") {
-      window.alert("One or more of your field is empty! Please fill them up and try again")
-      throw new Error("Missing some input")
-    }
-    else if(item.title === title) {
-      window.alert(`"${title}" is an existing income. Please use another title`)
-      throw new Error("Title already exist")
-    }
-    })
+    });
+    sortedArray.forEach((item) => {
+      if (
+        title === undefined ||
+        amount === "" ||
+        category === "" ||
+        description === "" ||
+        date === ""
+      ) {
+        window.alert(
+          "One or more of your field is empty! Please fill them up and try again"
+        );
+        throw new Error("Missing some input");
+      } else if (item.title === title) {
+        window.alert(
+          `"${title}" is an existing income. Please use another title`
+        );
+        throw new Error("Title already exist");
+      }
+    });
   }
 
   return (

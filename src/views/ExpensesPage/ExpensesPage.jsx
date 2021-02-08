@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Expenses } from "../../components/Expenses/Expenses";
 import { ExpensesAnalysis } from "../../components/Expenses/ExpensesAnalysisChart";
 import { ExpensesAnalysisPie } from "../../components/Expenses/ExpensesAnalysisPie";
-import { NewExpenseModal } from "../../components/Expenses/NewExpenseModal"
+import { NewExpenseModal } from "../../components/Expenses/NewExpenseModal";
 // Material-ui import
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -36,7 +36,11 @@ export function ExpensesPage() {
   return (
     <>
       <div className={classes.newButton}>
-        <NewExpenseModal deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated} expenses={expenses}></NewExpenseModal>
+        <NewExpenseModal
+          deletedOrUpdated={deletedOrUpdated}
+          setDeletedOrUpdated={setDeletedOrUpdated}
+          expenses={expenses}
+        ></NewExpenseModal>
       </div>
 
       <Grid container className={classes.expensesContainer}>
@@ -73,7 +77,12 @@ export function ExpensesPage() {
                   <h3 className={classes.cardTitle}>Expenses History</h3>
                 </CardHeader>
                 <CardBody className={classes.expensesHistoryCardBody}>
-                  <Expenses deletedOrUpdated={deletedOrUpdated} setDeletedOrUpdated={setDeletedOrUpdated}expenses={expenses} setExpenses={setExpenses} />
+                  <Expenses
+                    deletedOrUpdated={deletedOrUpdated}
+                    setDeletedOrUpdated={setDeletedOrUpdated}
+                    expenses={expenses}
+                    setExpenses={setExpenses}
+                  />
                 </CardBody>
               </Card>
             </Grid>

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 // NewIncomeModal function
 export function NewIncomesModal(props) {
-  const { deletedOrUpdated, setDeletedOrUpdated, incomes} = props
+  const { deletedOrUpdated, setDeletedOrUpdated, incomes } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -50,11 +50,7 @@ export function NewIncomesModal(props) {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleOpen}
-      >
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         Add Income
       </Button>
       <Modal
