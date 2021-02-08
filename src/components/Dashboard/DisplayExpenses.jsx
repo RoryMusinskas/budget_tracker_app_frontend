@@ -9,7 +9,7 @@ export default function DisplayExpenses(props) {
   const { getAccessTokenSilently } = useAuth0();
   const [titles, setTitles] = useState([]);
   const [amounts, setAmounts] = useState([]);
-  const { classes } = props;
+  const { classes, currentYear } = props;
 
   // variables used to create animation on charts
 
@@ -82,18 +82,23 @@ export default function DisplayExpenses(props) {
       );
       const responseData = await response.json();
 
+      // filtering of data that is created this year
+      const tempArr = responseData.filter(item => {
+        return item.date.split('-')[0] === `${currentYear}`
+      })
+
       // set empty arrays for the values to be pushed into
       let tempTitles = [];
       let tempAmounts = [];
 
       // map through the expenses and push in the title
-      responseData.map((expense) => {
+      tempArr.map((expense) => {
         return tempTitles.push(expense.title);
       });
       setTitles(tempTitles);
 
       // map through the expenses and push in the amount
-      responseData.map((expense) => {
+      tempArr.map((expense) => {
         return tempAmounts.push(expense.amount);
       });
       setAmounts(tempAmounts);
@@ -102,7 +107,7 @@ export default function DisplayExpenses(props) {
     }
   };
 
-  // on compenent load, fetch the expenses
+  // on component load, fetch the expenses
   useEffect(() => {
     fetchExpenses();
   }, []);
