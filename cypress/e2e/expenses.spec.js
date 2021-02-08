@@ -110,8 +110,10 @@ describe("user's expenses can be edited if an expense exist", () => {
       .should("have.value", "This is the edited description")
     })
     it("user can input select a different category", () => {
-      cy.get('#select-category').click();
-      cy.get('[data-value="2"]').click();
+      cy.get('#select-category')
+        .click();
+      cy.get('[data-value="2"]')
+        .click();
     })
   it("user can input a different date", () => {
     cy.get('.react-date-picker__inputGroup__month')
@@ -122,7 +124,7 @@ describe("user's expenses can be edited if an expense exist", () => {
     .type("{backspace}")
     .type(3)
     .should("have.value", "3")
-    cy.get('.react-date-picker__inputGroup__year').type(2022)
+    cy.get('.react-date-picker__inputGroup__year')
     .type("{backspace}{backspace}{backspace}{backspace}")
     .type(2022)
     .should("have.value", "2022")
