@@ -30,7 +30,7 @@ export default function LandingPage() {
   return (
     <>
       <Grid container className={classes.landingPageContainer}>
-        <Grid xs={12} className={classes.loginContainer}>
+        <Grid item xs={12} className={classes.loginContainer}>
           <Link className={classes.buttons}>
             <LoginButton color="primary">Login</LoginButton>
           </Link>
@@ -38,7 +38,7 @@ export default function LandingPage() {
             <SignupButton color="primary">Sign Up</SignupButton>
           </Link>
         </Grid>
-        <Grid xs={12} className={classes.headerContainer}>
+        <Grid item xs={12} className={classes.headerContainer}>
           <Fade
             bottom
             wait={2000}
@@ -55,7 +55,7 @@ export default function LandingPage() {
           </Fade>
         </Grid>
         <Hidden xsDown>
-          <Grid xs={10}>
+          <Grid item xs={10}>
             <img
               src={website}
               alt="website overview"
@@ -63,7 +63,7 @@ export default function LandingPage() {
             />
           </Grid>
         </Hidden>
-        <Grid xs={12} className={classes.headerFooterContainer}>
+        <Grid item xs={12} className={classes.headerFooterContainer}>
           <Link href="#features">
             <ArrowDropDownCircleIcon className={classes.dropDownArrow} />
           </Link>
