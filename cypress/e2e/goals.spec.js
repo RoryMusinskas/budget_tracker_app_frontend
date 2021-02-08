@@ -14,8 +14,8 @@ describe("editing goals card", () => {
   it("should allow the user to change the name of the card", () => {
     cy.visit("/admin/goals");
     cy.get(
-      '[data-rbd-draggable-id="column-1"] > .makeStyles-card-114 > .makeStyles-cardHeader-118 > .MuiGrid-root > .MuiInputBase-root > .MuiInputBase-input'
-    )cy.get('.makeStyles-editGrid-153 > div > .MuiSvgIcon-root')
+      '[data-rbd-draggable-id="column-1"] > .makeStyles-card-114 > .makeStyles-cardHeader-118 > .MuiGrid-root > .MuiInputBase-root > .MuiInputBase-input')
+    cy.get('.makeStyles-editGrid-153 > div > .MuiSvgIcon-root')
       .type("{backspace}{backspace}{backspace}{backspace}{backspace}")
       .type("New")
       .click("topLeft")
