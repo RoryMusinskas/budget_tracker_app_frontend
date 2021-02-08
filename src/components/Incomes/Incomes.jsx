@@ -85,17 +85,17 @@ export function Incomes(props) {
       {incomes.map((income, index) => {
         // Switch statement to render category name instead of id
         switch(income.category_id) {
-          case 1:
-            income.category = "Grocery"
+          case 6:
+            income.category = "Wages"
             break
-          case 2:
-            income.category = "Travel"
+          case 7:
+            income.category = "Shares"
             break
-          case 3:
-            income.category = "Entertainment"
+          case 8:
+            income.category = "Interest"
             break
-          case 4:
-            income.category = "Necessity"
+          case 9:
+            income.category = "Investment"
             break
           case 5:
             income.category = "Others"
