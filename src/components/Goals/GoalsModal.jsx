@@ -40,11 +40,6 @@ export default function WatchlistModal(props) {
   const [open, setOpen] = useState(false);
   const { state, setState, goal } = props;
 
-  // copied from share modal
-  // const [page, setPage] = useState("exchange");
-  // const [selectedShare, setSelectedShare] = useState("");
-  // const [selectedExchange, setSelectedExchange] = useState("");
-
   // open the model
   const handleOpen = () => {
     setOpen(true);
@@ -53,7 +48,6 @@ export default function WatchlistModal(props) {
   // close the model
   const handleClose = () => {
     setOpen(false);
-    // setPage("exchange");
   };
 
   // return the modal component
