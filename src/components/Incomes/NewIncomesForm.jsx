@@ -61,7 +61,7 @@ export function NewIncomesForm(props) {
 
   function validateInput(array) {
       array.forEach(item => {
-      if (title === undefined || amount === "" || category === "" || description === "" || date === "") {
+      if (title === "" || amount === "" || category === "" || description === "" || date === "") {
         window.alert("One or more of your field is empty! Please fill them up and try again")
         throw new Error("Missing some input")
       }
