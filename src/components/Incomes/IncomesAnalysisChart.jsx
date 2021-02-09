@@ -20,6 +20,7 @@ export function IncomesAnalysis({ incomes }) {
   // useEffect to re-render based on selectedYears state change
   useEffect(() => {
     fetchIncomesForChart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedYear, incomes]);
 
   function fetchIncomesForChart() {

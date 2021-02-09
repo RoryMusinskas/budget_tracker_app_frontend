@@ -23,10 +23,10 @@ export default function DisplayGoals() {
     } catch (err) {
       console.log(err);
     }
-    // setLoading(false);
   };
   useEffect(() => {
     getUserGoalData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function goalsList() {

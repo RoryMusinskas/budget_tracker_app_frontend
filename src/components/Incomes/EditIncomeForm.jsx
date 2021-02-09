@@ -55,11 +55,13 @@ export function EditIncomeForm(props) {
       }
     }
     fetchIncome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // sets the current edited title 
   useEffect(() => {
     setEditedTitle(title)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[loaded])
 
   async function onFormSubmit(e) {

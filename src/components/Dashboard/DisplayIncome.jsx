@@ -30,6 +30,7 @@ export function DisplayIncome(props){
   // Mount component
   useEffect(() => {
     getUserIncomeData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // setData function returns array that corresponds to the current year
