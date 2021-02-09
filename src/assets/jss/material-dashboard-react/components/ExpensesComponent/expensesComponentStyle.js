@@ -1,9 +1,10 @@
 const expensesStyle = {
   card: {
-    maxWidth: "40%",
-    height: "50%",
+    maxWidth: "100%",
+    height: "100%",
     backgroundColor: "rgba(238,238,238,0.4)",
     margin: "20px",
+    overflowY: "scroll",
   },
   expenseDeleteButton: {
     position: "absolute",
@@ -13,6 +14,10 @@ const expensesStyle = {
   expenseCardHeader: {
     textAlign: "center",
     marginTop: "20px",
+  },
+  expensesGrid: {
+    margin: "20px",
+    justifyContent: "center",
   }
 }
 
