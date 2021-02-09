@@ -40,7 +40,7 @@ export function ExpensesPage() {
       </div>
 
       <Grid container className={classes.expensesContainer}>
-        <Grid item xs={12} md={12} lg={8} xl={8}>
+        <Grid item xs={12} md={12} lg={7} xl={8}>
           <Grid className={classes.expensesAnalysisContainer}>
             <Grid item xs={12} md={12} lg={11} xl={11}>
               <Card chart className={classes.expensesAnalysisCard}>
@@ -65,7 +65,7 @@ export function ExpensesPage() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={12} lg={4} xl={4}>
+        <Grid item xs={12} md={12} lg={5} xl={4}>
           <Grid className={classes.expensesHistoryContainer}>
             <Grid item xs={12} md={12} lg={12} xl={12}>
               <Card className={classes.expensesHistoryCard}>

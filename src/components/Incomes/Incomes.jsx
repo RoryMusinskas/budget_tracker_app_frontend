@@ -10,6 +10,7 @@ import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
 import { makeStyles } from "@material-ui/core/styles";
 import { EditIncomeModal } from "./EditIncomeModal";
+import Grid from "@material-ui/core/Grid";
 // Style import
 import styles from "../../assets/jss/material-dashboard-react/components/IncomesComponent/incomesComponentStyle"
 
@@ -107,6 +108,7 @@ export function Incomes(props) {
         // EditIncomeModal component is propped drilled income.id for
         // identifying each unique income
         return (
+        <Grid item xs={11} md={11} lg={5} xl={5} key={`IncomesComponentGrid${index}`} className={classes.incomesGrid}>
           <Card key={`IncomeCardComponent${index}`} className={classes.card} variant="outlined">
             <CardHeader key={`IncomeCardHeader${index}`} className={classes.incomeCardHeader}>
             <DeleteForever key={`IncomeDeleteIcon${index}`} style={{color: "black"}} onClick={(e) => onClickDelete(e, income)} className={classes.incomeDeleteButton} ></DeleteForever>
@@ -115,16 +117,17 @@ export function Incomes(props) {
               <p key={`${income.date}${index}`}>{income.date}</p>
             </CardHeader>
             <CardBody key={`IncomeCardBody${index}`}>
-              <p key={`${income.amount}${index}`}><strong>Amount:</strong> ${income.amount}</p>
+              <p key={`${income.amount}${index}`}><strong>Amount</strong>: ${income.amount}</p>
               <p key={`${income.category}${index}`}><strong>Category</strong>: {income.category}</p>
               <p key={`${income.description.charAt(0)}${index}`}><strong>Description</strong>:</p> 
-              <div key={`div${index}`}style={{maxHeight: "100px", overflowY: "scroll"}}>
+              <div key={`div${index}`} style={{maxHeight: "100px", overflowY: "scroll"}}>
                 <Box key={`description${income.description.charAt(0)}${index}`}component="div">
                   {income.description}
                 </Box>
               </div>
             </CardBody>
-        </Card>
+          </Card>
+        </Grid>
         );
       })}
     </>

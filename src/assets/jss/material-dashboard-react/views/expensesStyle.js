@@ -104,12 +104,10 @@ import {
     expensesHistoryCardBody: {
       overflowY: "scroll",
       maxHeight: "80vh",
-      width: "94%",
-      margin: "0 auto",
+      maxWidth: "95%",
       display: "flex",
-      alignItems: "flex-start",
       flexWrap: "wrap",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
     },
     sortButton: {
       position: "absolute",
