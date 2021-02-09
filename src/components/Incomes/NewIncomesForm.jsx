@@ -28,8 +28,6 @@ export function NewIncomesForm(props) {
       e.preventDefault();
       // validation function
       validateInput(incomes)
-      // On submit, closes modal
-      handleClose(false); 
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes`, {
         method: "POST",
@@ -54,6 +52,8 @@ export function NewIncomesForm(props) {
       } else if(!deletedOrUpdated) {
         setDeletedOrUpdated(true)
       }
+      // On submit, closes modal
+      handleClose(false); 
     } catch (error) {
       console.log(error.message);
     }
