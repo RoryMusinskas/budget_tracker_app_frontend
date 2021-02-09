@@ -67,7 +67,9 @@ export function EditIncomeForm(props) {
       // Prevent default page reload on submit
       e.preventDefault();
       // Validate if empty input or existing title
-      await validateInput(incomes)
+      validateInput(incomes)
+      // On submit, closes modal
+      handleClose(false);
       // token
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes/${id}`, {
@@ -93,8 +95,6 @@ export function EditIncomeForm(props) {
       } else if(!deletedOrUpdated) {
         setDeletedOrUpdated(true)
       }
-      // On submit, closes modal
-      handleClose(false);
     } catch (error) {
       console.log(error.message);
     }
