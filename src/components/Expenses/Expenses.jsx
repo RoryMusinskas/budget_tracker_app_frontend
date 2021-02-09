@@ -10,6 +10,7 @@ import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
 import { makeStyles } from "@material-ui/core/styles";
 import { EditExpenseModal } from "./EditExpenseModal";
+import Grid from "@material-ui/core/Grid";
 // Style import
 import styles from "../../assets/jss/material-dashboard-react/components/ExpensesComponent/expensesComponentStyle"
 
@@ -107,6 +108,7 @@ export function Expenses(props) {
         // EditExpenseModal component is propped drilled expense.id for
         // identifying each unique expense
         return (
+        <Grid item xs={11} md={11} lg={5} xl={5} key={`ExpensesComponentGrid${index}`} className={classes.expensesGrid}>
           <Card key={`CardComponent${index}`} className={classes.card} variant="outlined">
             <CardHeader key={`CardHeader${index}`} className={classes.expenseCardHeader}>
             <DeleteForever key={`DeleteIcon${index}`} style={{color: "black"}} onClick={(e) => onClickDelete(e, expense)} className={classes.expenseDeleteButton} ></DeleteForever>
@@ -115,16 +117,17 @@ export function Expenses(props) {
               <p key={`${expense.date}${index}`}>{expense.date}</p>
             </CardHeader>
             <CardBody key={`CardBody${index}`}>
-              <p key={`${expense.amount}${index}`}><strong>Amount:</strong> ${expense.amount}</p>
+              <p key={`${expense.amount}${index}`}><strong>Amount</strong>: ${expense.amount}</p>
               <p key={`${expense.category}${index}`}><strong>Category</strong>: {expense.category}</p>
               <p key={`${expense.description.charAt(0)}${index}`}><strong>Description</strong>:</p> 
-              <div key={`div${index}`}style={{maxHeight: "100px", overflowY: "scroll"}}>
+              <div key={`div${index}`} style={{maxHeight: "100px", overflowY: "scroll"}}>
                 <Box key={`description${expense.description.charAt(0)}${index}`}component="div">
                   {expense.description}
                 </Box>
               </div>
             </CardBody>
-        </Card>
+          </Card>
+        </Grid>
         );
       })}
     </>
