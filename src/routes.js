@@ -17,12 +17,10 @@
 */
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Assessment from "@material-ui/icons/Assessment";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard";
-import UserProfile from "views/UserProfile/UserProfile";
 import SharesPage from "views/SharesPage/SharesPage";
 import GoalsPage from "views/GoalsPage/GoalsPage";
 import { AttachMoney } from "@material-ui/icons";
@@ -65,14 +63,6 @@ const dashboardRoutes = [
     icon: LibraryBooks,
     component: GoalsPage,
     layout: "/admin",
-  },
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: Person,
-    component: UserProfile,
-    layout: "/admin",
-    invisible: true, // invisible: true to hide from navbar. can use this as routing as they all go through protected routes
   },
 ];
 
