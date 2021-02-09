@@ -40,7 +40,7 @@ export function IncomesPage() {
       </div>
 
       <Grid container className={classes.incomesContainer}>
-        <Grid item xs={12} md={12} lg={8} xl={8}>
+        <Grid item xs={12} md={12} lg={7} xl={8}>
           <Grid className={classes.incomesAnalysisContainer}>
             <Grid item xs={12} md={12} lg={11} xl={11}>
               <Card chart className={classes.incomesAnalysisCard}>
@@ -65,7 +65,7 @@ export function IncomesPage() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={12} lg={4} xl={4}>
+        <Grid item xs={12} md={12} lg={5} xl={4}>
           <Grid className={classes.incomesHistoryContainer}>
             <Grid item xs={12} md={12} lg={12} xl={12}>
               <Card className={classes.incomesHistoryCard}>
