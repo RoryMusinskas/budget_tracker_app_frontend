@@ -92,7 +92,6 @@ export default function Column(props) {
               <Droppable droppableId={column.id} type="goal">
                 {(provided, snapshot) => (
                   <List
-                    key
                     ref={provided.innerRef}
                     // set the backgroundColour of the list when a goal is being dragged over the container
                     style={{
@@ -104,7 +103,7 @@ export default function Column(props) {
                   >
                     {/* map out each goal card for a goals assigned to the column */}
                     {goals.map((goal, index) => (
-                      <>
+                      <div key={index}>
                         {typeof goal !== "undefined" && (
                           <Card key={goal.id}>
                             <Goal
@@ -118,7 +117,7 @@ export default function Column(props) {
                             />
                           </Card>
                         )}
-                      </>
+                      </div>
                     ))}
                     {provided.placeholder}
                   </List>
