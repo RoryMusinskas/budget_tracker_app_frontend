@@ -19,7 +19,9 @@ export default function DisplayGoals() {
         }
       );
       const responseData = await response.json();
+      if (responseData !== undefined){
       setGoals(Object.values(responseData[0].goals_data.goals));
+      } 
     } catch (err) {
       console.log(err);
     }
