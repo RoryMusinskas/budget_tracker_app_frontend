@@ -110,6 +110,7 @@ export default function DisplayExpenses(props) {
   // on component load, fetch the expenses
   useEffect(() => {
     fetchExpenses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // return the chartist graph with the expenses shown

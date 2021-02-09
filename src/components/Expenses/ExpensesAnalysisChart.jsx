@@ -20,6 +20,7 @@ export function ExpensesAnalysis({ expenses }) {
   // useEffect to re-render based on selectedYears state change
   useEffect(() => {
     fetchExpensesForChart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedYear, expenses]);
 
   function fetchExpensesForChart() {

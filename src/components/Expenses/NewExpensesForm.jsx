@@ -28,8 +28,6 @@ export function NewExpensesForm(props) {
       e.preventDefault();
       // validation function
       validateInput(expenses)
-      // On submit, closes modal
-      handleClose(false); 
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/expenses`, {
         method: "POST",
@@ -54,6 +52,8 @@ export function NewExpensesForm(props) {
       } else if(!deletedOrUpdated) {
         setDeletedOrUpdated(true)
       }
+      // On submit, closes modal
+      handleClose(false); 
     } catch (error) {
       console.log(error.message);
     }
@@ -61,7 +61,7 @@ export function NewExpensesForm(props) {
 
   function validateInput(array) {
       array.forEach(item => {
-      if (title === undefined || amount === "" || category === "" || description === "" || date === "") {
+      if (title === "" || amount === "" || category === "" || description === "" || date === "") {
         window.alert("One or more of your field is empty! Please fill them up and try again")
         throw new Error("Missing some input")
       }

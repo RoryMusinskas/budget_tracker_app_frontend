@@ -44,6 +44,7 @@ export function Incomes(props) {
   // useEffect mounts the API call
   useEffect(() => {
     fetchIncomes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deletedOrUpdated]);
 
   // Onclick delete function

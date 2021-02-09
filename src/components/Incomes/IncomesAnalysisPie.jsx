@@ -18,6 +18,7 @@ export function IncomesAnalysisPie({ incomes }) {
   // and when a user selects which year to view
   useEffect(() => {
     fetchIncomesForPie();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedYear, incomes] );
 
   // Fetches from prop.income to pass into functions

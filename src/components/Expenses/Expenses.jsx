@@ -44,6 +44,7 @@ export function Expenses(props) {
   // useEffect mounts the API call
   useEffect(() => {
     fetchExpenses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deletedOrUpdated]);
 
   // Onclick delete function

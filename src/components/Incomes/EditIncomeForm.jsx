@@ -55,11 +55,13 @@ export function EditIncomeForm(props) {
       }
     }
     fetchIncome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // sets the current edited title 
   useEffect(() => {
     setEditedTitle(title)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[loaded])
 
   async function onFormSubmit(e) {
@@ -68,8 +70,6 @@ export function EditIncomeForm(props) {
       e.preventDefault();
       // Validate if empty input or existing title
       validateInput(incomes)
-      // On submit, closes modal
-      handleClose(false);
       // token
       const token = await getAccessTokenSilently();
       await fetch(`${process.env.REACT_APP_RAILS_API_URL}/incomes/${id}`, {
@@ -95,6 +95,8 @@ export function EditIncomeForm(props) {
       } else if(!deletedOrUpdated) {
         setDeletedOrUpdated(true)
       }
+      // On submit, closes modal
+      handleClose(false);
     } catch (error) {
       console.log(error.message);
     }

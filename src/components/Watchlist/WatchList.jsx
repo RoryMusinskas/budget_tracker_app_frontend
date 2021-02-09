@@ -11,6 +11,7 @@ export default function WatchList(props) {
   // get the users watchlist from the database on component load
   useEffect(() => {
     getWatchList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Moved this function out of the useEffect so that the updateSharesDatabase function can call it, this will re render the trading view widget

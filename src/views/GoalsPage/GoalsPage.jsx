@@ -30,6 +30,7 @@ export default function GoalsPage() {
   //-----------------------------------------------------------------------//
   useEffect(() => {
     getUserGoalData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // this is the equivilent of componentDidUpdate, this is so it doesn't run a put request on the initial load, as there is nothing in the database yet.
@@ -41,6 +42,7 @@ export default function GoalsPage() {
       return;
     }
     putUserGoalData(state);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   // get the user data from the database, if they haven't got any data stored, post the default values, else update the state
