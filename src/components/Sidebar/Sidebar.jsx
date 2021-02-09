@@ -83,21 +83,35 @@ export default function Sidebar(props) {
       })}
     </List>
   );
+
   var brand = (
     <div className={classes.logo}>
-      <a
-        href="/admin/user"
-        className={classNames(classes.logoLink, {
-          [classes.logoLinkRTL]: props.rtlActive
-        })}
-      >
-        <div className={classes.logoImage}>
-          <img src={logo} alt="logo" className={classes.img} />
-        </div>
-        {logoText}
-      </a>
+      {logoText !== "undefined undefined" ? (
+        <a
+          className={classNames(classes.logoLink, {
+            [classes.logoLinkRTL]: props.rtlActive,
+          })}
+        >
+          <div className={classes.logoImage}>
+            <img src={logo} alt="logo" className={classes.img} />
+          </div>
+          {logoText}
+        </a>
+      ) : (
+        <a
+          className={classNames(classes.logoLink, {
+            [classes.logoLinkRTL]: props.rtlActive,
+          })}
+        >
+          <div className={classes.logoImage}>
+            <img src={logo} alt="logo" className={classes.img} />
+          </div>
+          Tight 20's
+        </a>
+      )}
     </div>
   );
+
   return (
     <div>
       <Hidden mdUp implementation="css">
