@@ -60,16 +60,26 @@ export function NewIncomesForm(props) {
   }
 
   function validateInput(array) {
-      array.forEach(item => {
-      if (title === "" || amount === "" || category === "" || description === "" || date === "") {
-        window.alert("One or more of your field is empty! Please fill them up and try again")
-        throw new Error("Missing some input")
-      }
-      else if(item.title === title) {
-        window.alert(`"${title}" is an existing income. Please use another title`)
-        throw new Error("Title already exist")
-      }
-    })
+    switch(array.length) {
+      case 0:
+        if (title === "" || amount === "" || category === "" || description === "" || date === "") {
+          window.alert("One or more of your field is empty! Please fill them up and try again")
+          throw new Error("Missing some input")
+        }
+      break
+      default:
+        array.forEach(item => {
+          if (title === "" || amount === "" || category === "" || description === "" || date === "") {
+            window.alert("One or more of your field is empty! Please fill them up and try again")
+            throw new Error("Missing some input")
+          }
+          else if(item.title === title) {
+            window.alert(`"${title}" is an existing income. Please use another title`)
+            throw new Error("Title already exist")
+          }
+        })
+      break
+    }
   }
 
   return (
